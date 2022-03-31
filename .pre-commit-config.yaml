@@ -1,0 +1,19 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-added-large-files
+      - id: detect-private-key
+  - repo: https://github.com/pre-commit/mirrors-csslint
+    rev: v1.0.5 # Use the sha / tag you want to point at
+    hooks:
+      - id: csslint
+  - repo: https://github.com/pre-commit/mirrors-scss-lint
+    rev: v0.59.0 # Use the sha / tag you want to point at
+    hooks:
+      - id: scss-lint
