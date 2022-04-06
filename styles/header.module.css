@@ -1,6 +1,6 @@
 .container {
   height: 6rem;
-  box-shadow: rgb(26 33 69 / 10%) 0px 4px 4px 0px;
+  box-shadow: var(--shadow);
 }
 
 .container .nav {
@@ -30,10 +30,17 @@
   justify-content: center;
   text-align: center;
   border-radius: 20px;
-  color: #000000;
+  color: var(--color-primary);
   margin: 20px;
   padding: 10px;
   min-width: 8rem;
+}
+
+.formSlider {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
 }
 
 .active {
@@ -45,7 +52,7 @@
 }
 
 .inactive span a {
-  color: #000000 !important;
+  color: var(--color-primary);
 }
 
 .switch {
@@ -86,11 +93,12 @@
 }
 
 input:checked + .slider {
-  background-color: #33f321;
+  background-color: #000000;
+  border: 1px solid;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #33f321;
+  box-shadow: 0 0 1px #000000;
 }
 
 input:checked + .slider:before {

@@ -14,34 +14,35 @@ const path = [
 
 export default function Header() {
   const router = useRouter();
-  const [darkTheme, setDarkTheme] = useState(undefined);
+  const [darkTheme, setDarkTheme] = useState(false);
 
   const handleToggle = (e: any) => {
     setDarkTheme(e.target.checked);
   };
 
-  // useEffect(() => {
-  //   if (darkTheme !== undefined) {
-  //     if (darkTheme) {
-  //       // Set value of  darkmode to dark
-  //       document.documentElement.setAttribute('data-theme', 'dark');
-  //       window.localStorage.setItem('theme', 'dark');
-  //     } else {
-  //       // Set value of  darkmode to light
-  //       document.documentElement.removeAttribute('data-theme');
-  //       window.localStorage.setItem('theme', 'light');
-  //     }
-  //   }
-  // }, [darkTheme]);
+  useEffect(() => {
+    if (darkTheme !== undefined) {
+      if (darkTheme) {
+        // Set value of  darkmode to dark
+        document.documentElement.setAttribute('data-theme', 'dark');
+        window.localStorage.setItem('theme', 'dark');
+      } else {
+        // Set value of  darkmode to light
+        document.documentElement.removeAttribute('data-theme');
+        window.localStorage.setItem('theme', 'light');
+      }
+    }
+  }, [darkTheme]);
 
-  // useEffect(() => {
-  //   const root = window.document.documentElement;
-  //   const initialColorValue: any = root.style.getPropertyValue(
-  //     '--initial-color-mode'
-  //   );
-  //   // Set initial darkmode to light
-  //   setDarkTheme(initialColorValue === 'dark');
-  // }, []);
+  useEffect(() => {
+    const root = window.document.documentElement;
+    const initialColorValue: any = root.style.getPropertyValue(
+      '--initial-color-mode'
+    );
+    // Set initial darkmode to light
+    const verifyDark: any = initialColorValue === 'dark';
+    setDarkTheme(verifyDark);
+  }, []);
   return (
     <header className={styles.container}>
       <nav className={styles.nav}>
@@ -82,15 +83,15 @@ export default function Header() {
           })}
         </div>
 
-        <div>
+        <div className={styles.formSlider}>
           <form action="#">
-            <label className="switch">
+            <label className={styles.switch}>
               <input
                 type="checkbox"
                 checked={darkTheme}
                 onChange={handleToggle}
               />
-              <span className="slider"></span>
+              <span className={styles.slider}></span>
             </label>
           </form>
         </div>
