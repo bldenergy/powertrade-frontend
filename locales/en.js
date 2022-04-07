@@ -1,11 +1,11 @@
 export default {
   home: {
     title: 'Home',
-    subTitle: 'Save Energy and Get Paid.',
+    subTitle: 'Save Energy and Get Paid',
   },
   scheduling: {
     title: 'Scheduling',
-    subTitle: 'Choose the best time that suits you.',
+    subTitle: 'Choose the best time that suits you',
   },
   trading: {
     title: 'Trading',

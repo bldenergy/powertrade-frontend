@@ -9,10 +9,10 @@ export default {
   },
   trading: {
     title: '貿易',
-    subTitle: '節省能源並獲得獎勵。',
+    subTitle: '節省能源並獲得獎勵',
   },
   account: {
     title: '帳戶',
-    subTitle: '編輯您的個人信息。',
+    subTitle: '編輯您的個人信息',
   },
 };
