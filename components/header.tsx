@@ -4,9 +4,11 @@ import Image from 'next/image';
 import logo from '../public/images/bld-energy-logo.webp';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import en from '../locales/en';
+import zh from '../locales/zh';
 
 const path = [
-  { uid: 21, name: ' Home', id: 1, path: '/' },
+  { uid: 21, name: 'Home', id: 1, path: '/' },
   { uid: 31, name: 'Scheduling', id: 2, path: '/scheduling' },
   { uid: 41, name: 'Trading', id: 3, path: '/trading' },
   { uid: 51, name: 'Account', id: 3, path: '/account' },
@@ -18,6 +20,14 @@ export default function Header() {
 
   const handleToggle = (e: any) => {
     setDarkTheme(e.target.checked);
+  };
+  const { locale } = router;
+  const translate: any = locale === 'en' ? en : zh;
+  // console.log(translate['home']);
+
+  const changeLanguage = (e: any) => {
+    const locale = e.target.value;
+    router.push(router.pathname, router.asPath, { locale });
   };
 
   useEffect(() => {
@@ -75,7 +85,7 @@ export default function Header() {
                 }>
                 <span>
                   <Link href={value.path}>
-                    <a>{value.name}</a>
+                    <a>{translate[value.name.toLowerCase()].title}</a>
                   </Link>
                 </span>
               </div>
@@ -94,6 +104,20 @@ export default function Header() {
               <span className={styles.slider}></span>
             </label>
           </form>
+        </div>
+
+        <div className={styles.selectOption}>
+          <select
+            onChange={changeLanguage}
+            defaultValue={locale}
+            className={styles.selectStyle}>
+            <option className="text-black" value="en">
+              EN
+            </option>
+            <option className="text-black" value="zh">
+              ZH
+            </option>
+          </select>
         </div>
       </nav>
     </header>

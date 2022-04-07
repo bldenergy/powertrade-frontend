@@ -114,3 +114,16 @@ input:checked + .slider:before {
 .slider:before {
   border-radius: 50%;
 }
+
+.selectOption {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.selectStyle {
+  border-radius: 20px;
+  padding: 7px;
+  border: 1px solid #ccc;
+}
