@@ -5,7 +5,7 @@ export default {
   },
   scheduling: {
     title: 'Scheduling',
-    subTitle: 'Choose the best time that suits you',
+    subTitle: 'Choose the best Time that suits you',
   },
   trading: {
     title: 'Trading',
