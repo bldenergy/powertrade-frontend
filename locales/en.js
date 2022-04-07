@@ -9,10 +9,10 @@ export default {
   },
   trading: {
     title: 'Trading',
-    subTitle: 'Save Energy and get Rewarded.',
+    subTitle: 'Save Energy and get Rewarded',
   },
   account: {
     title: 'Account',
-    subTitle: 'Edit your personal info.',
+    subTitle: 'Edit your personal info',
   },
 };
