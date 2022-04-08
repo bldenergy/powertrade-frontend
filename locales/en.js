@@ -1,7 +1,7 @@
 export default {
   home: {
     title: 'Home',
-    subTitle: 'Save Energy and Get Paid',
+    subTitle: 'Save Energy and Get Paid - Testing Github Action......',
   },
   scheduling: {
     title: 'Scheduling',
