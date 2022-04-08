@@ -1,15 +1,19 @@
-name: deploy website
+name: "Deploy"
+
 on: [pull_request]
+
 jobs:
-  deploy:
+  vercel: 
     runs-on: ubuntu-latest
+    name: "Deploy front-end"
+    
     steps:
       - uses: actions/checkout@v2
-      #  your build commands
-      # - run: |
-      #    ng build --prod
-      - name: Vercel Action
-        uses: amondnet/vercel-action@v20.0.1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16'
+          registry-url: https://registry.npmjs.org/
+      - uses: amondnet/vercel-action@v20 #deploy
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
           github-token: ${{ secrets.GITHUB_TOKEN }} #Optional 
@@ -17,5 +21,3 @@ jobs:
           vercel-org-id: ${{ secrets.ORG_ID}}  #Required
           vercel-project-id: ${{ secrets.PROJECT_ID}} #Required 
           working-directory: ./sub-directory
-  
-
