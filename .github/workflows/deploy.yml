@@ -66,7 +66,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Resolving deployment url from Vercel
         run: |
-          sudo apt update -y >/dev/null && apt install -y jq >/dev/null
+          sudo apt-get update -y >/dev/null && sudo apt-get install -y jq >/dev/null
           MANUAL_TRIGGER_CUSTOMER='${{ github.event.inputs.customer}}'
           echo 'MANUAL_TRIGGER_CUSTOMER: ' $MANUAL_TRIGGER_CUSTOMER
           echo 'MANUAL_TRIGGER_CUSTOMER=$MANUAL_TRIGGER_CUSTOMER' >> $GITHUB_ENV
