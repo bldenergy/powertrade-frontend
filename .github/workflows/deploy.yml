@@ -56,7 +56,6 @@ jobs:
         uses: cypress-io/github-action@v2 # See https://github.com/cypress-io/github-action
         with:
           wait-on: ${{ env.VERCEL_DEPLOYMENT_URL }} # Be sure that the endpoint is ready by pinging it before starting tests, it has a timeout of 60seconds
-          config-file: cypress/config-customer-ci-cd.json # The config file itself doesn't matter because we will override most settings anyway. We just need `projectId` to run the tests.
           config: baseUrl=${{ env.VERCEL_DEPLOYMENT_URL }} # Overriding baseUrl provided by config file to test the new deployment
         env:
           # Enables Cypress debugging logs, very useful if Cypress crashes, like out-of-memory issues.
