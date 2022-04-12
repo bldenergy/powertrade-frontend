@@ -48,7 +48,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v2
-      - run: cypress --config baseUrl=${{ github.event.deployment_status.target_url }}
         with:
           config: baseUrl=${{ github.event.deployment_status.target_url }}
           browser: firefox
