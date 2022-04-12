@@ -67,7 +67,7 @@ jobs:
       - name: Resolving deployment url from Vercel
         run: |
           echo 1 > $null
-          $MANUAL_TRIGGER_CUSTOMER='${ github.event.inputs.customer }'
+          $MANUAL_TRIGGER_CUSTOMER=${{ github.event.inputs.customer}}
           echo 'MANUAL_TRIGGER_CUSTOMER: ' $MANUAL_TRIGGER_CUSTOMER
           echo 'MANUAL_TRIGGER_CUSTOMER=$MANUAL_TRIGGER_CUSTOMER' >> $GITHUB_ENV
           $VERCEL=`cat vercel.json | jq --raw-output '.build.env.NEXT_PUBLIC_CUSTOMER_REF'`
