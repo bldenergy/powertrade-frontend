@@ -18,7 +18,6 @@ jobs:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   chrome-e2e:
     name: E2E on Chrome
-    if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     needs: vercel
     steps:
@@ -27,10 +26,8 @@ jobs:
         with:
           config: baseUrl=${{ github.event.deployment_status.target_url }}
           browser: chrome
-
   edge-e2e:
     name: E2E on Edge
-    if: github.event.deployment_status.state == 'success'
     runs-on: windows-latest
     needs: vercel
     steps:
@@ -39,10 +36,8 @@ jobs:
         with:
           config: baseUrl=${{ github.event.deployment_status.target_url }}
           browser: edge
-
   firefox-e2e:
     name: E2E on Firefox
-    if: github.event.deployment_status.state == 'success'
     runs-on: ubuntu-latest
     needs: vercel
     steps:
