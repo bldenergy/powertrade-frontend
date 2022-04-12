@@ -10,14 +10,31 @@ jobs:
         with:
           node-version: '16'
           registry-url: https://registry.npmjs.org/
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          start: npm run dev
-          wait-on: http://localhost:3000
       - name: 'Deploy to Vercel'
         run: npx vercel --token ${VERCEL_TOKEN} --prod
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  cypress-run:
+    runs-on: ubuntu-20.04
+    name: E2E on Chrome
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cypress-io/github-action@v2
+        with:
+          browser: chrome
+  tests:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cypress-io/github-action@v2
+        with:
+          browser: edge
+  firefox:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cypress-io/github-action@v2
+        with:
+          browser: firefox

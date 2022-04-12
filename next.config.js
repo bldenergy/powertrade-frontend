@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const withPWA = require('next-pwa');
+const runtimeCaching = require('next-pwa/cache');
+
+module.exports = withPWA({
   reactStrictMode: true,
   i18n: {
     // These are all the locales you want to support in
@@ -9,6 +12,8 @@ const nextConfig = {
     // a non-locale prefixed path e.g. `/hello`
     defaultLocale: 'zh',
   },
-};
-
-module.exports = nextConfig;
+  pwa: {
+    dest: 'public',
+    runtimeCaching,
+  },
+});
