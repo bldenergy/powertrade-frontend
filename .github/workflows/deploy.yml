@@ -1,4 +1,4 @@
-name: 'Deploy'
+name: 'Deploy and Run Cypress'
 on: [pull_request]
 jobs:
   vercel:
@@ -19,13 +19,16 @@ jobs:
   cypress-run:
     runs-on: ubuntu-20.04
     name: E2E on Chrome
+    needs: vercel
     steps:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v2
         with:
           browser: chrome
-  tests:
+  edge:
     runs-on: windows-latest
+    name: E2E on Edge
+    needs: vercel
     steps:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v2
@@ -33,6 +36,8 @@ jobs:
           browser: edge
   firefox:
     runs-on: ubuntu-latest
+    name: E2E on Firefox
+    needs: vercel
     steps:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v2
