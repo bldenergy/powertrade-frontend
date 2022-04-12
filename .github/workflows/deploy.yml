@@ -91,7 +91,7 @@ jobs:
           # TODO Do not use '.deployments [0].url' blindly, but filter the deployments array first to make sure to consider only the deployments where "name" is equal to $VERCEL_PROJECT_NAME
           VERCEL_DEPLOYMENT=`echo $ALL_VERCEL_DEPLOYMENTS | jq '.deployments [0].url' | tr -d \"`
           VERCEL_DEPLOYMENT_URL="https://$VERCEL_DEPLOYMENT"
-          echo "Url where to run E2E tests (VERCEL_DEPLOYMENT_URL): " $VERCEL_DEPLOYMENT_URL
+          echo 'Url where to run E2E tests (VERCEL_DEPLOYMENT_URL): ' $VERCEL_DEPLOYMENT_URL
           echo 'VERCEL_DEPLOYMENT_URL=$VERCEL_DEPLOYMENT_URL' >> $GITHUB_ENV
       # Run the E2E tests against the new Vercel deployment
       - name: Run E2E tests (Cypress)
