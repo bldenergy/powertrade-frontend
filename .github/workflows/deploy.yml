@@ -24,8 +24,13 @@ jobs:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v2
         with:
-          config: baseUrl=https://${{ github.event.deployment_status.target_url }}
+          wait-on: ${{ env.VERCEL_DEPLOYMENT_URL }}
+          config: baseUrl=${{ env.VERCEL_DEPLOYMENT_URL }}
           browser: chrome
+        env:
+          # Enables Cypress debugging logs, very useful if Cypress crashes, like out-of-memory issues.
+          #          DEBUG: "cypress:*" # Enable all logs. See https://docs.cypress.io/guides/references/troubleshooting.html#Print-DEBUG-logs
+          DEBUG: 'cypress:server:util:process_profiler' # Enable logs for "memory and CPU usage". See https://docs.cypress.io/guides/references/troubleshooting.html#Log-memory-and-CPU-usage
   edge-e2e:
     name: E2E on Edge
     runs-on: windows-latest
@@ -34,7 +39,8 @@ jobs:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v2
         with:
-          config: baseUrl=https://${{ github.event.deployment_status.target_url }}
+          wait-on: ${{ env.VERCEL_DEPLOYMENT_URL }}
+          config: baseUrl=${{ env.VERCEL_DEPLOYMENT_URL }}
           browser: edge
   firefox-e2e:
     name: E2E on Firefox
@@ -44,5 +50,6 @@ jobs:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v2
         with:
-          config: baseUrl=https://${{ github.event.deployment_status.target_url }}
+          wait-on: ${{ env.VERCEL_DEPLOYMENT_URL }}
+          config: baseUrl=${{ env.VERCEL_DEPLOYMENT_URL }}
           browser: firefox
