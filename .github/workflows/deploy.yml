@@ -78,10 +78,6 @@ jobs:
           $VERCEL_TEAM_ID=`cat vercel.null.staging.json | jq --raw-output '.scope'`
           echo 'Vercel team ID: ' $VERCEL_TEAM_ID
           echo 'VERCEL_TEAM_ID=$VERCEL_TEAM_ID' >> $GITHUB_ENV
-          # Resolve Vercel project name
-          $VERCEL_PROJECT_NAME=`cat vercel.$CUSTOMER_REF_TO_DEPLOY.staging.json | jq --raw-output '.name'`
-          echo 'Vercel project name: ' $VERCEL_PROJECT_NAME
-          echo 'VERCEL_PROJECT_NAME=$VERCEL_PROJECT_NAME' >> $GITHUB_ENV
           # Build Vercel API endpoint used to fetch deployments
           $VERCEL_FETCH_DEPLOYMENTS_API_ENDPOINT='https://api.zeit.co/v5/now/deployments?teamId=$VERCEL_TEAM_ID'
           echo 'Fetching Vercel deployments using API endpoint: ' $VERCEL_FETCH_DEPLOYMENTS_API_ENDPOINT
