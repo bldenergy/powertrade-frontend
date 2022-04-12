@@ -23,8 +23,8 @@ jobs:
     needs: vercel
     steps:
       - uses: actions/checkout@v2
-      - run: cypress --config baseUrl=${{ github.event.deployment_status.target_url }}
       - uses: cypress-io/github-action@v2
+      - run: cypress --config baseUrl=${{ github.event.deployment_status.target_url }}
         with:
           browser: chrome
   edge-e2e:
@@ -34,8 +34,8 @@ jobs:
     needs: vercel
     steps:
       - uses: actions/checkout@v2
-      - run: cypress --config baseUrl=${{ github.event.deployment_status.target_url }}
       - uses: cypress-io/github-action@v2
+      - run: cypress --config baseUrl=${{ github.event.deployment_status.target_url }}
         with:
           browser: edge
   firefox-e2e:
@@ -45,7 +45,7 @@ jobs:
     needs: vercel
     steps:
       - uses: actions/checkout@v2
-      - run: cypress --config baseUrl=${{ github.event.deployment_status.target_url }}
       - uses: cypress-io/github-action@v2
+      - run: cypress --config baseUrl=${{ github.event.deployment_status.target_url }}
         with:
           browser: firefox
