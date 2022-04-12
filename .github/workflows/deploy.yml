@@ -70,7 +70,7 @@ jobs:
           $MANUAL_TRIGGER_CUSTOMER='${{ github.event.inputs.customer}}'
           echo 'MANUAL_TRIGGER_CUSTOMER: ' $MANUAL_TRIGGER_CUSTOMER
           echo 'MANUAL_TRIGGER_CUSTOMER=$MANUAL_TRIGGER_CUSTOMER' >> $GITHUB_ENV
-          $CUSTOMER_REF_TO_DEPLOY='${MANUAL_TRIGGER_CUSTOMER:-$(cat vercel.json | jq --raw-output '.build.env.NEXT_PUBLIC_CUSTOMER_REF')}'
+          $CUSTOMER_REF_TO_DEPLOY='$MANUAL_TRIGGER_CUSTOMER:-$(cat vercel.json | jq --raw-output '.build.env.NEXT_PUBLIC_CUSTOMER_REF')'
           echo 'Customer that was deployed: ' $CUSTOMER_REF_TO_DEPLOY
           echo 'CUSTOMER_REF_TO_DEPLOY=$CUSTOMER_REF_TO_DEPLOY' >> $GITHUB_ENV
           # Resolve Vercel team ID
