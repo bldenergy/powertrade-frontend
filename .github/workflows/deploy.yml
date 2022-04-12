@@ -70,7 +70,7 @@ jobs:
           $MANUAL_TRIGGER_CUSTOMER='${{ github.event.inputs.customer}}'
           echo 'MANUAL_TRIGGER_CUSTOMER: ' $MANUAL_TRIGGER_CUSTOMER
           echo 'MANUAL_TRIGGER_CUSTOMER=$MANUAL_TRIGGER_CUSTOMER' >> $GITHUB_ENV
-          $VERCEL=cat vercel.json | jq --raw-output '.build.env.NEXT_PUBLIC_CUSTOMER_REF'
+          $VERCEL=`cat vercel.json | jq --raw-output '.build.env.NEXT_PUBLIC_CUSTOMER_REF'`
           $CUSTOMER_REF_TO_DEPLOY=`'MANUAL_TRIGGER_CUSTOMER':-$VERCEL`
           echo 'Customer that was deployed: ' $CUSTOMER_REF_TO_DEPLOY
           echo 'CUSTOMER_REF_TO_DEPLOY=$CUSTOMER_REF_TO_DEPLOY' >> $GITHUB_ENV
@@ -93,7 +93,7 @@ jobs:
           $VERCEL_DEPLOYMENT=`echo $ALL_VERCEL_DEPLOYMENTS | jq '.deployments [0].url' | tr -d \`
           $VERCEL_DEPLOYMENT_URL='https://$VERCEL_DEPLOYMENT'
           echo 'Url where to run E2E tests (VERCEL_DEPLOYMENT_URL): ' $VERCEL_DEPLOYMENT_URL
-          echo "VERCEL_DEPLOYMENT_URL=$VERCEL_DEPLOYMENT_URL" >> $GITHUB_ENV
+          echo 'VERCEL_DEPLOYMENT_URL=$VERCEL_DEPLOYMENT_URL' >> $GITHUB_ENV
       # Run the E2E tests against the new Vercel deployment
       - name: Run E2E tests (Cypress)
         uses: cypress-io/github-action@v2 # See https://github.com/cypress-io/github-action
