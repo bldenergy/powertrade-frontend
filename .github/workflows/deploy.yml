@@ -24,9 +24,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v2
-      - run: cypress --config baseUrl=${{ github.event.deployment_status.target_url }}
         with:
+          config: baseUrl=${{ github.event.deployment_status.target_url }}
           browser: chrome
+
   edge-e2e:
     name: E2E on Edge
     if: github.event.deployment_status.state == 'success'
@@ -35,9 +36,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v2
-      - run: cypress --config baseUrl=${{ github.event.deployment_status.target_url }}
         with:
+          config: baseUrl=${{ github.event.deployment_status.target_url }}
           browser: edge
+
   firefox-e2e:
     name: E2E on Firefox
     if: github.event.deployment_status.state == 'success'
@@ -48,4 +50,5 @@ jobs:
       - uses: cypress-io/github-action@v2
       - run: cypress --config baseUrl=${{ github.event.deployment_status.target_url }}
         with:
+          config: baseUrl=${{ github.event.deployment_status.target_url }}
           browser: firefox
