@@ -67,7 +67,7 @@ jobs:
       - name: Resolving deployment url from Vercel
         shell: powershell
         run: |
-          sudo apt update -y >/dev/null && sudo apt install -y jq >/dev/null
+          sudo apt update -y >/dev/null ; sudo apt install -y jq >/dev/null
           MANUAL_TRIGGER_CUSTOMER='${{ github.event.inputs.customer}}'
           echo 'MANUAL_TRIGGER_CUSTOMER: ' $MANUAL_TRIGGER_CUSTOMER
           echo 'MANUAL_TRIGGER_CUSTOMER=$MANUAL_TRIGGER_CUSTOMER' >> $GITHUB_ENV
