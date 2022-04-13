@@ -12,8 +12,8 @@ jobs:
         with:
           node-version: '16'
           registry-url: https://registry.npmjs.org/
-      - name: 'Deploy to Vercel'
       - id: identify
+        name: 'Deploy to Vercel'
         run: |
           npx vercel --token ${VERCEL_TOKEN} --prod
           echo "::set-output name=VERCEL_URL::${VERCEL_URL}"
