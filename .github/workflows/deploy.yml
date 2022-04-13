@@ -79,6 +79,7 @@ jobs:
     steps:
       - run: |
           echo "${{ needs.chrome-and-firefox-e2e.outputs.VERCEL_DEPLOYMENT_URL }}"
+          echo "${{ needs.vercel.outputs.VERCEL_URL }}"
       - uses: actions/checkout@v2
       - name: Run E2E tests (Cypress)
         uses: cypress-io/github-action@v2 # See https://github.com/cypress-io/github-action
