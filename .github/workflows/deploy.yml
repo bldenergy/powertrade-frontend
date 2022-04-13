@@ -38,13 +38,13 @@ jobs:
     steps:
       # Run the E2E tests against the new Vercel deployment
       - name: Run E2E tests (Cypress) with Chrome
-        uses: cypress-io/github-action@v2 # See https://github.com/cypress-io/github-action
+        uses: cypress-io/github-action@v2.9.7 # See https://github.com/cypress-io/github-action
         with:
           wait-on: ${{ needs.vercel.outputs.VERCEL_URL }} # Be sure that the endpoint is ready by pinging it before starting tests, it has a timeout of 60seconds
           config: baseUrl=${{ needs.vercel.outputs.VERCEL_URL }} # Overriding baseUrl provided by config file to test the new deployment
           browser: chrome
       - name: Run E2E tests (Cypress) with FireFox
-        uses: cypress-io/github-action@v2 # See https://github.com/cypress-io/github-action
+        uses: cypress-io/github-action@v2.9.7 # See https://github.com/cypress-io/github-action
         with:
           wait-on: ${{ needs.vercel.outputs.VERCEL_URL }} # Be sure that the endpoint is ready by pinging it before starting tests, it has a timeout of 60seconds
           config: baseUrl=${{ needs.vercel.outputs.VERCEL_URL }} # Overriding baseUrl provided by config file to test the new deployment
@@ -56,7 +56,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run E2E tests (Cypress)
-        uses: cypress-io/github-action@v2 # See https://github.com/cypress-io/github-action
+        uses: cypress-io/github-action@v2.9.7 # See https://github.com/cypress-io/github-action
         with:
           wait-on: ${{ needs.vercel.outputs.VERCEL_URL }} # Be sure that the endpoint is ready by pinging it before starting tests, it has a timeout of 60seconds
           config: baseUrl=${{ needs.vercel.outputs.VERCEL_URL }} # Overriding baseUrl provided by config file to test the new deployment
