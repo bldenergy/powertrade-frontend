@@ -26,7 +26,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: vercel
     steps:
+      - run: |
+          echo "${{ needs.vercel.outputs.VERCEL_URL }}"
       - uses: actions/checkout@v2
+      # Run the E2E tests against the new Vercel deployment
       - name: Run E2E tests (Cypress) with Chrome
         uses: cypress-io/github-action@v2 # See https://github.com/cypress-io/github-action
         with:
@@ -44,6 +47,8 @@ jobs:
     runs-on: windows-latest
     needs: vercel
     steps:
+      - run: |
+          echo "${{ needs.vercel.outputs.VERCEL_URL }}"
       - uses: actions/checkout@v2
       - name: Run E2E tests (Cypress)
         uses: cypress-io/github-action@v2 # See https://github.com/cypress-io/github-action
