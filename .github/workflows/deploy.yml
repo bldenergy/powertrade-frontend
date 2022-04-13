@@ -24,7 +24,7 @@ jobs:
         uses: dorshinar/get-deployment-url@v1.0.7
         timeout-minutes: 5
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.VERCEL_TOKEN }}
         env:
           deployment: ${{ steps.deployment.outputs.deployment }}
   chrome-and-firefox-e2e:
