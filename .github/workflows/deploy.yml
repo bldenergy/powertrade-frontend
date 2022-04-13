@@ -4,6 +4,8 @@ jobs:
   vercel:
     runs-on: ubuntu-latest
     name: 'Deploy front-end'
+    outputs:
+      VERCEL_URL: ${{ steps.identify.outputs.VERCEL_URL }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -11,6 +13,7 @@ jobs:
           node-version: '16'
           registry-url: https://registry.npmjs.org/
       - name: 'Deploy to Vercel'
+      - id: identify
         run: |
           npx vercel --token ${VERCEL_TOKEN} --prod
           echo "::set-output name=VERCEL_URL::${VERCEL_URL}"
