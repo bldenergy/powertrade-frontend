@@ -27,6 +27,8 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           scope: ${{ secrets.VERCEL_ORG_ID }}
       - name: Get Deployment URL
+        run: |
+          echo "${{ steps.deploy-vercel-staging.outputs.preview-url }}"
         env:
           VERCEL_URL: ${{ steps.deploy-vercel-staging.outputs.preview-url }}
   # chrome-and-firefox-e2e:
