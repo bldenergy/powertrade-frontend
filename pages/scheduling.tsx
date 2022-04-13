@@ -11,7 +11,7 @@ const Scheduling: NextPage = () => {
   const translate = locale === 'en' ? en : zh;
   return (
     <div className={styles.container}>
-      <HeadComponent title="BLD PowerTrade - Scheduling" />
+      <HeadComponent title="BLD PowerTrade - Scheduling..." />
       <main className={styles.main}>
         <h1 className={styles.title}>{translate.scheduling.title}</h1>
         <p className={styles.description}>{translate.scheduling.subTitle}</p>
