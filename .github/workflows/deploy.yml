@@ -44,8 +44,6 @@ jobs:
           wait-on: ${{ needs.vercel.outputs.VERCEL_URL }}
           config: baseUrl=${{ needs.vercel.outputs.VERCEL_URL }}
           browser: firefox
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
   edge-e2e:
     name: E2E on Edge
     runs-on: windows-latest
@@ -58,5 +56,3 @@ jobs:
           wait-on: ${{ needs.vercel.outputs.VERCEL_URL }}
           config: baseUrl=${{ needs.vercel.outputs.VERCEL_URL }}
           browser: edge
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
