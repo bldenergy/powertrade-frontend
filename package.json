@@ -10,9 +10,11 @@
     "test": "cypress run"
   },
   "dependencies": {
+    "chart.js": "^3.7.1",
     "next": "12.1.3",
     "next-pwa": "^5.5.0",
     "react": "18.0.0",
+    "react-chartjs-2": "^4.1.0",
     "react-dom": "18.0.0"
   },
   "devDependencies": {

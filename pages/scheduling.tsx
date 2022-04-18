@@ -4,6 +4,7 @@ import HeadComponent from '../components/head';
 import { useRouter } from 'next/router';
 import en from '../locales/en';
 import zh from '../locales/zh';
+import React from 'react';
 
 const Scheduling: NextPage = () => {
   const router = useRouter();
