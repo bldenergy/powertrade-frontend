@@ -30,7 +30,7 @@ ChartJS.register(
 
 import { Bar, Line, Scatter, Bubble } from 'react-chartjs-2';
 
-const data = [
+const futureLoad = [
   {
     x: '00:00',
     y: 2690,
@@ -609,7 +609,7 @@ const data = [
   },
 ];
 
-const data2 = [
+const presentLoad = [
   {
     x: '00:00',
     y: 2693.1,
@@ -1190,7 +1190,7 @@ const data2 = [
 
 // <block:animation:1>
 const totalDuration = 10000;
-const delayBetweenPoints = totalDuration / data.length;
+const delayBetweenPoints = totalDuration / futureLoad.length;
 const previousY = (ctx: {
   index: number;
   chart: {
@@ -1252,7 +1252,7 @@ const config: any = {
       borderColor: 'rgba(75,192,192,1)',
       borderWidth: 2,
       radius: 0,
-      data: data,
+      data: futureLoad,
       borderDash: [5, 5],
     },
     {
@@ -1260,7 +1260,7 @@ const config: any = {
       borderColor: 'rgba(175,192,192,1)',
       borderWidth: 4,
       radius: 0,
-      data: data2,
+      data: presentLoad,
       fill: true,
     },
   ],
