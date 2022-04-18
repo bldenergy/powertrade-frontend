@@ -46,6 +46,8 @@ jobs:
           browser: firefox
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
+        with:
+        token: ${{ secrets.CODECOV_TOKEN }}
   edge-e2e:
     name: E2E on Edge
     runs-on: windows-latest
@@ -60,3 +62,5 @@ jobs:
           browser: edge
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
+        with:
+        token: ${{ secrets.CODECOV_TOKEN }}
