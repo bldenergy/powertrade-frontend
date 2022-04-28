@@ -28,6 +28,8 @@ const Registration: NextPage = () => {
 
   // In this effect we either initiate a new registration flow, or we fetch an existing registration flow.
   useEffect(() => {
+    console.log(router.isReady)
+    console.log(flow)
     // If the router is not ready yet, or we already have a flow, do nothing.
     if (!router.isReady || flow) {
       return
