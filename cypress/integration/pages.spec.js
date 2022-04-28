@@ -43,4 +43,8 @@ context('Ory Kratos pages', () => {
     cy.visit('/')
     cy.get('h2').should('exist')
   })
+
+  it('can load the error page', () => {
+    cy.visit('/error')
+  })
 })
