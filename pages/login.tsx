@@ -1,8 +1,8 @@
+import styles from '../styles/index.module.css'
 import {
   SelfServiceLoginFlow,
   SubmitSelfServiceLoginFlowBody
 } from '@ory/client'
-import { CardTitle } from '@ory/themes'
 import { AxiosError } from 'axios'
 import type { NextPage } from 'next'
 import Head from 'next/head'
@@ -10,13 +10,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import {
-  ActionCard,
-  CenterLink,
-  createLogoutHandler,
-  Flow,
-  MarginCard
-} from '../pkg'
+import PageWrapper from '../components/pageWrapper'
+import { createLogoutHandler, Flow } from '../pkg'
 import { handleGetFlowError, handleFlowError } from '../pkg/errors'
 import ory from '../pkg/sdk'
 
@@ -106,39 +101,41 @@ const Login: NextPage = () => {
         <title>Sign in - Ory NextJS Integration Example</title>
         <meta name="description" content="NextJS + React + Vercel + Ory" />
       </Head>
-      <MarginCard>
-        <CardTitle>
-          {(() => {
-            if (flow?.refresh) {
-              return 'Confirm Action'
-            } else if (flow?.requested_aal === 'aal2') {
-              return 'Two-Factor Authentication'
-            }
-            return 'Sign In'
-          })()}
-        </CardTitle>
-        <Flow onSubmit={onSubmit} flow={flow} />
-      </MarginCard>
-      {aal || refresh ? (
-        <ActionCard>
-          <CenterLink data-testid="logout-link" onClick={onLogout}>
-            Log out
-          </CenterLink>
-        </ActionCard>
-      ) : (
-        <>
-          <ActionCard>
-            <Link href="/registration" passHref>
-              <CenterLink>Create account</CenterLink>
-            </Link>
-          </ActionCard>
-          <ActionCard>
-            <Link href="/recovery" passHref>
-              <CenterLink>Recover your account</CenterLink>
-            </Link>
-          </ActionCard>
-        </>
-      )}
+      <PageWrapper>
+        <div>
+          <div className={styles.title}>
+            {(() => {
+              if (flow?.refresh) {
+                return 'Confirm Action'
+              } else if (flow?.requested_aal === 'aal2') {
+                return 'Two-Factor Authentication'
+              }
+              return 'Sign In'
+            })()}
+          </div>
+          <Flow onSubmit={onSubmit} flow={flow} />
+        </div>
+        {aal || refresh ? (
+          <div>
+            <div data-testid="logout-link" onClick={onLogout}>
+              Log out
+            </div>
+          </div>
+        ) : (
+          <>
+            <div>
+              <Link href="/registration" passHref>
+                <div>Create account</div>
+              </Link>
+            </div>
+            <div>
+              <Link href="/recovery" passHref>
+                <div>Recover your account</div>
+              </Link>
+            </div>
+          </>
+        )}
+      </PageWrapper>
     </>
   )
 }

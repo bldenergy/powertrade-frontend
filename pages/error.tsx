@@ -1,12 +1,10 @@
 import { SelfServiceError } from '@ory/client'
-import { CardTitle, CodeBox } from '@ory/themes'
 import { AxiosError } from 'axios'
 import type { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { ActionCard, CenterLink, MarginCard } from '../pkg'
 import ory from '../pkg/sdk'
 
 const Login: NextPage = () => {
@@ -48,15 +46,15 @@ const Login: NextPage = () => {
 
   return (
     <>
-      <MarginCard wide>
-        <CardTitle>An error occurred</CardTitle>
-        <CodeBox code={JSON.stringify(error, null, 2)} />
-      </MarginCard>
-      <ActionCard wide>
+      <div>
+        <div>An error occurred</div>
+        <div data-code={JSON.stringify(error, null, 2)} />
+      </div>
+      <div>
         <Link href="/" passHref>
-          <CenterLink>Go back</CenterLink>
+          <div>Go back</div>
         </Link>
-      </ActionCard>
+      </div>
     </>
   )
 }

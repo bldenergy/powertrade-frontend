@@ -2,7 +2,6 @@ import {
   SelfServiceLoginFlow,
   SubmitSelfServiceLoginFlowBody
 } from '@ory/client'
-import { CardTitle } from '@ory/themes'
 import { AxiosError } from 'axios'
 import type { NextPage } from 'next'
 import Head from 'next/head'
@@ -10,13 +9,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import {
-  ActionCard,
-  CenterLink,
-  createLogoutHandler,
-  Flow,
-  MarginCard
-} from '../pkg'
+import { createLogoutHandler, Flow } from '../pkg'
 import { handleGetFlowError, handleFlowError } from '../pkg/errors'
 import ory from '../pkg/sdk'
 
@@ -106,8 +99,8 @@ const Login: NextPage = () => {
         <title>Sign in - Ory NextJS Integration Example</title>
         <meta name="description" content="NextJS + React + Vercel + Ory" />
       </Head>
-      <MarginCard>
-        <CardTitle>
+      <div>
+        <div>
           {(() => {
             if (flow?.refresh) {
               return 'Confirm Action'
@@ -116,27 +109,27 @@ const Login: NextPage = () => {
             }
             return 'Sign In'
           })()}
-        </CardTitle>
+        </div>
         <Flow onSubmit={onSubmit} flow={flow} />
-      </MarginCard>
+      </div>
       {aal || refresh ? (
-        <ActionCard>
-          <CenterLink data-testid="logout-link" onClick={onLogout}>
+        <div>
+          <div data-testid="logout-link" onClick={onLogout}>
             Log out
-          </CenterLink>
-        </ActionCard>
+          </div>
+        </div>
       ) : (
         <>
-          <ActionCard>
+          <div>
             <Link href="/registration" passHref>
-              <CenterLink>Create account</CenterLink>
+              <div>Create account</div>
             </Link>
-          </ActionCard>
-          <ActionCard>
+          </div>
+          <div>
             <Link href="/recovery" passHref>
-              <CenterLink>Recover your account</CenterLink>
+              <div>Recover your account</div>
             </Link>
-          </ActionCard>
+          </div>
         </>
       )}
     </>

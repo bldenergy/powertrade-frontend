@@ -2,7 +2,6 @@ import {
   SelfServiceVerificationFlow,
   SubmitSelfServiceVerificationFlowBody
 } from '@ory/client'
-import { Card, CardTitle } from '@ory/themes'
 import { AxiosError } from 'axios'
 import type { NextPage } from 'next'
 import Head from 'next/head'
@@ -10,7 +9,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { Flow, ActionCard, CenterLink, MarginCard } from '../pkg'
+import { Flow } from '../pkg'
 import ory from '../pkg/sdk'
 
 const Verification: NextPage = () => {
@@ -100,15 +99,15 @@ const Verification: NextPage = () => {
         <title>Verify your account - Ory NextJS Integration Example</title>
         <meta name="description" content="NextJS + React + Vercel + Ory" />
       </Head>
-      <MarginCard>
-        <CardTitle>Verify your account</CardTitle>
+      <div>
+        <div>Verify your account</div>
         <Flow onSubmit={onSubmit} flow={flow} />
-      </MarginCard>
-      <ActionCard>
+      </div>
+      <div>
         <Link href="/" passHref>
-          <CenterLink>Go back</CenterLink>
+          <div>Go back</div>
         </Link>
-      </ActionCard>
+      </div>
     </>
   )
 }

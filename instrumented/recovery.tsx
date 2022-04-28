@@ -2,7 +2,6 @@ import {
   SelfServiceRecoveryFlow,
   SubmitSelfServiceRecoveryFlowBody
 } from '@ory/client'
-import { CardTitle } from '@ory/themes'
 import { AxiosError } from 'axios'
 import type { NextPage } from 'next'
 import Head from 'next/head'
@@ -10,7 +9,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { Flow, ActionCard, CenterLink, MarginCard } from '../pkg'
+import { Flow } from '../pkg'
 import { handleFlowError } from '../pkg/errors'
 import ory from '../pkg/sdk'
 
@@ -88,15 +87,15 @@ const Recovery: NextPage = () => {
         <title>Recover your account - Ory NextJS Integration Example</title>
         <meta name="description" content="NextJS + React + Vercel + Ory" />
       </Head>
-      <MarginCard>
-        <CardTitle>Recover your account</CardTitle>
+      <div>
+        <div>Recover your account</div>
         <Flow onSubmit={onSubmit} flow={flow} />
-      </MarginCard>
-      <ActionCard>
+      </div>
+      <div>
         <Link href="/" passHref>
-          <CenterLink>Go back</CenterLink>
+          <div>Go back</div>
         </Link>
-      </ActionCard>
+      </div>
     </>
   )
 }

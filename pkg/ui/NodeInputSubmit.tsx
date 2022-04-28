@@ -1,6 +1,6 @@
+import styles from '../../styles/index.module.css'
 import { UiNode, UiNodeInputAttributes } from '@ory/client'
 import { getNodeLabel } from '@ory/integrations/ui'
-import { Button, Checkbox, TextInput } from '@ory/themes'
 
 import { FormDispatcher, NodeInputProps, ValueSetter } from './helpers'
 
@@ -13,7 +13,8 @@ export function NodeInputSubmit<T>({
 }: NodeInputProps) {
   return (
     <>
-      <Button
+      <button
+        className={styles.button}
         name={attributes.name}
         onClick={(e) => {
           // On click, we set this value, and once set, dispatch the submission!
@@ -23,7 +24,7 @@ export function NodeInputSubmit<T>({
         disabled={attributes.disabled || disabled}
       >
         {getNodeLabel(node)}
-      </Button>
+      </button>
     </>
   )
 }

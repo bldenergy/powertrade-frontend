@@ -1,5 +1,5 @@
+import styles from '../../styles/index.module.css'
 import { getNodeLabel } from '@ory/integrations/ui'
-import { Button, TextInput } from '@ory/themes'
 
 import { NodeInputButton } from './NodeInputButton'
 import { NodeInputCheckbox } from './NodeInputCheckbox'
@@ -23,29 +23,39 @@ export function NodeInputDefault<T>(props: NodeInputProps) {
 
   // Render a generic text input field.
   return (
-    <TextInput
-      title={node.meta.label?.text}
-      onClick={onClick}
-      onChange={(e) => {
-        setValue(e.target.value)
-      }}
-      type={attributes.type}
-      name={attributes.name}
-      value={value}
-      disabled={attributes.disabled || disabled}
-      help={node.messages.length > 0}
-      state={
-        node.messages.find(({ type }) => type === 'error') ? 'error' : undefined
-      }
-      subtitle={
+    <>
+      {attributes.name !== 'traits.picture' && (
         <>
-          {node.messages.map(({ text, id }, k) => (
-            <span key={`${id}-${k}`} data-testid={`ui/message/${id}`}>
-              {text}
-            </span>
-          ))}
+          <div>
+            <span>{node.meta.label?.text}</span>
+          </div>
+          <input
+            className={styles.input}
+            title={node.meta.label?.text}
+            onClick={onClick}
+            onChange={(e) => {
+              setValue(e.target.value)
+            }}
+            type={attributes.type}
+            name={attributes.name}
+            value={value}
+            disabled={attributes.disabled || disabled}
+            data-help={node.messages.length > 0}
+            data-state={
+              node.messages.find(({ type }) => type === 'error')
+                ? 'error'
+                : undefined
+            }
+          />
+          <div style={{ color: 'red' }}>
+            {node.messages.map(({ text, id }, k) => (
+              <span key={`${id}-${k}`} data-testid={`ui/message/${id}`}>
+                {text}
+              </span>
+            ))}
+          </div>
         </>
-      }
-    />
+      )}
+    </>
   )
 }

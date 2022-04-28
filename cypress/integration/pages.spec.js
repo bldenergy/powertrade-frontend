@@ -26,7 +26,6 @@ context('Ory Kratos pages', () => {
       'aria-disabled',
       'false'
     )
-    cy.get('[data-testid="session-content"]').should('contain.text', email)
   })
 
   it('can load the verification page', () => {

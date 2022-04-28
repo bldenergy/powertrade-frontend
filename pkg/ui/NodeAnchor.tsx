@@ -1,6 +1,5 @@
 import { UiNodeAnchorAttributes } from '@ory/client'
 import { UiNode } from '@ory/client'
-import { Button } from '@ory/themes'
 
 interface Props {
   node: UiNode
@@ -9,7 +8,7 @@ interface Props {
 
 export const NodeAnchor = ({ node, attributes }: Props) => {
   return (
-    <Button
+    <div
       data-testid={`node/anchor/${attributes.id}`}
       onClick={(e) => {
         e.stopPropagation()
@@ -18,6 +17,6 @@ export const NodeAnchor = ({ node, attributes }: Props) => {
       }}
     >
       {attributes.title.text}
-    </Button>
+    </div>
   )
 }

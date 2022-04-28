@@ -1,11 +1,10 @@
-import { Card, CardTitle, P, H2, H3, CodeBox } from '@ory/themes'
 import { AxiosError } from 'axios'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { DocsButton, MarginCard, createLogoutHandler } from '../pkg'
+import { createLogoutHandler } from '../pkg'
 import ory from '../pkg/sdk'
 
 const Home: NextPage = () => {
@@ -50,111 +49,124 @@ const Home: NextPage = () => {
         <meta name="description" content="NextJS + React + Vercel + Ory" />
       </Head>
 
-      <MarginCard wide>
-        <CardTitle>Welcome to Ory!</CardTitle>
-        <P>
+      <div>
+        <div>Welcome to Ory!</div>
+        <p>
           Welcome to the Ory Managed UI. This UI implements a run-of-the-mill
           user interface for all self-service flows (login, registration,
           recovery, verification, settings). The purpose of this UI is to help
           you get started quickly. In the long run, you probably want to
           implement your own custom user interface.
-        </P>
+        </p>
         <div className="row">
           <div className="col-md-4 col-xs-12">
             <div className="box">
-              <H3>Documentation</H3>
-              <P>
+              <h3>Documentation</h3>
+              <p>
                 Here are some useful documentation pieces that help you get
                 started.
-              </P>
+              </p>
               <div className="row">
-                <DocsButton
+                <div
                   title="Get Started"
-                  href="https://www.ory.sh/docs/get-started"
-                  testid="get-started"
+                  data-href="https://www.ory.sh/docs/get-started"
+                  data-testid="get-started"
                 />
-                <DocsButton
+                <div
                   title="User Flows"
-                  href="https://www.ory.sh/docs/concepts/self-service"
-                  testid="user-flows"
+                  data-href="https://www.ory.sh/docs/concepts/self-service"
+                  data-testid="user-flows"
                 />
-                <DocsButton
+                <div
                   title="Identities"
-                  href="https://www.ory.sh/docs/concepts/identity"
-                  testid="identities"
+                  data-href="https://www.ory.sh/docs/concepts/identity"
+                  data-testid="identities"
                 />
-                <DocsButton
+                <div
                   title="Sessions"
-                  href="https://www.ory.sh/docs/concepts/session"
-                  testid="sessions"
+                  data-href="https://www.ory.sh/docs/concepts/session"
+                  data-testid="sessions"
                 />
-                <DocsButton
+                <div
                   title="Bring Your Own UI"
-                  href="https://www.ory.sh/docs/guides/bring-your-user-interface"
-                  testid="customize-ui"
+                  data-href="https://www.ory.sh/docs/guides/bring-your-user-interface"
+                  data-testid="customize-ui"
                 />
               </div>
             </div>
           </div>
           <div className="col-md-8 col-xs-12">
             <div className="box">
-              <H3>Session Information</H3>
-              <P>
+              <h3>Session Information</h3>
+              <p>
                 Below you will find the decoded Ory Session if you are logged
                 in.
-              </P>
-              <CodeBox data-testid="session-content" code={session} />
+              </p>
+              <div data-data-testid="session-content" data-code={session} />
             </div>
           </div>
         </div>
-      </MarginCard>
+      </div>
 
-      <Card wide>
-        <H2>Other User Interface Screens</H2>
+      <div>
+        <h2>Other User Interface Screens</h2>
         <div className={'row'}>
-          <DocsButton
-            unresponsive
-            testid="login"
-            href="/login"
+          <button
+            type="button"
+            data-testid="login"
+            data-href="/login"
             disabled={hasSession}
             title={'Login'}
-          />
-          <DocsButton
-            unresponsive
-            testid="sign-up"
-            href="/registration"
+            onClick={(event) => (window.location.href = '/login')}
+          >
+            Login
+          </button>
+          <button
+            data-testid="sign-up"
+            data-href="/registration"
             disabled={hasSession}
             title={'Sign Up'}
-          />
-          <DocsButton
-            unresponsive
-            testid="recover-account"
-            href="/recovery"
+            onClick={(event) => (window.location.href = '/registration')}
+          >
+            Sign Up
+          </button>
+          <button
+            data-testid="recover-account"
+            data-href="/recovery"
             disabled={hasSession}
             title="Recover Account"
-          />
-          <DocsButton
-            unresponsive
-            testid="verify-account"
-            href="/verification"
+            onClick={(event) => (window.location.href = '/recovery')}
+          >
+            Recover Account
+          </button>
+          <button
+            data-testid="verify-account"
+            data-href="/verification"
             title="Verify Account"
-          />
-          <DocsButton
-            unresponsive
-            testid="account-settings"
-            href="/settings"
+            onClick={(event) => (window.location.href = '/verification')}
+          >
+            Verify Account
+          </button>
+          <button
+            data-testid="account-settings"
+            data-href="/settings"
             disabled={!hasSession}
             title={'Account Settings'}
-          />
-          <DocsButton
-            unresponsive
-            testid="logout"
+            onClick={(event) => (window.location.href = '/settings')}
+          >
+            Account Settings
+          </button>
+          <button
+            data-testid="logout"
             onClick={onLogout}
+            aria-disabled="true"
             disabled={!hasSession}
             title={'Logout'}
-          />
+          >
+            Logout
+          </button>
         </div>
-      </Card>
+      </div>
     </div>
   )
 }

@@ -1,3 +1,5 @@
+import styles from '../../styles/index.module.css'
+
 import { NodeInputButton } from './NodeInputButton'
 import { NodeInputCheckbox } from './NodeInputCheckbox'
 import { NodeInputDefault } from './NodeInputDefault'
@@ -25,5 +27,9 @@ export function NodeInput<T>(props: NodeInputProps) {
   }
 
   // Render a generic text input field.
-  return <NodeInputDefault {...props} />
+  return (
+    <div className={styles.inputWrapper}>
+      <NodeInputDefault {...props} />
+    </div>
+  )
 }

@@ -2,7 +2,6 @@ import {
   SelfServiceSettingsFlow,
   SubmitSelfServiceSettingsFlowBody
 } from '@ory/client'
-import { CardTitle, H3, P } from '@ory/themes'
 import { AxiosError } from 'axios'
 import type { NextPage } from 'next'
 import Head from 'next/head'
@@ -10,7 +9,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { ReactNode, useEffect, useState } from 'react'
 
-import { Flow, Methods, Messages, ActionCard, CenterLink } from '../pkg'
+import { Flow, Methods, Messages } from '../pkg'
 import { handleFlowError } from '../pkg/errors'
 import ory from '../pkg/sdk'
 
@@ -36,7 +35,7 @@ function SettingsCard({
     return null
   }
 
-  return <ActionCard wide>{children}</ActionCard>
+  return <div>{children}</div>
 }
 
 const Settings: NextPage = () => {
@@ -108,11 +107,11 @@ const Settings: NextPage = () => {
         </title>
         <meta name="description" content="NextJS + React + Vercel + Ory" />
       </Head>
-      <CardTitle style={{ marginTop: 80 }}>
+      <div style={{ marginTop: 80 }}>
         Profile Management and Security Settings
-      </CardTitle>
+      </div>
       <SettingsCard only="profile" flow={flow}>
-        <H3>Profile Settings</H3>
+        <h3>Profile Settings</h3>
         <Messages messages={flow?.ui.messages} />
         <Flow
           hideGlobalMessages
@@ -122,7 +121,7 @@ const Settings: NextPage = () => {
         />
       </SettingsCard>
       <SettingsCard only="password" flow={flow}>
-        <H3>Change Password</H3>
+        <h3>Change Password</h3>
 
         <Messages messages={flow?.ui.messages} />
         <Flow
@@ -133,18 +132,18 @@ const Settings: NextPage = () => {
         />
       </SettingsCard>
       <SettingsCard only="oidc" flow={flow}>
-        <H3>Manage Social Sign In</H3>
+        <h3>Manage Social Sign In</h3>
 
         <Messages messages={flow?.ui.messages} />
         <Flow hideGlobalMessages onSubmit={onSubmit} only="oidc" flow={flow} />
       </SettingsCard>
       <SettingsCard only="lookup_secret" flow={flow}>
-        <H3>Manage 2FA Backup Recovery Codes</H3>
+        <h3>Manage 2FA Backup Recovery Codes</h3>
         <Messages messages={flow?.ui.messages} />
-        <P>
+        <p>
           Recovery codes can be used in panic situations where you have lost
           access to your 2FA device.
-        </P>
+        </p>
 
         <Flow
           hideGlobalMessages
@@ -154,8 +153,8 @@ const Settings: NextPage = () => {
         />
       </SettingsCard>
       <SettingsCard only="totp" flow={flow}>
-        <H3>Manage 2FA TOTP Authenticator App</H3>
-        <P>
+        <h3>Manage 2FA TOTP Authenticator App</h3>
+        <p>
           Add a TOTP Authenticator App to your account to improve your account
           security. Popular Authenticator Apps are{' '}
           <a href="https://www.lastpass.com" rel="noreferrer" target="_blank">
@@ -178,17 +177,17 @@ const Settings: NextPage = () => {
             Android
           </a>
           ).
-        </P>
+        </p>
         <Messages messages={flow?.ui.messages} />
         <Flow hideGlobalMessages onSubmit={onSubmit} only="totp" flow={flow} />
       </SettingsCard>
       <SettingsCard only="webauthn" flow={flow}>
-        <H3>Manage Hardware Tokens and Biometrics</H3>
+        <h3>Manage Hardware Tokens and Biometrics</h3>
         <Messages messages={flow?.ui.messages} />
-        <P>
+        <p>
           Use Hardware Tokens (e.g. YubiKey) or Biometrics (e.g. FaceID,
           TouchID) to enhance your account security.
-        </P>
+        </p>
         <Flow
           hideGlobalMessages
           onSubmit={onSubmit}
@@ -196,11 +195,11 @@ const Settings: NextPage = () => {
           flow={flow}
         />
       </SettingsCard>
-      <ActionCard wide>
+      <div>
         <Link href="/" passHref>
-          <CenterLink>Go back</CenterLink>
+          <div>Go back</div>
         </Link>
-      </ActionCard>
+      </div>
     </>
   )
 }
