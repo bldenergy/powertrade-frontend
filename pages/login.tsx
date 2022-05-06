@@ -61,7 +61,7 @@ const Login: NextPage = (serverProps) => {
       .initializeSelfServiceLoginFlowForBrowsers(
         Boolean(refresh),
         aal ? String(aal) : undefined,
-        `${process.env.BLD_POWERTRADE_URL}/oauth?login_challenge=${challenge}&login_state=${serverProps.login_state}`
+        `${serverProps.power_trade_url}/oauth?login_challenge=${challenge}&login_state=${serverProps.login_state}`
       )
       .then(({ data }) => {
         setFlow(data)
@@ -79,7 +79,7 @@ const Login: NextPage = (serverProps) => {
           .submitSelfServiceLoginFlow(String(flow?.id), undefined, values)
           // We logged in successfully! Let's bring the user to hydra to fetch token.
           .then((res) => {
-            window.location.href = `${process.env.BLD_POWERTRADE_URL}/oauth?login_challenge=${challenge}&login_state=${serverProps.login_state}`
+            window.location.href = `${serverProps.power_trade_url}/oauth?login_challenge=${challenge}&login_state=${serverProps.login_state}`
             return
           })
           .then(() => {})
@@ -193,7 +193,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     };
   }
 
-  return { props: { login_state } }
+  return { props: { login_state, power_trade_url: process.env.BLD_POWERTRADE_URL } }
 }
 
 export default Login
