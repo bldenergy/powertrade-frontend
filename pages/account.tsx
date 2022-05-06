@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react'
 import HeadComponent from '../components/head'
 import en from '../locales/en'
 import zh from '../locales/zh'
-import ory from '../pkg/sdk'
+import kratosBrowser from '../pkg/sdk/browser/kratos'
 
 const Account: NextPage = () => {
   const router = useRouter()
@@ -20,7 +20,7 @@ const Account: NextPage = () => {
   const [hasSession, setHasSession] = useState<boolean>(false)
 
   useEffect(() => {
-    ory
+    kratosBrowser
       .toSession()
       .then(({ data }) => {
         setSession(JSON.stringify(data, null, 2))

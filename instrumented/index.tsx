@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 import { createLogoutHandler } from '../pkg'
-import ory from '../pkg/sdk'
+import kratosBrowser from '../pkg/sdk/browser/kratos'
 
 const Home: NextPage = () => {
   const [session, setSession] = useState<string>(
@@ -16,7 +16,7 @@ const Home: NextPage = () => {
   const onLogout = createLogoutHandler()
 
   useEffect(() => {
-    ory
+    kratosBrowser
       .toSession()
       .then(({ data }) => {
         setSession(JSON.stringify(data, null, 2))

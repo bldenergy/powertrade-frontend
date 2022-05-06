@@ -10,7 +10,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 import { Flow } from '../pkg'
-import ory from '../pkg/sdk'
+import kratosBrowser from '../pkg/sdk/browser/kratos'
 
 const Verification: NextPage = () => {
   const [flow, setFlow] = useState<SelfServiceVerificationFlow>()
@@ -27,7 +27,7 @@ const Verification: NextPage = () => {
 
     // If ?flow=.. was in the URL, we fetch it
     if (flowId) {
-      ory
+      kratosBrowser
         .getSelfServiceVerificationFlow(String(flowId))
         .then(({ data }) => {
           setFlow(data)
@@ -47,7 +47,7 @@ const Verification: NextPage = () => {
     }
 
     // Otherwise we initialize it
-    ory
+    kratosBrowser
       .initializeSelfServiceVerificationFlowForBrowsers(
         returnTo ? String(returnTo) : undefined
       )
@@ -71,7 +71,7 @@ const Verification: NextPage = () => {
       // his data when she/he reloads the page.
       .push(`/verification?flow=${flow?.id}`, undefined, { shallow: true })
       .then(() =>
-        ory
+        kratosBrowser
           .submitSelfServiceVerificationFlow(
             String(flow?.id),
             undefined,

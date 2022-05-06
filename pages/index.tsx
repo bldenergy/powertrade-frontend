@@ -21,7 +21,7 @@ import HeadComponent from '../components/head'
 import en from '../locales/en'
 import zh from '../locales/zh'
 import { createLogoutHandler } from '../pkg'
-import ory from '../pkg/sdk'
+import kratosBrowser from '../pkg/sdk/browser/kratos'
 
 ChartJS.register(
   CategoryScale,
@@ -1311,7 +1311,7 @@ const Home: NextPage = () => {
   const onLogout = createLogoutHandler()
 
   useEffect(() => {
-    ory
+    kratosBrowser
       .toSession()
       .then(({ data }) => {
         setSession(JSON.stringify(data, null, 2))

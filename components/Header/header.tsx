@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 import en from '../../locales/en'
 import zh from '../../locales/zh'
 import { createLogoutHandler } from '../../pkg'
-import ory from '../../pkg/sdk'
+import kratosBrowser from '../../pkg/sdk/browser/kratos'
 
 const path = [
   { uid: 21, name: 'Power Consumption', id: 2, path: '/power-consumption' },
@@ -39,7 +39,7 @@ export default function Header() {
   }
 
   useEffect(() => {
-    ory
+    kratosBrowser
       .toSession()
       .then(({ data }) => {
         setSession(JSON.stringify(data, null, 2))

@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react'
 
 import { createLogoutHandler, Flow } from '../pkg'
 import { handleGetFlowError, handleFlowError } from '../pkg/errors'
-import ory from '../pkg/sdk'
+import kratosBrowser from '../pkg/sdk/browser/kratos'
 
 const Login: NextPage = () => {
   const [flow, setFlow] = useState<SelfServiceLoginFlow>()
@@ -41,7 +41,7 @@ const Login: NextPage = () => {
 
     // If ?flow=.. was in the URL, we fetch it
     if (flowId) {
-      ory
+      kratosBrowser
         .getSelfServiceLoginFlow(String(flowId))
         .then(({ data }) => {
           setFlow(data)
@@ -51,7 +51,7 @@ const Login: NextPage = () => {
     }
 
     // Otherwise we initialize it
-    ory
+    kratosBrowser
       .initializeSelfServiceLoginFlowForBrowsers(
         Boolean(refresh),
         aal ? String(aal) : undefined,
@@ -69,7 +69,7 @@ const Login: NextPage = () => {
       // his data when she/he reloads the page.
       .push(`/login?flow=${flow?.id}`, undefined, { shallow: true })
       .then(() =>
-        ory
+        kratosBrowser
           .submitSelfServiceLoginFlow(String(flow?.id), undefined, values)
           // We logged in successfully! Let's bring the user home.
           .then((res) => {

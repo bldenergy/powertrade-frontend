@@ -11,7 +11,7 @@ import { ReactNode, useEffect, useState } from 'react'
 
 import { Flow, Methods, Messages } from '../pkg'
 import { handleFlowError } from '../pkg/errors'
-import ory from '../pkg/sdk'
+import kratosBrowser from '../pkg/sdk/browser/kratos'
 
 interface Props {
   flow?: SelfServiceSettingsFlow
@@ -53,7 +53,7 @@ const Settings: NextPage = () => {
 
     // If ?flow=.. was in the URL, we fetch it
     if (flowId) {
-      ory
+      kratosBrowser
         .getSelfServiceSettingsFlow(String(flowId))
         .then(({ data }) => {
           setFlow(data)
@@ -63,7 +63,7 @@ const Settings: NextPage = () => {
     }
 
     // Otherwise we initialize it
-    ory
+    kratosBrowser
       .initializeSelfServiceSettingsFlowForBrowsers(
         returnTo ? String(returnTo) : undefined
       )
@@ -79,7 +79,7 @@ const Settings: NextPage = () => {
       // his data when she/he reloads the page.
       .push(`/settings?flow=${flow?.id}`, undefined, { shallow: true })
       .then(() =>
-        ory
+        kratosBrowser
           .submitSelfServiceSettingsFlow(String(flow?.id), undefined, values)
           .then(({ data }) => {
             // The settings have been saved and the flow was updated. Let's show it to the user!
