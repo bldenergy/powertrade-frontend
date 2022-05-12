@@ -8,11 +8,11 @@ import kratosBrowser from './sdk/browser/kratos'
 export function createLogoutHandler(deps?: DependencyList) {
   const [logoutToken, setLogoutToken] = useState<string>('')
   const router = useRouter()
-
   useEffect(() => {
     kratosBrowser
       .createSelfServiceLogoutFlowUrlForBrowsers()
       .then(({ data }) => {
+        // console.log(data)
         setLogoutToken(data.logout_token)
       })
       .catch((err: AxiosError) => {
@@ -29,6 +29,7 @@ export function createLogoutHandler(deps?: DependencyList) {
 
   return () => {
     if (logoutToken) {
+      console.log('Yeah')
       kratosBrowser
         .submitSelfServiceLogoutFlow(logoutToken)
         .then(() => router.push('/login'))

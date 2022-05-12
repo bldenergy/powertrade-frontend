@@ -8,17 +8,17 @@ import { AxiosError } from 'axios'
 import type { NextPage, GetServerSideProps } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { generators } from 'openid-client'
 import { useEffect, useState } from 'react'
 
 import HeadComponent from '../components/head'
 import { createLogoutHandler, Flow } from '../pkg'
 import { handleGetFlowError, handleFlowError } from '../pkg/errors'
-import kratosBrowser from '../pkg/sdk/browser/kratos'
 import hydraAdmin from '../pkg/sdk/api/hydraAdmin'
+import kratosBrowser from '../pkg/sdk/browser/kratos'
 import bldclient, { BLDScope } from '../pkg/sdk/oauth2Client'
-import { generators } from 'openid-client';
 
-const Login: NextPage = (serverProps) => {
+const Login: NextPage = (serverProps: any) => {
   const [flow, setFlow] = useState<SelfServiceLoginFlow>()
 
   // Get ?flow=... from the URL
@@ -33,7 +33,7 @@ const Login: NextPage = (serverProps) => {
     // to perform two-factor authentication/verification.
     aal,
     // The challenge is used to fetch information about the login request from ORY Hydra.
-    login_challenge: challenge,
+    login_challenge: challenge
   } = router.query
 
   // This might be confusing, but we want to show the user an option
@@ -67,7 +67,18 @@ const Login: NextPage = (serverProps) => {
         setFlow(data)
       })
       .catch(handleFlowError(router, 'login', setFlow))
-  }, [flowId, router, router.isReady, aal, refresh, returnTo, flow])
+  }, [
+    flowId,
+    router,
+    router.isReady,
+    aal,
+    refresh,
+    returnTo,
+    flow,
+    serverProps.power_trade_url,
+    serverProps.login_state,
+    challenge
+  ])
 
   const onSubmit = (values: SubmitSelfServiceLoginFlowBody) =>
     router
@@ -141,9 +152,9 @@ const Login: NextPage = (serverProps) => {
 // This gets called on every request
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // Parses the URL query
-  const challenge = context.query.login_challenge;
+  const challenge: any = context.query.login_challenge
   // Fetch login_state in cookies
-  const login_state = context.req.cookies['login_state'];
+  const login_state = context.req.cookies['login_state']
 
   if (challenge !== undefined) {
     hydraAdmin
@@ -167,33 +178,37 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
               return {
                 redirect: {
                   permanent: false,
-                  destination: String(body.redirect_to),
+                  destination: String(body.redirect_to)
                 },
-                props: {},
-              };
+                props: {}
+              }
             })
         }
       })
-      .catch(() => {
-      })
+      .catch(() => {})
   } else {
     // No challenge has been found, so we need redirect to hydra to start a new authorization flow
-    const state = generators.state();
-    context.res.setHeader('set-cookie', [`login_state=${state}`]);
+    const state = generators.state()
+    context.res.setHeader('set-cookie', [`login_state=${state}`])
     const authUrl = await bldclient.authorizationUrl({
       scope: BLDScope,
       state
-    });
+    })
     return {
       redirect: {
         permanent: false,
-        destination: authUrl,
+        destination: authUrl
       },
-      props: {},
-    };
+      props: {}
+    }
   }
 
-  return { props: { login_state, power_trade_url: process.env.BLD_POWERTRADE_URL } }
+  return {
+    props: {
+      login_state: login_state ? login_state : null,
+      power_trade_url: process.env.BLD_POWERTRADE_URL
+    }
+  }
 }
 
 export default Login

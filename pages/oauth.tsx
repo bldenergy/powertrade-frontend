@@ -1,32 +1,34 @@
 import { AxiosError } from 'axios'
 import type { NextPage, GetServerSideProps } from 'next'
 
-import kratosApi from '../pkg/sdk/api/kratos'
 import hydraAdmin from '../pkg/sdk/api/hydraAdmin'
+import kratosApi from '../pkg/sdk/api/kratos'
 
 const Oauth: NextPage = (serverProps) => {
-  return (
-    <></>
-  );
+  return <></>
 }
 
 // This gets called on every request
 export const getServerSideProps: GetServerSideProps = async (context) => {
   // Parses the URL query
-  const challenge = context.query.login_challenge;
+  const challenge: any = context.query.login_challenge
 
   if (challenge === undefined) {
     return {
       redirect: {
         permanent: false,
-        destination: '/login',
+        destination: '/login'
       },
-      props: {},
-    };
+      props: {}
+    }
   }
 
   try {
-    const { data: kratosSession } = await kratosApi.toSession(undefined, undefined, { headers: context.req.headers });
+    const { data: kratosSession } = await kratosApi.toSession(
+      undefined,
+      undefined,
+      { headers: context.req.headers }
+    )
     const { data: hydraCompletedRequest } = await hydraAdmin.acceptLoginRequest(
       challenge,
       {
@@ -53,16 +55,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         acr: '0'
       },
       { headers: context.req.headers }
-    );
+    )
     // All we need to do now is to redirect the user back to hydra!
     return {
       redirect: {
         permanent: false,
-        destination: hydraCompletedRequest.redirect_to,
+        destination: hydraCompletedRequest.redirect_to
       },
-      props: {},
-    };
-  } catch (err: AxiosError) {
+      props: {}
+    }
+  } catch (err: any) {
     switch (err.response?.status) {
       case 403:
       // This is a legacy error code thrown. See code 422 for
@@ -74,18 +76,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         return {
           redirect: {
             permanent: false,
-            destination: '/login?aal=aal2',
+            destination: '/login?aal=aal2'
           },
-          props: {},
+          props: {}
         }
       case 401:
         // do nothing, the user is not logged in
         return {
           redirect: {
             permanent: false,
-            destination: '/login',
+            destination: '/login'
           },
-          props: {},
+          props: {}
         }
     }
 

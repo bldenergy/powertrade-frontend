@@ -11,11 +11,9 @@ import {
   Legend,
   Filler
 } from 'chart.js'
-import type { NextPage } from 'next'
-import Head from 'next/head'
+import type { GetServerSideProps, NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import { Bar, Line, Scatter, Bubble } from 'react-chartjs-2'
 
 import HeadComponent from '../components/head'
 import en from '../locales/en'
@@ -1249,58 +1247,11 @@ const animation = {
 
 // <block:config:0>
 
-const config: any = {
-  datasets: [
-    {
-      label: 'Future Load',
-      borderColor: 'rgba(75,192,192,1)',
-      borderWidth: 2,
-      radius: 0,
-      data: futureLoad,
-      borderDash: [5, 5]
-    },
-    {
-      label: 'Present Load',
-      borderColor: 'rgba(175,192,192,1)',
-      borderWidth: 4,
-      radius: 0,
-      data: presentLoad,
-      fill: true
-    }
-  ]
-}
-
-const options: any = {
-  animation,
-  interaction: {
-    intersect: false
-  },
-  plugins: {
-    legend: true
-  },
-  scales: {
-    x: {
-      grid: {
-        display: false
-      },
-      ticks: {
-        maxTicksLimit: 10 //
-      }
-    },
-    y: {
-      grid: {
-        drawBorder: false,
-        display: false,
-        drawOnChartArea: false
-      },
-      ticks: {
-        display: false
-      }
-    }
+const Home: NextPage = (serverProps: any) => {
+  let token: any
+  if (typeof window !== 'undefined') {
+    token = localStorage.getItem('Xjdfnd') || undefined
   }
-}
-
-const Home: NextPage = () => {
   const router = useRouter()
   const { locale } = router
   const translate = locale === 'en' ? en : zh
@@ -1308,8 +1259,8 @@ const Home: NextPage = () => {
     'No valid Ory Session was found.\nPlease sign in to receive one.'
   )
   const [hasSession, setHasSession] = useState<boolean>(false)
-  const onLogout = createLogoutHandler()
 
+  // Kratos Session
   useEffect(() => {
     kratosBrowser
       .toSession()
@@ -1335,6 +1286,19 @@ const Home: NextPage = () => {
         // Something else happened!
         return Promise.reject(err)
       })
+  }, [hasSession, router])
+
+  // Verify wheter token exists, if yes then access this page, if no : check if Kratos session exits, esle redirect to login
+  useEffect(() => {
+    if (token === undefined) {
+      if (hasSession) {
+        router.push(
+          `${serverProps.ory_hydra_public_url}/oauth2/sessions/logout`
+        )
+      } else {
+        router.push('/login')
+      }
+    }
   })
 
   return (
@@ -1352,15 +1316,15 @@ const Home: NextPage = () => {
             data-href="/recovery"
             disabled={hasSession}
             title="Recover Account"
-            onClick={(event) => (window.location.href = '/recovery')}
+            onClick={() => (window.location.href = '/recovery')}
           >
-            Recover Account
+            Recover Account {hasSession}
           </button>
           <button
             data-testid="verify-account"
             data-href="/verification"
             title="Verify Account"
-            onClick={(event) => (window.location.href = '/verification')}
+            onClick={() => (window.location.href = '/verification')}
           >
             Verify Account
           </button>
@@ -1369,7 +1333,7 @@ const Home: NextPage = () => {
             data-href="/settings"
             disabled={!hasSession}
             title={'Account Settings'}
-            onClick={(event) => (window.location.href = '/settings')}
+            onClick={() => (window.location.href = '/settings')}
           >
             Account Settings
           </button>
@@ -1379,4 +1343,12 @@ const Home: NextPage = () => {
   )
 }
 
+// This gets called on every request
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    props: {
+      ory_hydra_public_url: process.env.ORY_HYDRA_PUBLIC_URL
+    }
+  }
+}
 export default Home
