@@ -14,7 +14,7 @@ import HeadComponent from '../components/head'
 import hydraAdmin from '../pkg/sdk/api/hydraAdmin'
 import kratosApi from '../pkg/sdk/api/kratos'
 
-const Transition = React.forwardRef(function Transition(props, ref) {
+const Transition: any = React.forwardRef(function Transition(props, ref) {
   // eslint-disable-next-line react/no-children-prop
   return <Slide children={<></>} direction="up" ref={ref} {...props} />
 })
