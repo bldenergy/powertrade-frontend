@@ -40,14 +40,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     )
     console.log('received and validated tokens %j', tokenSet)
     console.log('validated ID Token claims %j', tokenSet.claims())
-    // localStorage.setItem('access_token', JSON.stringify(tokenSet))
-    // return {
-    //   redirect: {
-    //     permanent: false,
-    //     destination: '/'
-    //   },
-    //   props: { id_token: JSON.stringify(tokenSet) }
-    // }
   } catch (err) {
     console.log(err)
   }
