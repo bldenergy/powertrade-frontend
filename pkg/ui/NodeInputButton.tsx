@@ -23,6 +23,7 @@ export function NodeInputButton<T>({
 
   return (
     <>
+      {console.log(attributes.name)}
       <button
         name={attributes.name}
         onClick={(e) => {

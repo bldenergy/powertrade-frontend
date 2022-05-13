@@ -10,14 +10,11 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  // console.log(Token)
   return (
     <>
       <Header />
       {/* <Callback/> */}
-      <main className={layoutStyles.container}>
-        <section>{children}</section>
-      </main>
+      <main className={layoutStyles.container}>{children}</main>
       <Footer />
     </>
   )

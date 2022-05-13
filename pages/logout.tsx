@@ -1,16 +1,19 @@
-import styles from '../styles/shared.module.css'
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog'
-import DialogActions from '@mui/material/DialogActions'
-import DialogContent from '@mui/material/DialogContent'
-import DialogTitle from '@mui/material/DialogTitle'
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogCloseButton,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  Button,
+  useDisclosure
+} from '@chakra-ui/react'
 import Slide from '@mui/material/Slide'
 import type { NextPage, GetServerSideProps } from 'next'
 import router from 'next/router'
-import { useEffect } from 'react'
 import * as React from 'react'
 
-import HeadComponent from '../components/head'
 import hydraAdmin from '../pkg/sdk/api/hydraAdmin'
 import kratosApi from '../pkg/sdk/api/kratos'
 
@@ -19,48 +22,55 @@ const Transition: any = React.forwardRef(function Transition(props, ref) {
   return <Slide children={<></>} direction="up" ref={ref} {...props} />
 })
 const Logout: NextPage = (serverProps: any) => {
-  const [open, setOpen] = React.useState(false)
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const cancelRef: any = React.useRef()
 
-  useEffect(() => {
-    setOpen(true)
-  }, [])
+  React.useEffect(() => {
+    onOpen()
+  }, [onOpen])
 
   const handleCancel = () => {
     router.push(serverProps.previous_url)
   }
 
   const handleLogout = () => {
-    setOpen(false)
-
     if (typeof window !== 'undefined') {
       localStorage.removeItem('Xjdfnd')
       localStorage.removeItem('Mchvdh')
       localStorage.removeItem('Lbcdjb')
     }
-
     router.push(`${serverProps.ory_hydra_public_url}/oauth2/sessions/logout`)
   }
 
   return (
-    <div className={styles.container}>
-      <HeadComponent title="BLD PowerTrade - Power Consumption" />
-      <main className={styles.main}>
-        <Dialog
-          open={open}
-          TransitionComponent={Transition}
-          keepMounted
-          onClose={handleLogout}
-          aria-describedby="alert-dialog-slide-description"
-        >
-          <DialogTitle>{'Are you sure you want to logout?'}</DialogTitle>
-          <DialogContent></DialogContent>
-          <DialogActions>
-            <Button onClick={handleCancel}>No</Button>
-            <Button onClick={handleLogout}>Yes</Button>
-          </DialogActions>
-        </Dialog>
-      </main>
-    </div>
+    <>
+      <AlertDialog
+        closeOnOverlayClick={false}
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+        isCentered
+      >
+        <AlertDialogOverlay>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+              Logout
+            </AlertDialogHeader>
+
+            <AlertDialogBody>Are you sure you want to logout?</AlertDialogBody>
+
+            <AlertDialogFooter>
+              <Button ref={cancelRef} onClick={handleCancel}>
+                No
+              </Button>
+              <Button colorScheme="red" onClick={handleLogout} ml={3}>
+                Yes
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
+    </>
   )
 }
 

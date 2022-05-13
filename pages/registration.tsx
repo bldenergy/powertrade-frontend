@@ -1,3 +1,16 @@
+import styles from '../styles/index.module.css'
+import sharedStyles from '../styles/shared.module.css'
+import {
+  Box,
+  Button,
+  Container,
+  Heading,
+  HStack,
+  Stack,
+  Text,
+  useBreakpointValue,
+  useColorModeValue
+} from '@chakra-ui/react'
 import {
   SelfServiceRegistrationFlow,
   SubmitSelfServiceRegistrationFlowBody
@@ -9,6 +22,7 @@ import Link from 'next/link'
 import { useRouter, NextRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
+import HeadComponent from '../components/head'
 import PageWrapper from '../components/pageWrapper'
 // Import render helpers
 import { Flow } from '../pkg'
@@ -18,7 +32,16 @@ import kratosBrowser from '../pkg/sdk/browser/kratos'
 
 // Renders the registration page
 const Registration: NextPage = () => {
+  const [mounted, setMounted] = useState(false)
   const router = useRouter()
+  const breakpoint: any = useBreakpointValue({
+    base: 'transparent',
+    sm: 'bg-surface'
+  })
+  const headingBreakPointvalue: any = useBreakpointValue({
+    base: 'xs',
+    md: 'lg'
+  })
 
   // The "flow" represents a registration process and contains
   // information about the form we need to render (e.g. username + password)
@@ -26,6 +49,10 @@ const Registration: NextPage = () => {
 
   // Get ?flow=... from the URL
   const { flow: flowId, return_to: returnTo } = router.query
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // In this effect we either initiate a new registration flow, or we fetch an existing registration flow.
   useEffect(() => {
@@ -90,13 +117,10 @@ const Registration: NextPage = () => {
       )
 
   return (
-    <>
-      <Head>
-        <title>Create account - Ory NextJS Integration Example</title>
-        <meta name="description" content="NextJS + React + Vercel + Ory" />
-      </Head>
-      <PageWrapper>
-        <div>
+    <div className={[sharedStyles.container, styles.pageColor].join(' ')}>
+      <HeadComponent title="BLD PowerTrade - Sign Up" />
+      <div className={sharedStyles.main}>
+        {/* <div>
           <div>Create account</div>
           <Flow onSubmit={onSubmit} flow={flow} />
         </div>
@@ -104,9 +128,45 @@ const Registration: NextPage = () => {
           <Link data-testid="cta-link" href={'/login'}>
             Sign in
           </Link>
-        </div>
-      </PageWrapper>
-    </>
+        </div> */}
+
+        <Container
+          maxW="lg"
+          py={{ base: '12', md: '24' }}
+          px={{ base: '0', sm: '8' }}
+        >
+          <Stack spacing="8">
+            <Stack spacing="6">
+              <div className={styles.title}>
+                <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
+                  <Heading size={mounted ? headingBreakPointvalue : null}>
+                    Create Account
+                  </Heading>
+                  <HStack spacing="1" justify="center">
+                    <Text color="muted"> {`Have an account?`}</Text>
+                    <Link href="/login" passHref>
+                      <Button variant="link" colorScheme="blue">
+                        Login
+                      </Button>
+                    </Link>
+                  </HStack>
+                </Stack>
+              </div>
+            </Stack>
+          </Stack>
+          <Box
+            py={{ base: '0', sm: '8' }}
+            px={{ base: '4', sm: '10' }}
+            bg={mounted ? breakpoint : null}
+            boxShadow={{ base: 'none', sm: useColorModeValue('md', 'md-dark') }}
+            borderRadius={{ base: 'none', sm: 'xl' }}
+            backgroundColor="white"
+          >
+            <Flow onSubmit={onSubmit} flow={flow} />
+          </Box>
+        </Container>
+      </div>
+    </div>
   )
 }
 

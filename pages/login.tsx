@@ -1,6 +1,18 @@
 import styles from '../styles/index.module.css'
 import sharedStyles from '../styles/shared.module.css'
 import {
+  Button,
+  Heading,
+  HStack,
+  Stack,
+  useBreakpointValue,
+  Text,
+  Container,
+  Box,
+  useColorModeValue,
+  Divider
+} from '@chakra-ui/react'
+import {
   SelfServiceLoginFlow,
   SubmitSelfServiceLoginFlowBody
 } from '@ory/client'
@@ -19,6 +31,20 @@ import kratosBrowser from '../pkg/sdk/browser/kratos'
 import bldclient, { BLDScope } from '../pkg/sdk/oauth2Client'
 
 const Login: NextPage = (serverProps: any) => {
+  const [mounted, setMounted] = useState(false)
+  const breakpoint: any = useBreakpointValue({
+    base: 'transparent',
+    sm: 'bg-surface'
+  })
+  const headingBreakPointvalue: any = useBreakpointValue({
+    base: 'xs',
+    md: 'lg'
+  })
+  // const colorMode = useColorModeValue('md', 'md-dark') };
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
   const [flow, setFlow] = useState<SelfServiceLoginFlow>()
 
   // Get ?flow=... from the URL
@@ -108,43 +134,77 @@ const Login: NextPage = (serverProps: any) => {
       )
 
   return (
-    <div className={sharedStyles.container}>
+    <div className={[sharedStyles.container, styles.pageColor].join(' ')}>
       <HeadComponent title="BLD PowerTrade - Sign In" />
-      <main className={sharedStyles.main}>
-        <div>
-          <div className={styles.title}>
-            {(() => {
-              if (flow?.refresh) {
-                return 'Confirm Action'
-              } else if (flow?.requested_aal === 'aal2') {
-                return 'Two-Factor Authentication'
-              }
-              return 'Sign In'
-            })()}
-          </div>
-          <Flow onSubmit={onSubmit} flow={flow} />
-        </div>
-        {aal || refresh ? (
-          <div>
-            <div data-testid="logout-link" onClick={onLogout}>
-              Log out
-            </div>
-          </div>
-        ) : (
-          <>
-            <div>
+      <div className={sharedStyles.main}>
+        <Container
+          maxW="lg"
+          py={{ base: '12', md: '24' }}
+          px={{ base: '0', sm: '8' }}
+        >
+          <Stack spacing="8">
+            <Stack spacing="6">
+              <div className={styles.title}>
+                {(() => {
+                  if (flow?.refresh) {
+                    return 'Confirm Action'
+                  } else if (flow?.requested_aal === 'aal2') {
+                    return 'Two-Factor Authentication'
+                  }
+                  return (
+                    <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
+                      <Heading size={mounted ? headingBreakPointvalue : null}>
+                        Log in to your account
+                      </Heading>
+                      <HStack spacing="1" justify="center">
+                        <Text color="muted"> {`Don't have an account?`}</Text>
+                        <Link href="/registration" passHref>
+                          <Button variant="link" colorScheme="blue">
+                            Sign up
+                          </Button>
+                        </Link>
+                      </HStack>
+                    </Stack>
+                  )
+                })()}
+              </div>
+            </Stack>
+          </Stack>
+          <Box
+            py={{ base: '0', sm: '8' }}
+            px={{ base: '4', sm: '10' }}
+            bg={mounted ? breakpoint : null}
+            boxShadow={{ base: 'none', sm: useColorModeValue('md', 'md-dark') }}
+            borderRadius={{ base: 'none', sm: 'xl' }}
+            backgroundColor="white"
+          >
+            <Flow onSubmit={onSubmit} flow={flow} />
+
+            {aal || refresh ? (
+              <div>
+                <div data-testid="logout-link" onClick={onLogout}>
+                  Log out
+                </div>
+              </div>
+            ) : (
+              <>
+                {/* <div>
               <Link href="/registration" passHref>
                 <div>Create account</div>
               </Link>
-            </div>
-            <div>
-              <Link href="/recovery" passHref>
-                <div>Recover your account</div>
-              </Link>
-            </div>
-          </>
-        )}
-      </main>
+            </div> */}
+                <HStack paddingTop={'10px'} justify={'right'}>
+                  <Link href="/recovery" passHref>
+                    <Button variant="link" colorScheme="blue" size="sm">
+                      Forgot password?
+                    </Button>
+                  </Link>
+                </HStack>
+              </>
+            )}
+          </Box>
+        </Container>
+      </div>
     </div>
   )
 }
