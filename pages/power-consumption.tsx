@@ -10,6 +10,9 @@ import en from '../locales/en'
 import zh from '../locales/zh'
 import kratosBrowser from '../pkg/sdk/browser/kratos'
 
+import { GetBookRequest, Book, QueryBooksRequest } from '../grpc/practice/v1alpha/book_service_pb'
+import { BookServiceClient } from '../grpc/practice/v1alpha/Book_serviceServiceClientPb'
+
 const Consumption: NextPage = (serverProps: any) => {
   let token: any
   if (typeof window !== 'undefined') {
@@ -62,6 +65,27 @@ const Consumption: NextPage = (serverProps: any) => {
         router.push('/login')
       }
     }
+
+    const echoService = new BookServiceClient(`http://${window.location.hostname}:8081`, null, null);
+    // var request = new GetBookRequest();
+    // request.setIsbn("60929871");
+    // const call = echoService.getBook(request, { 'custom-header-1': 'value1' },
+    //   (err: grpcWeb.RpcError, response: Book) => {
+    //     console.log(err);
+    //     console.log(response);
+    //   });
+    // call.on('status', (status: grpcWeb.Status) => {
+    //   console.log(status);
+    // });
+
+    var queryBookRequest = new QueryBooksRequest()
+    const streamCall = echoService.queryBooks(queryBookRequest, {});
+    streamCall.on('data', (resp: Book) => {
+      console.log(resp);
+    });
+    streamCall.on('end', () => {
+      console.log("It's the end");
+    });
   })
 
   return (
