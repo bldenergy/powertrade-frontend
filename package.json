@@ -38,6 +38,7 @@
     "classnames": "^2.3.1",
     "csurf": "^1.11.0",
     "framer-motion": "^6.3.3",
+    "jwt-decode": "^3.1.2",
     "next": "^12.1.5",
     "openid-client": "5.1.5",
     "react": "^18.1.0",

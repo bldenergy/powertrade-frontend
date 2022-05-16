@@ -17,13 +17,11 @@ import {
 } from '@ory/client'
 import { AxiosError } from 'axios'
 import type { NextPage } from 'next'
-import Head from 'next/head'
 import Link from 'next/link'
-import { useRouter, NextRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 import HeadComponent from '../components/head'
-import PageWrapper from '../components/pageWrapper'
 // Import render helpers
 import { Flow } from '../pkg'
 import { handleFlowError } from '../pkg/errors'
@@ -56,8 +54,6 @@ const Registration: NextPage = () => {
 
   // In this effect we either initiate a new registration flow, or we fetch an existing registration flow.
   useEffect(() => {
-    console.log(router.isReady)
-    console.log(flow)
     // If the router is not ready yet, or we already have a flow, do nothing.
     if (!router.isReady || flow) {
       return
@@ -120,16 +116,6 @@ const Registration: NextPage = () => {
     <div className={[sharedStyles.container, styles.pageColor].join(' ')}>
       <HeadComponent title="BLD PowerTrade - Sign Up" />
       <div className={sharedStyles.main}>
-        {/* <div>
-          <div>Create account</div>
-          <Flow onSubmit={onSubmit} flow={flow} />
-        </div>
-        <div>
-          <Link data-testid="cta-link" href={'/login'}>
-            Sign in
-          </Link>
-        </div> */}
-
         <Container
           maxW="lg"
           py={{ base: '12', md: '24' }}

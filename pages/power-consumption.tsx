@@ -1,10 +1,10 @@
 import styles from '../styles/shared.module.css'
 import { AxiosError } from 'axios'
+import jwt_decode from 'jwt-decode'
 import type { GetServerSideProps, NextPage } from 'next'
-import { useRouter } from 'next/router'
-import React, { useContext, useEffect, useState } from 'react'
+import router, { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
 
-import AppContext from '../AppContext'
 import HeadComponent from '../components/head'
 import en from '../locales/en'
 import zh from '../locales/zh'
@@ -54,12 +54,24 @@ const Consumption: NextPage = (serverProps: any) => {
   // Verify wheter token exists, if yes then access this page, if no : check if Kratos session exits, esle redirect to login
   useEffect(() => {
     if (token === undefined) {
-      if (hasSession) {
-        router.push(
+      checkLogout(
+        hasSession,
+        `${serverProps.ory_hydra_public_url}/oauth2/sessions/logout`
+      )
+    } else {
+      try {
+        const decodeToken: any = jwt_decode(token)
+        if (!decodeToken.hasOwnProperty('client_id')) {
+          checkLogout(
+            hasSession,
+            `${serverProps.ory_hydra_public_url}/oauth2/sessions/logout`
+          )
+        }
+      } catch (err) {
+        checkLogout(
+          hasSession,
           `${serverProps.ory_hydra_public_url}/oauth2/sessions/logout`
         )
-      } else {
-        router.push('/login')
       }
     }
   })
@@ -75,6 +87,14 @@ const Consumption: NextPage = (serverProps: any) => {
       </main>
     </div>
   )
+}
+
+function checkLogout(hasSession: any, redirect: any) {
+  if (hasSession) {
+    router.push(redirect)
+  } else {
+    router.push('/login')
+  }
 }
 
 // This gets called on every request

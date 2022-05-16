@@ -1,6 +1,7 @@
 import styles from '../styles/shared.module.css'
+import jwt_decode from 'jwt-decode'
 import type { GetServerSideProps, NextPage } from 'next'
-import { useRouter } from 'next/router'
+import router, { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 import HeadComponent from '../components/head'
@@ -49,14 +50,27 @@ const Trading: NextPage = (serverProps: any) => {
       })
   }, [hasSession, router])
 
+  // Verify wheter token exists, if yes then access this page, if no : check if Kratos session exits, esle redirect to login
   useEffect(() => {
     if (token === undefined) {
-      if (hasSession) {
-        router.push(
+      checkLogout(
+        hasSession,
+        `${serverProps.ory_hydra_public_url}/oauth2/sessions/logout`
+      )
+    } else {
+      try {
+        const decodeToken: any = jwt_decode(token)
+        if (!decodeToken.hasOwnProperty('client_id')) {
+          checkLogout(
+            hasSession,
+            `${serverProps.ory_hydra_public_url}/oauth2/sessions/logout`
+          )
+        }
+      } catch (err) {
+        checkLogout(
+          hasSession,
           `${serverProps.ory_hydra_public_url}/oauth2/sessions/logout`
         )
-      } else {
-        router.push('/login')
       }
     }
   })
@@ -69,6 +83,14 @@ const Trading: NextPage = (serverProps: any) => {
       </main>
     </div>
   )
+}
+
+function checkLogout(hasSession: any, redirect: any) {
+  if (hasSession) {
+    router.push(redirect)
+  } else {
+    router.push('/login')
+  }
 }
 
 // This gets called on every request

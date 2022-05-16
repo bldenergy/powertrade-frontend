@@ -11,8 +11,9 @@ import {
   Legend,
   Filler
 } from 'chart.js'
+import jwt_decode from 'jwt-decode'
 import type { GetServerSideProps, NextPage } from 'next'
-import { useRouter } from 'next/router'
+import router, { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 import HeadComponent from '../components/head'
@@ -1291,12 +1292,24 @@ const Home: NextPage = (serverProps: any) => {
   // Verify wheter token exists, if yes then access this page, if no : check if Kratos session exits, esle redirect to login
   useEffect(() => {
     if (token === undefined) {
-      if (hasSession) {
-        router.push(
+      checkLogout(
+        hasSession,
+        `${serverProps.ory_hydra_public_url}/oauth2/sessions/logout`
+      )
+    } else {
+      try {
+        const decodeToken: any = jwt_decode(token)
+        if (!decodeToken.hasOwnProperty('client_id')) {
+          checkLogout(
+            hasSession,
+            `${serverProps.ory_hydra_public_url}/oauth2/sessions/logout`
+          )
+        }
+      } catch (err) {
+        checkLogout(
+          hasSession,
           `${serverProps.ory_hydra_public_url}/oauth2/sessions/logout`
         )
-      } else {
-        router.push('/login')
       }
     }
   })
@@ -1310,37 +1323,17 @@ const Home: NextPage = (serverProps: any) => {
         {/* <div style={{ marginBottom: '40px' }}>
           <Line data={config} width={1000} height={400} options={options} />
         </div> */}
-        <div className={styles.authSection}>
-          <button
-            data-testid="recover-account"
-            data-href="/recovery"
-            disabled={hasSession}
-            title="Recover Account"
-            onClick={() => (window.location.href = '/recovery')}
-          >
-            Recover Account {hasSession}
-          </button>
-          <button
-            data-testid="verify-account"
-            data-href="/verification"
-            title="Verify Account"
-            onClick={() => (window.location.href = '/verification')}
-          >
-            Verify Account
-          </button>
-          <button
-            data-testid="account-settings"
-            data-href="/settings"
-            disabled={!hasSession}
-            title={'Account Settings'}
-            onClick={() => (window.location.href = '/settings')}
-          >
-            Account Settings
-          </button>
-        </div>
       </main>
     </div>
   )
+}
+
+function checkLogout(hasSession: any, redirect: any) {
+  if (hasSession) {
+    router.push(redirect)
+  } else {
+    router.push('/login')
+  }
 }
 
 // This gets called on every request

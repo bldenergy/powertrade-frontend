@@ -1,3 +1,5 @@
+import styles from '../styles/index.module.css'
+import sharedStyles from '../styles/shared.module.css'
 import {
   AlertDialog,
   AlertDialogBody,
@@ -14,6 +16,7 @@ import type { NextPage, GetServerSideProps } from 'next'
 import router from 'next/router'
 import * as React from 'react'
 
+import HeadComponent from '../components/head'
 import hydraAdmin from '../pkg/sdk/api/hydraAdmin'
 import kratosApi from '../pkg/sdk/api/kratos'
 
@@ -43,34 +46,39 @@ const Logout: NextPage = (serverProps: any) => {
   }
 
   return (
-    <>
-      <AlertDialog
-        closeOnOverlayClick={false}
-        isOpen={isOpen}
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}
-        isCentered
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Logout
-            </AlertDialogHeader>
+    <div className={sharedStyles.container}>
+      <HeadComponent title="BLD PowerTrade - Profile Management and Security Settings" />
+      <div className={sharedStyles.main}>
+        <AlertDialog
+          closeOnOverlayClick={false}
+          isOpen={isOpen}
+          leastDestructiveRef={cancelRef}
+          onClose={onClose}
+          isCentered
+        >
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                Logout
+              </AlertDialogHeader>
 
-            <AlertDialogBody>Are you sure you want to logout?</AlertDialogBody>
+              <AlertDialogBody>
+                Are you sure you want to logout?
+              </AlertDialogBody>
 
-            <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={handleCancel}>
-                No
-              </Button>
-              <Button colorScheme="red" onClick={handleLogout} ml={3}>
-                Yes
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
-    </>
+              <AlertDialogFooter>
+                <Button ref={cancelRef} onClick={handleCancel}>
+                  No
+                </Button>
+                <Button colorScheme="red" onClick={handleLogout} ml={3}>
+                  Yes
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
+      </div>
+    </div>
   )
 }
 
@@ -85,17 +93,17 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         await hydraAdmin.getLogoutRequest(challenge, {
           headers: context.req.headers
         })
-      console.log('getLogoutRequestResponse', getLogoutRequestResponse)
+      //   console.log('getLogoutRequestResponse', getLogoutRequestResponse)
       const { data: acceptLogoutRequestReponse } =
         await hydraAdmin.acceptLogoutRequest(challenge, {
           headers: context.req.headers
         })
-      console.log('acceptLogoutRequestReponse', acceptLogoutRequestReponse)
+      //   console.log('acceptLogoutRequestReponse', acceptLogoutRequestReponse)
 
-      console.log(
-        'acceptLogoutRequestReponse.redirect_to',
-        acceptLogoutRequestReponse.redirect_to
-      )
+      //   console.log(
+      //     'acceptLogoutRequestReponse.redirect_to',
+      //     acceptLogoutRequestReponse.redirect_to
+      //   )
       ///////////////////////////////////////////////////////////
 
       // Kratos Logout Process
@@ -105,16 +113,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           headers: context.req.headers
         })
         .then(({ data }) => {
-          console.log(data)
+          //   console.log(data)
           if (data.logout_token) {
-            console.log('Yeah')
+            // console.log('Yeah')
             kratosApi.submitSelfServiceLogoutFlow(data.logout_token, '', {
               headers: context.req.headers
             })
           }
         })
         .catch((err: any) => {
-          console.log(err)
+          //   console.log(err)
           switch (err.response?.status) {
             case 401:
               // do nothing, the user is not logged in
@@ -160,7 +168,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           }
       }
 
-      console.log(err)
+      //   console.log(err)
       // Something else happened!
     }
     return {

@@ -44,7 +44,7 @@ export function NodeInputSubmit<T>({
                 setValue(attributes.value).then(() => dispatchSubmit(e))
               }}
             >
-              Sign in with {'Facebook'}
+              Login with {'Facebook'}
             </Button>
           )}
 
@@ -58,7 +58,7 @@ export function NodeInputSubmit<T>({
                 setValue(attributes.value).then(() => dispatchSubmit(e))
               }}
             >
-              Sign in with {'Google'}
+              Login with {'Google'}
             </Button>
           )}
         </ButtonGroup>

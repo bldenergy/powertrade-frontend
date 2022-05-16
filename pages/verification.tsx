@@ -1,21 +1,38 @@
+import styles from '../styles/index.module.css'
+import sharedStyles from '../styles/shared.module.css'
+import {
+  Box,
+  Button,
+  Heading,
+  HStack,
+  useBreakpointValue,
+  useColorModeValue
+} from '@chakra-ui/react'
 import {
   SelfServiceVerificationFlow,
   SubmitSelfServiceVerificationFlowBody
 } from '@ory/client'
 import { AxiosError } from 'axios'
-import type { NextPage } from 'next'
-import Head from 'next/head'
+import type { GetServerSideProps, NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import PageWrapper from '../components/pageWrapper'
+import HeadComponent from '../components/head'
 import { Flow } from '../pkg'
 import kratosBrowser from '../pkg/sdk/browser/kratos'
 
-const Verification: NextPage = () => {
+const Verification: NextPage = (serverProps: any) => {
   const [flow, setFlow] = useState<SelfServiceVerificationFlow>()
-
+  const [mounted, setMounted] = useState(false)
+  const breakpoint: any = useBreakpointValue({
+    base: 'transparent',
+    sm: 'bg-surface'
+  })
+  const headingBreakPointvalue: any = useBreakpointValue({
+    base: 'xs',
+    md: 'lg'
+  })
   // Get ?flow=... from the URL
   const router = useRouter()
   const { flow: flowId, return_to: returnTo } = router.query
@@ -95,24 +112,41 @@ const Verification: NextPage = () => {
       )
 
   return (
-    <>
-      <Head>
-        <title>Verify your account - Ory NextJS Integration Example</title>
-        <meta name="description" content="NextJS + React + Vercel + Ory" />
-      </Head>
-      <PageWrapper>
-        <div>
-          <div>Verify your account</div>
+    <div className={[sharedStyles.container, styles.pageColor].join(' ')}>
+      <HeadComponent title="BLD PowerTrade - Verify your account" />
+      <div className={sharedStyles.main}>
+        <Box
+          py={{ base: '0', sm: '8' }}
+          px={{ base: '4', sm: '10' }}
+          bg={mounted ? breakpoint : null}
+          boxShadow={{ base: 'none', sm: useColorModeValue('md', 'md-dark') }}
+          borderRadius={{ base: 'none', sm: 'xl' }}
+          backgroundColor="white"
+        >
+          <Heading size={mounted ? headingBreakPointvalue : null}>
+            Verify your account
+          </Heading>
           <Flow onSubmit={onSubmit} flow={flow} />
-        </div>
-        <div>
-          <Link href="/" passHref>
-            <div>Go back</div>
-          </Link>
-        </div>
-      </PageWrapper>
-    </>
+
+          <HStack paddingTop={'15px'} justify={'right'}>
+            <Link href="/account" passHref>
+              <Button variant="link" colorScheme="blue" size="sm">
+                Go back
+              </Button>
+            </Link>
+          </HStack>
+        </Box>
+      </div>
+    </div>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return {
+    props: {
+      previous_url: context.req.headers.referer
+    }
+  }
 }
 
 export default Verification

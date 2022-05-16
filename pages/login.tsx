@@ -135,7 +135,7 @@ const Login: NextPage = (serverProps: any) => {
 
   return (
     <div className={[sharedStyles.container, styles.pageColor].join(' ')}>
-      <HeadComponent title="BLD PowerTrade - Sign In" />
+      <HeadComponent title="BLD PowerTrade - Login" />
       <div className={sharedStyles.main}>
         <Container
           maxW="lg"
