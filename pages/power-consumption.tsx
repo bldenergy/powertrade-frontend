@@ -10,8 +10,9 @@ import en from '../locales/en'
 import zh from '../locales/zh'
 import kratosBrowser from '../pkg/sdk/browser/kratos'
 
-import { GetBookRequest, Book, QueryBooksRequest } from '../grpc/practice/v1alpha/book_service_pb'
-import { BookServiceClient } from '../grpc/practice/v1alpha/Book_serviceServiceClientPb'
+import * as grpcWeb from 'grpc-web'
+import { Get60TicksPowerUsageRequest, PowerUsage, GetPowerUsageRequest } from '../grpc/powertrade/powerusage/v1alpha/powerusage_pb'
+import { PowerUsageServiceClient } from '../grpc/powertrade/powerusage/v1alpha/Powerusage_serviceServiceClientPb'
 
 const Consumption: NextPage = (serverProps: any) => {
   let token: any
@@ -66,26 +67,25 @@ const Consumption: NextPage = (serverProps: any) => {
       }
     }
 
-    const echoService = new BookServiceClient(`http://${window.location.hostname}:8081`, null, null);
-    // var request = new GetBookRequest();
-    // request.setIsbn("60929871");
-    // const call = echoService.getBook(request, { 'custom-header-1': 'value1' },
-    //   (err: grpcWeb.RpcError, response: Book) => {
-    //     console.log(err);
-    //     console.log(response);
-    //   });
-    // call.on('status', (status: grpcWeb.Status) => {
-    //   console.log(status);
-    // });
+    const powerUsageService = new PowerUsageServiceClient(`http://${window.location.hostname}:8081`, null, null);
+    var request = new GetPowerUsageRequest();
+    const call = powerUsageService.getPowerUsage(request, { 'custom-header-1': 'value1' },
+      (err: grpcWeb.RpcError, response: PowerUsage) => {
+        console.log(err);
+        console.log(response.toObject());
+      });
+    call.on('status', (status: grpcWeb.Status) => {
+      console.log(status);
+    });
 
-    var queryBookRequest = new QueryBooksRequest()
-    const streamCall = echoService.queryBooks(queryBookRequest, {});
-    streamCall.on('data', (resp: Book) => {
-      console.log(resp);
-    });
-    streamCall.on('end', () => {
-      console.log("It's the end");
-    });
+    // var get60TicksPowerUsageRequest = new Get60TicksPowerUsageRequest()
+    // const streamCall = powerUsageService.get60TicksPowerUsage(get60TicksPowerUsageRequest, {});
+    // streamCall.on('data', (resp: PowerUsage) => {
+    //   console.log(resp);
+    // });
+    // streamCall.on('end', () => {
+    //   console.log("It's the end");
+    // });
   })
 
   return (

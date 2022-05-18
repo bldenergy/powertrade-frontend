@@ -1,65 +1,66 @@
 import * as jspb from 'google-protobuf'
 
+import * as google_protobuf_struct_pb from 'google-protobuf/google/protobuf/struct_pb';
+import * as google_protobuf_field_mask_pb from 'google-protobuf/google/protobuf/field_mask_pb';
+import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
+import * as protoc$gen$openapiv2_options_annotations_pb from '../../../protoc-gen-openapiv2/options/annotations_pb';
+import * as google_api_resource_pb from '../../../google/api/resource_pb';
+import * as google_api_field_behavior_pb from '../../../google/api/field_behavior_pb';
 
-export class Book extends jspb.Message {
-  getIsbn(): string;
-  setIsbn(value: string): Book;
 
-  getTitle(): string;
-  setTitle(value: string): Book;
+export class PowerUsage extends jspb.Message {
+  getDeviceId(): string;
+  setDeviceId(value: string): PowerUsage;
 
-  getAuthor(): string;
-  setAuthor(value: string): Book;
+  getPowerUsage(): number;
+  setPowerUsage(value: number): PowerUsage;
+
+  getTimeOfUsage(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setTimeOfUsage(value?: google_protobuf_timestamp_pb.Timestamp): PowerUsage;
+  hasTimeOfUsage(): boolean;
+  clearTimeOfUsage(): PowerUsage;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): Book.AsObject;
-  static toObject(includeInstance: boolean, msg: Book): Book.AsObject;
-  static serializeBinaryToWriter(message: Book, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): Book;
-  static deserializeBinaryFromReader(message: Book, reader: jspb.BinaryReader): Book;
+  toObject(includeInstance?: boolean): PowerUsage.AsObject;
+  static toObject(includeInstance: boolean, msg: PowerUsage): PowerUsage.AsObject;
+  static serializeBinaryToWriter(message: PowerUsage, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): PowerUsage;
+  static deserializeBinaryFromReader(message: PowerUsage, reader: jspb.BinaryReader): PowerUsage;
 }
 
-export namespace Book {
+export namespace PowerUsage {
   export type AsObject = {
-    isbn: string,
-    title: string,
-    author: string,
+    deviceId: string,
+    powerUsage: number,
+    timeOfUsage?: google_protobuf_timestamp_pb.Timestamp.AsObject,
   }
 }
 
-export class GetBookRequest extends jspb.Message {
-  getIsbn(): string;
-  setIsbn(value: string): GetBookRequest;
-
+export class GetPowerUsageRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetBookRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetBookRequest): GetBookRequest.AsObject;
-  static serializeBinaryToWriter(message: GetBookRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetBookRequest;
-  static deserializeBinaryFromReader(message: GetBookRequest, reader: jspb.BinaryReader): GetBookRequest;
+  toObject(includeInstance?: boolean): GetPowerUsageRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetPowerUsageRequest): GetPowerUsageRequest.AsObject;
+  static serializeBinaryToWriter(message: GetPowerUsageRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetPowerUsageRequest;
+  static deserializeBinaryFromReader(message: GetPowerUsageRequest, reader: jspb.BinaryReader): GetPowerUsageRequest;
 }
 
-export namespace GetBookRequest {
+export namespace GetPowerUsageRequest {
   export type AsObject = {
-    isbn: string,
   }
 }
 
-export class QueryBooksRequest extends jspb.Message {
-  getAuthorPrefix(): string;
-  setAuthorPrefix(value: string): QueryBooksRequest;
-
+export class Get60TicksPowerUsageRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): QueryBooksRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: QueryBooksRequest): QueryBooksRequest.AsObject;
-  static serializeBinaryToWriter(message: QueryBooksRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): QueryBooksRequest;
-  static deserializeBinaryFromReader(message: QueryBooksRequest, reader: jspb.BinaryReader): QueryBooksRequest;
+  toObject(includeInstance?: boolean): Get60TicksPowerUsageRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: Get60TicksPowerUsageRequest): Get60TicksPowerUsageRequest.AsObject;
+  static serializeBinaryToWriter(message: Get60TicksPowerUsageRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Get60TicksPowerUsageRequest;
+  static deserializeBinaryFromReader(message: Get60TicksPowerUsageRequest, reader: jspb.BinaryReader): Get60TicksPowerUsageRequest;
 }
 
-export namespace QueryBooksRequest {
+export namespace Get60TicksPowerUsageRequest {
   export type AsObject = {
-    authorPrefix: string,
   }
 }
 
@@ -82,7 +83,7 @@ export namespace HealthCheckRequest {
     service?: string,
   }
 
-  export enum ServiceCase {
+  export enum ServiceCase { 
     _SERVICE_NOT_SET = 0,
     SERVICE = 1,
   }
@@ -105,7 +106,7 @@ export namespace HealthCheckResponse {
     status: HealthCheckResponse.ServingStatus,
   }
 
-  export enum ServingStatus {
+  export enum ServingStatus { 
     SERVING_STATUS_UNSPECIFIED = 0,
     SERVING_STATUS_SERVING = 1,
     SERVING_STATUS_NOT_SERVING = 2,
@@ -129,11 +130,6 @@ export class LivenessRequest extends jspb.Message {
 export namespace LivenessRequest {
   export type AsObject = {
     healthCheckRequest?: HealthCheckRequest.AsObject,
-  }
-
-  export enum HealthCheckRequestCase {
-    _HEALTH_CHECK_REQUEST_NOT_SET = 0,
-    HEALTH_CHECK_REQUEST = 1,
   }
 }
 
@@ -175,11 +171,6 @@ export namespace ReadinessRequest {
   export type AsObject = {
     healthCheckRequest?: HealthCheckRequest.AsObject,
   }
-
-  export enum HealthCheckRequestCase {
-    _HEALTH_CHECK_REQUEST_NOT_SET = 0,
-    HEALTH_CHECK_REQUEST = 1,
-  }
 }
 
 export class ReadinessResponse extends jspb.Message {
@@ -201,3 +192,4 @@ export namespace ReadinessResponse {
     healthCheckResponse?: HealthCheckResponse.AsObject,
   }
 }
+
