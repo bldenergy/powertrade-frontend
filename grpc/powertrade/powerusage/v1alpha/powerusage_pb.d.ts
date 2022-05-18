@@ -83,7 +83,7 @@ export namespace HealthCheckRequest {
     service?: string,
   }
 
-  export enum ServiceCase { 
+  export enum ServiceCase {
     _SERVICE_NOT_SET = 0,
     SERVICE = 1,
   }
@@ -106,7 +106,7 @@ export namespace HealthCheckResponse {
     status: HealthCheckResponse.ServingStatus,
   }
 
-  export enum ServingStatus { 
+  export enum ServingStatus {
     SERVING_STATUS_UNSPECIFIED = 0,
     SERVING_STATUS_SERVING = 1,
     SERVING_STATUS_NOT_SERVING = 2,
@@ -192,4 +192,3 @@ export namespace ReadinessResponse {
     healthCheckResponse?: HealthCheckResponse.AsObject,
   }
 }
-
