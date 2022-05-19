@@ -1,12 +1,20 @@
 import styles from '../styles/shared.module.css'
 import { Spinner } from '@chakra-ui/react'
 import { AxiosError } from 'axios'
+import * as grpcWeb from 'grpc-web'
 import jwt_decode from 'jwt-decode'
 import type { GetServerSideProps, NextPage } from 'next'
 import router, { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
+import AppContext from '../AppContext'
 import HeadComponent from '../components/head'
+import { PowerUsageServiceClient } from '../grpc/powertrade/powerusage/v1alpha/Powerusage_serviceServiceClientPb'
+import {
+  Get60TicksPowerUsageRequest,
+  PowerUsage,
+  GetPowerUsageRequest
+} from '../grpc/powertrade/powerusage/v1alpha/powerusage_pb'
 import en from '../locales/en'
 import zh from '../locales/zh'
 import kratosBrowser from '../pkg/sdk/browser/kratos'
@@ -77,6 +85,33 @@ const Consumption: NextPage = (serverProps: any) => {
         )
       }
     }
+
+    const powerUsageService = new PowerUsageServiceClient(
+      `http://${window.location.hostname}:8081`,
+      null,
+      null
+    )
+    var request = new GetPowerUsageRequest()
+    const call = powerUsageService.getPowerUsage(
+      request,
+      { 'custom-header-1': 'value1' },
+      (err: grpcWeb.RpcError, response: PowerUsage) => {
+        console.log(err)
+        console.log(response.toObject())
+      }
+    )
+    call.on('status', (status: grpcWeb.Status) => {
+      console.log(status)
+    })
+
+    // var get60TicksPowerUsageRequest = new Get60TicksPowerUsageRequest()
+    // const streamCall = powerUsageService.get60TicksPowerUsage(get60TicksPowerUsageRequest, {});
+    // streamCall.on('data', (resp: PowerUsage) => {
+    //   console.log(resp);
+    // });
+    // streamCall.on('end', () => {
+    //   console.log("It's the end");
+    // });
   })
 
   return (

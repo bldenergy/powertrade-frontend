@@ -22,7 +22,7 @@
   "dependencies": {
     "@atlaskit/button": "^16.3.0",
     "@atlaskit/modal-dialog": "^12.2.7",
-    "@chakra-ui/react": "^2.0.0",
+    "@chakra-ui/react": "^2.0.2",
     "@emotion/cache": "^11.7.1",
     "@emotion/react": "^11.9.0",
     "@emotion/server": "^11.4.0",
@@ -38,6 +38,8 @@
     "classnames": "^2.3.1",
     "csurf": "^1.11.0",
     "framer-motion": "^6.3.3",
+    "google-protobuf": "3.20.1",
+    "grpc-web": "1.3.1",
     "jwt-decode": "^3.1.2",
     "next": "^12.1.5",
     "openid-client": "5.1.5",

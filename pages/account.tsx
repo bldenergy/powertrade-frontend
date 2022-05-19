@@ -13,6 +13,8 @@ import zh from '../locales/zh'
 import kratosBrowser from '../pkg/sdk/browser/kratos'
 
 const Account: NextPage = () => {
+  const value = useContext(AppContext)
+  console.log(value, 'value')
   const router = useRouter()
   const { locale } = router
   const translate = locale === 'en' ? en : zh

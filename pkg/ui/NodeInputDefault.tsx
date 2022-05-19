@@ -62,6 +62,7 @@ export function NodeInputDefault<T>(
           </FormLabel>
 
           <Input
+            borderColor={'#e2e8f0'}
             onClick={onClick}
             onChange={(e) => {
               setValue(e.target.value)
