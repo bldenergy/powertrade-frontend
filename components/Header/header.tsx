@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react'
 import en from '../../locales/en'
 import zh from '../../locales/zh'
 import { createLogoutHandler } from '../../pkg'
-import ory from '../../pkg/sdk'
+import kratosBrowser from '../../pkg/sdk/browser/kratos'
 
 const path = [
   { uid: 21, name: 'Power Consumption', id: 2, path: '/power-consumption' },
@@ -21,7 +21,7 @@ export default function Header() {
   const router = useRouter()
   const [darkTheme, setDarkTheme] = useState(false)
   const [hasSession, setHasSession] = useState<boolean>(false)
-  const onLogout = createLogoutHandler()
+  const onLogout: any = createLogoutHandler()
   const [session, setSession] = useState<string>(
     'No valid Ory Session was found.\nPlease sign in to receive one.'
   )
@@ -39,7 +39,7 @@ export default function Header() {
   }
 
   useEffect(() => {
-    ory
+    kratosBrowser
       .toSession()
       .then(({ data }) => {
         setSession(JSON.stringify(data, null, 2))
@@ -195,26 +195,27 @@ export default function Header() {
         {hasSession && (
           <div className={styles.selectOption}>
             <div>
-              <button
-                className={styles.authButton}
-                data-testid="logout"
-                onClick={(event) => (window.location.href = '/account')}
-                disabled={!hasSession}
-                title={'Account'}
-              >
-                Account
-              </button>
+              <Link href={'/account'} passHref>
+                <button
+                  className={styles.authButton}
+                  data-testid="account"
+                  disabled={!hasSession}
+                >
+                  Account
+                </button>
+              </Link>
             </div>
             <div>
-              <button
-                className={styles.authButton}
-                data-testid="logout"
-                onClick={onLogout}
-                disabled={!hasSession}
-                title={'Logout'}
-              >
-                Logout
-              </button>
+              <Link href={'/logout'} passHref>
+                <button
+                  className={styles.authButton}
+                  data-testid="logout"
+                  disabled={!hasSession}
+                  title={'Logout'}
+                >
+                  Logout
+                </button>
+              </Link>
             </div>
           </div>
         )}

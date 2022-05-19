@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react'
 import HeadComponent from '../components/head'
 import { Flow } from '../pkg'
 import { handleFlowError } from '../pkg/errors'
-import ory from '../pkg/sdk'
+import kratosBrowser from '../pkg/sdk/browser/kratos'
 
 const Recovery: NextPage = () => {
   const [flow, setFlow] = useState<SelfServiceRecoveryFlow>()
@@ -30,7 +30,7 @@ const Recovery: NextPage = () => {
 
     // If ?flow=.. was in the URL, we fetch it
     if (flowId) {
-      ory
+      kratosBrowser
         .getSelfServiceRecoveryFlow(String(flowId))
         .then(({ data }) => {
           setFlow(data)
@@ -40,7 +40,7 @@ const Recovery: NextPage = () => {
     }
 
     // Otherwise we initialize it
-    ory
+    kratosBrowser
       .initializeSelfServiceRecoveryFlowForBrowsers()
       .then(({ data }) => {
         setFlow(data)
@@ -64,7 +64,7 @@ const Recovery: NextPage = () => {
       // his data when she/he reloads the page.
       .push(`/recovery?flow=${flow?.id}`, undefined, { shallow: true })
       .then(() =>
-        ory
+        kratosBrowser
           .submitSelfServiceRecoveryFlow(String(flow?.id), undefined, values)
           .then(({ data }) => {
             // Form submission was successful, show the message to the user!

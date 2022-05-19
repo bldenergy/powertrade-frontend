@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import ory from '../pkg/sdk'
+import kratosBrowser from '../pkg/sdk/browser/kratos'
 
 const Login: NextPage = () => {
   const [error, setError] = useState<SelfServiceError | string>()
@@ -20,7 +20,7 @@ const Login: NextPage = () => {
       return
     }
 
-    ory
+    kratosBrowser
       .getSelfServiceError(String(id))
       .then(({ data }) => {
         setError(data)

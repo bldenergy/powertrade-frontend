@@ -5,17 +5,20 @@ import {
   SubmitSelfServiceLoginFlowBody
 } from '@ory/client'
 import { AxiosError } from 'axios'
-import type { NextPage } from 'next'
+import type { NextPage, GetServerSideProps } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { generators } from 'openid-client'
 import { useEffect, useState } from 'react'
 
 import HeadComponent from '../components/head'
 import { createLogoutHandler, Flow } from '../pkg'
 import { handleGetFlowError, handleFlowError } from '../pkg/errors'
-import ory from '../pkg/sdk'
+import hydraAdmin from '../pkg/sdk/api/hydraAdmin'
+import kratosBrowser from '../pkg/sdk/browser/kratos'
+import bldclient, { BLDScope } from '../pkg/sdk/oauth2Client'
 
-const Login: NextPage = (dataAdmin) => {
+const Login: NextPage = (serverProps: any) => {
   const [flow, setFlow] = useState<SelfServiceLoginFlow>()
 
   // Get ?flow=... from the URL
@@ -29,7 +32,8 @@ const Login: NextPage = (dataAdmin) => {
     // AAL = Authorization Assurance Level. This implies that we want to upgrade the AAL, meaning that we want
     // to perform two-factor authentication/verification.
     aal,
-    challenge
+    // The challenge is used to fetch information about the login request from ORY Hydra.
+    login_challenge: challenge
   } = router.query
 
   // This might be confusing, but we want to show the user an option
@@ -37,7 +41,6 @@ const Login: NextPage = (dataAdmin) => {
   const onLogout = createLogoutHandler([aal, refresh])
 
   useEffect(() => {
-    console.log(dataAdmin)
     // If the router is not ready yet, or we already have a flow, do nothing.
     if (!router.isReady || flow) {
       return
@@ -45,7 +48,7 @@ const Login: NextPage = (dataAdmin) => {
 
     // If ?flow=.. was in the URL, we fetch it
     if (flowId) {
-      ory
+      kratosBrowser
         .getSelfServiceLoginFlow(String(flowId))
         .then(({ data }) => {
           setFlow(data)
@@ -54,17 +57,28 @@ const Login: NextPage = (dataAdmin) => {
       return
     }
     // Otherwise we initialize it
-    ory
+    kratosBrowser
       .initializeSelfServiceLoginFlowForBrowsers(
         Boolean(refresh),
         aal ? String(aal) : undefined,
-        returnTo ? String(returnTo) : undefined
+        `${serverProps.power_trade_url}/oauth?login_challenge=${challenge}&login_state=${serverProps.login_state}`
       )
       .then(({ data }) => {
         setFlow(data)
       })
       .catch(handleFlowError(router, 'login', setFlow))
-  }, [flowId, router, router.isReady, aal, refresh, returnTo, flow])
+  }, [
+    flowId,
+    router,
+    router.isReady,
+    aal,
+    refresh,
+    returnTo,
+    flow,
+    serverProps.power_trade_url,
+    serverProps.login_state,
+    challenge
+  ])
 
   const onSubmit = (values: SubmitSelfServiceLoginFlowBody) =>
     router
@@ -72,15 +86,12 @@ const Login: NextPage = (dataAdmin) => {
       // his data when she/he reloads the page.
       .push(`/login?flow=${flow?.id}`, undefined, { shallow: true })
       .then(() =>
-        ory
+        kratosBrowser
           .submitSelfServiceLoginFlow(String(flow?.id), undefined, values)
-          // We logged in successfully! Let's bring the user home.
+          // We logged in successfully! Let's bring the user to hydra to fetch token.
           .then((res) => {
-            if (flow?.return_to) {
-              window.location.href = flow?.return_to
-              return
-            }
-            router.push('/')
+            window.location.href = `${serverProps.power_trade_url}/oauth?login_challenge=${challenge}&login_state=${serverProps.login_state}`
+            return
           })
           .then(() => {})
           .catch(handleFlowError(router, 'login', setFlow))
@@ -139,52 +150,65 @@ const Login: NextPage = (dataAdmin) => {
 }
 
 // This gets called on every request
-// export async function getServerSideProps() {
-//   const hydraAdmin = new AdminApi(process.env.HYDRA_ADMIN_URL)
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  // Parses the URL query
+  const challenge: any = context.query.login_challenge
+  // Fetch login_state in cookies
+  const login_state = context.req.cookies['login_state']
 
-//   // Sets up csrf protection. Always do this when handling HTML forms!
-//   const csrfProtection = csrf({ cookie: true })
-//   const router = express.Router()
+  if (challenge !== undefined) {
+    hydraAdmin
+      .getLoginRequest(challenge)
+      .then(({ data: body }) => {
+        // If hydra was already able to authenticate the user, skip will be true and we do not need to re-authenticate
+        // the user.
+        if (body.skip) {
+          // You can apply logic here, for example update the number of times the user logged in.
+          // ...
 
-//   router.get('/login', csrfProtection, (req, res, next) => {
-//     // Parses the URL query
-//     const query = url.parse(req.url, true).query
+          // Now it's time to grant the login request. You could also deny the request if something went terribly wrong
+          // (e.g. your arch-enemy logging in...)
+          return hydraAdmin
+            .acceptLoginRequest(challenge, {
+              // All we need to do is to confirm that we indeed want to log in the user.
+              subject: String(body.subject)
+            })
+            .then(({ data: body }) => {
+              // All we need to do now is to redirect the user back to hydra!
+              return {
+                redirect: {
+                  permanent: false,
+                  destination: String(body.redirect_to)
+                },
+                props: {}
+              }
+            })
+        }
+      })
+      .catch(() => {})
+  } else {
+    // No challenge has been found, so we need redirect to hydra to start a new authorization flow
+    const state = generators.state()
+    context.res.setHeader('set-cookie', [`login_state=${state}`])
+    const authUrl = await bldclient.authorizationUrl({
+      scope: BLDScope,
+      state
+    })
+    return {
+      redirect: {
+        permanent: false,
+        destination: authUrl
+      },
+      props: {}
+    }
+  }
 
-//     // The challenge is used to fetch information about the login request from Ory Hydra.
-//     const challenge = String(query.login_challenge)
-
-//     hydraAdmin.getLoginRequest(challenge).then(({ body }) => {
-//       // If hydra was already able to authenticate the user, skip will be true and we don't need to re-authenticate
-//       // the user.
-//       if (body.skip) {
-//         // You can apply logic here, for example update the number of times the user logged in.
-//         // ...
-
-//         // Now it's time to grant the login request. You could also deny the request if something went terribly wrong
-//         // (for example your arch-enemy logging in!)
-//         return hydraAdmin
-//           .acceptLoginRequest(challenge, {
-//             // All we need to do is to confirm that we indeed want to log in the user.
-//             subject: String(body.subject)
-//           })
-//           .then(({ body }) => {
-//             // All we need to do now is to redirect the user back to hydra!
-//             res.redirect(String(body.redirectTo))
-//           })
-//       }
-
-//       // If authentication can't be skipped we MUST show the login UI.
-//       res.render('login', {
-//         csrfToken: req.csrfToken(),
-//         challenge: challenge
-//       })
-//     })
-//   })
-
-//   const dataAdmin = JSON.stringify(hydraAdmin)
-
-//   // Pass data to the page via props
-//   return { props: { dataAdmin } }
-// }
+  return {
+    props: {
+      login_state: login_state ? login_state : null,
+      power_trade_url: process.env.BLD_POWERTRADE_URL
+    }
+  }
+}
 
 export default Login

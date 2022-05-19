@@ -3,14 +3,17 @@ import sharedStyles from '../styles/shared.module.css'
 import { AxiosError } from 'axios'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
+import AppContext from '../AppContext'
 import HeadComponent from '../components/head'
 import en from '../locales/en'
 import zh from '../locales/zh'
-import ory from '../pkg/sdk'
+import kratosBrowser from '../pkg/sdk/browser/kratos'
 
 const Account: NextPage = () => {
+  const value = useContext(AppContext)
+  console.log(value, 'value')
   const router = useRouter()
   const { locale } = router
   const translate = locale === 'en' ? en : zh
@@ -20,7 +23,7 @@ const Account: NextPage = () => {
   const [hasSession, setHasSession] = useState<boolean>(false)
 
   useEffect(() => {
-    ory
+    kratosBrowser
       .toSession()
       .then(({ data }) => {
         setSession(JSON.stringify(data, null, 2))

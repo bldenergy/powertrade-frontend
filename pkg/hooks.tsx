@@ -1,16 +1,18 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { AxiosError } from 'axios'
 import { useRouter } from 'next/router'
 import { useState, useEffect, DependencyList } from 'react'
 
-import ory from './sdk'
+import kratosBrowser from './sdk/browser/kratos'
 
 // Returns a function which will log the user out
 export function createLogoutHandler(deps?: DependencyList) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [logoutToken, setLogoutToken] = useState<string>('')
   const router = useRouter()
 
   useEffect(() => {
-    ory
+    kratosBrowser
       .createSelfServiceLogoutFlowUrlForBrowsers()
       .then(({ data }) => {
         setLogoutToken(data.logout_token)
@@ -29,7 +31,7 @@ export function createLogoutHandler(deps?: DependencyList) {
 
   return () => {
     if (logoutToken) {
-      ory
+      kratosBrowser
         .submitSelfServiceLogoutFlow(logoutToken)
         .then(() => router.push('/login'))
         .then(() => router.reload())

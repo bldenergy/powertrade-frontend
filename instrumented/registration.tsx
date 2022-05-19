@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react'
 import { Flow } from '../pkg'
 import { handleFlowError } from '../pkg/errors'
 // Import the SDK
-import ory from '../pkg/sdk'
+import kratosBrowser from '../pkg/sdk/browser/kratos'
 
 // Renders the registration page
 const Registration: NextPage = () => {
@@ -36,7 +36,7 @@ const Registration: NextPage = () => {
 
     // If ?flow=.. was in the URL, we fetch it
     if (flowId) {
-      ory
+      kratosBrowser
         .getSelfServiceRegistrationFlow(String(flowId))
         .then(({ data }) => {
           // We received the flow - let's use its data and render the form!
@@ -47,7 +47,7 @@ const Registration: NextPage = () => {
     }
 
     // Otherwise we initialize it
-    ory
+    kratosBrowser
       .initializeSelfServiceRegistrationFlowForBrowsers(
         returnTo ? String(returnTo) : undefined
       )
@@ -63,7 +63,7 @@ const Registration: NextPage = () => {
       // his data when she/he reloads the page.
       .push(`/registration?flow=${flow?.id}`, undefined, { shallow: true })
       .then(() =>
-        ory
+        kratosBrowser
           .submitSelfServiceRegistrationFlow(String(flow?.id), values)
           .then(({ data }) => {
             // If we ended up here, it means we are successfully signed up!
