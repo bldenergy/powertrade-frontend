@@ -1,4 +1,5 @@
 import styles from '../styles/shared.module.css'
+import { Spinner } from '@chakra-ui/react'
 import jwt_decode from 'jwt-decode'
 import type { NextPage } from 'next'
 import router, { useRouter } from 'next/router'
@@ -21,6 +22,7 @@ const Scheduling: NextPage = (serverProps: any) => {
     'No valid Ory Session was found.\nPlease sign in to receive one.'
   )
   const [hasSession, setHasSession] = useState<boolean>(false)
+  const [loading, setLoading] = useState(true)
 
   // Kratos Session
   useEffect(() => {
@@ -29,6 +31,7 @@ const Scheduling: NextPage = (serverProps: any) => {
       .then(({ data }) => {
         setSession(JSON.stringify(data, null, 2))
         setHasSession(true)
+        setLoading(false)
       })
       .catch((err: any) => {
         switch (err.response?.status) {
@@ -78,8 +81,22 @@ const Scheduling: NextPage = (serverProps: any) => {
     <div className={styles.container}>
       <HeadComponent title="BLD PowerTrade - Scheduling..." />
       <main className={styles.main}>
-        <h1 className={styles.title}>{translate.scheduling.title}</h1>
-        <p className={styles.description}>{translate.scheduling.subTitle}</p>
+        {!loading ? (
+          <>
+            <h1 className={styles.title}>{translate.scheduling.title}</h1>
+            <p className={styles.description}>
+              {translate.scheduling.subTitle}
+            </p>
+          </>
+        ) : (
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="#088be0"
+            size="xl"
+          />
+        )}
       </main>
     </div>
   )

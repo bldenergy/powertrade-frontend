@@ -1,4 +1,5 @@
 import styles from '../styles/shared.module.css'
+import { Spinner } from '@chakra-ui/react'
 import { AxiosError } from 'axios'
 import jwt_decode from 'jwt-decode'
 import type { GetServerSideProps, NextPage } from 'next'
@@ -22,6 +23,7 @@ const Consumption: NextPage = (serverProps: any) => {
     'No valid Ory Session was found.\nPlease sign in to receive one.'
   )
   const [hasSession, setHasSession] = useState<boolean>(false)
+  const [loading, setLoading] = useState(true)
 
   // Kratos Session
   useEffect(() => {
@@ -30,6 +32,7 @@ const Consumption: NextPage = (serverProps: any) => {
       .then(({ data }) => {
         setSession(JSON.stringify(data, null, 2))
         setHasSession(true)
+        setLoading(false)
       })
       .catch((err: AxiosError) => {
         switch (err.response?.status) {
@@ -80,10 +83,22 @@ const Consumption: NextPage = (serverProps: any) => {
     <div className={styles.container}>
       <HeadComponent title="BLD PowerTrade - Power Consumption" />
       <main className={styles.main}>
-        <h1 className={styles.title}>{translate.powerconsumption.title}</h1>
-        <p className={styles.description}>
-          {translate.powerconsumption.subTitle}
-        </p>
+        {!loading ? (
+          <>
+            <h1 className={styles.title}>{translate.powerconsumption.title}</h1>
+            <p className={styles.description}>
+              {translate.powerconsumption.subTitle}
+            </p>
+          </>
+        ) : (
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="#088be0"
+            size="xl"
+          />
+        )}
       </main>
     </div>
   )

@@ -1,4 +1,5 @@
 import styles from '../styles/shared.module.css'
+import { Spinner, useToast } from '@chakra-ui/react'
 import { AxiosError } from 'axios'
 import {
   Chart as ChartJS,
@@ -14,7 +15,7 @@ import {
 import jwt_decode from 'jwt-decode'
 import type { GetServerSideProps, NextPage } from 'next'
 import router, { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import HeadComponent from '../components/head'
 import en from '../locales/en'
@@ -1250,8 +1251,10 @@ const animation = {
 
 const Home: NextPage = (serverProps: any) => {
   let token: any
+  let alert: any
   if (typeof window !== 'undefined') {
     token = localStorage.getItem('Xjdfnd') || undefined
+    alert = localStorage.getItem('alert')
   }
   const router = useRouter()
   const { locale } = router
@@ -1260,6 +1263,8 @@ const Home: NextPage = (serverProps: any) => {
     'No valid Ory Session was found.\nPlease sign in to receive one.'
   )
   const [hasSession, setHasSession] = useState<boolean>(false)
+  const [loading, setLoading] = useState(true)
+  const toast = useToast()
 
   // Kratos Session
   useEffect(() => {
@@ -1268,6 +1273,7 @@ const Home: NextPage = (serverProps: any) => {
       .then(({ data }) => {
         setSession(JSON.stringify(data, null, 2))
         setHasSession(true)
+        setLoading(false)
       })
       .catch((err: AxiosError) => {
         switch (err.response?.status) {
@@ -1312,14 +1318,37 @@ const Home: NextPage = (serverProps: any) => {
         )
       }
     }
+    if (alert === 'true' && !loading) {
+      toast({
+        title: 'Welcome to PowerTrade!',
+        status: 'success',
+        duration: 5000,
+        isClosable: true
+      })
+      localStorage.setItem('alert', 'false')
+    }
   })
 
   return (
     <div className={styles.container}>
       <HeadComponent title={translate.home.title} />
+
       <main className={styles.main}>
-        <h1 className={styles.title}>{translate.home.title}</h1>
-        <p className={styles.description}>{translate.home.subTitle}</p>
+        {!loading ? (
+          <>
+            <h1 className={styles.title}>{translate.home.title}</h1>
+            <p className={styles.description}>{translate.home.subTitle}</p>
+          </>
+        ) : (
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="#088be0"
+            size="xl"
+          />
+        )}
+
         {/* <div style={{ marginBottom: '40px' }}>
           <Line data={config} width={1000} height={400} options={options} />
         </div> */}
@@ -1328,6 +1357,7 @@ const Home: NextPage = (serverProps: any) => {
   )
 }
 
+// Achieve Logout action
 function checkLogout(hasSession: any, redirect: any) {
   if (hasSession) {
     router.push(redirect)

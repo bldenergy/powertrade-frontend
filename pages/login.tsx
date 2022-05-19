@@ -31,6 +31,9 @@ import kratosBrowser from '../pkg/sdk/browser/kratos'
 import bldclient, { BLDScope } from '../pkg/sdk/oauth2Client'
 
 const Login: NextPage = (serverProps: any) => {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('alert', 'true')
+  }
   const [mounted, setMounted] = useState(false)
   const breakpoint: any = useBreakpointValue({
     base: 'transparent',
