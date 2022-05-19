@@ -10,7 +10,6 @@ const Trading: NextPage = () => {
   const router = useRouter()
   const { locale } = router
   const translate = locale === 'en' ? en : zh
-
   return (
     <div className={styles.container}>
       <HeadComponent title="BLD PowerTrade - Trading" />
@@ -22,6 +21,14 @@ const Trading: NextPage = () => {
       </main>
     </div>
   )
+}
+
+function checkLogout(hasSession: any, redirect: any) {
+  if (hasSession) {
+    router.push(redirect)
+  } else {
+    router.push('/login')
+  }
 }
 
 // This gets called on every request

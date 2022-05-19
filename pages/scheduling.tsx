@@ -1,4 +1,6 @@
 import styles from '../styles/shared.module.css'
+import { Spinner } from '@chakra-ui/react'
+import jwt_decode from 'jwt-decode'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
@@ -11,7 +13,6 @@ const Scheduling: NextPage = () => {
   const router = useRouter()
   const { locale } = router
   const translate = locale === 'en' ? en : zh
-
   return (
     <div className={styles.container}>
       <HeadComponent title="BLD PowerTrade - Scheduling..." />
