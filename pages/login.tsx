@@ -9,8 +9,7 @@ import {
   Text,
   Container,
   Box,
-  useColorModeValue,
-  Divider
+  useColorModeValue
 } from '@chakra-ui/react'
 import {
   SelfServiceLoginFlow,

@@ -1,18 +1,9 @@
-import styles from '../../styles/index.module.css'
-import {
-  Button,
-  ButtonGroup,
-  Flex,
-  HStack,
-  VisuallyHidden
-} from '@chakra-ui/react'
-import { UiNode, UiNodeInputAttributes } from '@ory/client'
+import { Button, ButtonGroup } from '@chakra-ui/react'
 import { getNodeLabel } from '@ory/integrations/ui'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 import { GoogleIcon, FacebookIcon } from './ProviderIcons'
-import { FormDispatcher, NodeInputProps, ValueSetter } from './helpers'
+import { NodeInputProps } from './helpers'
 
 const providers = [
   { name: 'Facebook', icon: <FacebookIcon boxSize="5" /> },

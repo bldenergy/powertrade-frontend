@@ -7,11 +7,9 @@ import type { GetServerSideProps, NextPage } from 'next'
 import router, { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
-import AppContext from '../AppContext'
 import HeadComponent from '../components/head'
 import { PowerUsageServiceClient } from '../grpc/powertrade/powerusage/v1alpha/Powerusage_serviceServiceClientPb'
 import {
-  Get60TicksPowerUsageRequest,
   PowerUsage,
   GetPowerUsageRequest
 } from '../grpc/powertrade/powerusage/v1alpha/powerusage_pb'

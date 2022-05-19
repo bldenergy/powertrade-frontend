@@ -1,4 +1,3 @@
-import { Stack } from '@chakra-ui/react'
 import { UiNode } from '@ory/client'
 import {
   isUiNodeAnchorAttributes,

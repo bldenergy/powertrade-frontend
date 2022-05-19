@@ -1,9 +1,7 @@
-import styles from '../styles/index.module.css'
 import sharedStyles from '../styles/shared.module.css'
 import {
   AlertDialog,
   AlertDialogBody,
-  AlertDialogCloseButton,
   AlertDialogContent,
   AlertDialogFooter,
   AlertDialogHeader,

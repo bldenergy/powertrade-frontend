@@ -1,23 +1,6 @@
-import styles from '../../styles/index.module.css'
-import {
-  Divider,
-  FormLabel,
-  HStack,
-  IconButton,
-  Input,
-  InputGroup,
-  InputRightElement,
-  useDisclosure,
-  useMergeRefs
-} from '@chakra-ui/react'
-import { getNodeLabel } from '@ory/integrations/ui'
+import { FormLabel, Input, useDisclosure, useMergeRefs } from '@chakra-ui/react'
 import React from 'react'
-import { HiEye, HiEyeOff } from 'react-icons/hi'
 
-import { NodeInputButton } from './NodeInputButton'
-import { NodeInputCheckbox } from './NodeInputCheckbox'
-import { NodeInputHidden } from './NodeInputHidden'
-import { NodeInputSubmit } from './NodeInputSubmit'
 import { NodeInputProps } from './helpers'
 
 export function NodeInputDefault<T>(

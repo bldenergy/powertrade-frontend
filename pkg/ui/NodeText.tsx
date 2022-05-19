@@ -1,6 +1,5 @@
 import { UiNode, UiNodeTextAttributes } from '@ory/client'
 import { UiText } from '@ory/client'
-import styled from 'styled-components'
 
 interface Props {
   node: UiNode

@@ -6,7 +6,6 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import Layout from '../components/Layout/layout'
-import createEmotionCache from '../utility/createEmotionCache'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
