@@ -178,4 +178,3 @@ export namespace Get60TicksPowerUsageResponse {
     metersList: Array<MeterUsage.AsObject>,
   }
 }
-
