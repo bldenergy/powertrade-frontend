@@ -10,6 +10,10 @@ import en from '../locales/en'
 import zh from '../locales/zh'
 import kratosBrowser from '../pkg/sdk/browser/kratos'
 
+import * as grpcWeb from 'grpc-web'
+import { Get60TicksPowerUsageRequest, PowerUsage, GetPowerUsageRequest } from '../grpc/powertrade/powerusage/v1alpha/powerusage_pb'
+import { PowerUsageServiceClient } from '../grpc/powertrade/powerusage/v1alpha/Powerusage_serviceServiceClientPb'
+
 const Consumption: NextPage = (serverProps: any) => {
   let token: any
   if (typeof window !== 'undefined') {
@@ -62,6 +66,26 @@ const Consumption: NextPage = (serverProps: any) => {
         router.push('/login')
       }
     }
+
+    const powerUsageService = new PowerUsageServiceClient(`http://${window.location.hostname}:8081`, null, null);
+    var request = new GetPowerUsageRequest();
+    const call = powerUsageService.getPowerUsage(request, { 'custom-header-1': 'value1' },
+      (err: grpcWeb.RpcError, response: PowerUsage) => {
+        console.log(err);
+        console.log(response.toObject());
+      });
+    call.on('status', (status: grpcWeb.Status) => {
+      console.log(status);
+    });
+
+    // var get60TicksPowerUsageRequest = new Get60TicksPowerUsageRequest()
+    // const streamCall = powerUsageService.get60TicksPowerUsage(get60TicksPowerUsageRequest, {});
+    // streamCall.on('data', (resp: PowerUsage) => {
+    //   console.log(resp);
+    // });
+    // streamCall.on('end', () => {
+    //   console.log("It's the end");
+    // });
   })
 
   return (
