@@ -15,9 +15,7 @@ export default function Layout({ children }: LayoutProps) {
     <>
       <Header />
       {/* <Callback/> */}
-      <main className={layoutStyles.container}>
-        <section>{children}</section>
-      </main>
+      <main className={layoutStyles.container}>{children}</main>
       <Footer />
     </>
   )

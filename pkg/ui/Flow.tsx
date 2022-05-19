@@ -1,3 +1,4 @@
+import { Stack } from '@chakra-ui/react'
 import {
   SelfServiceLoginFlow,
   SelfServiceRecoveryFlow,
@@ -163,33 +164,37 @@ export class Flow<T extends Values> extends Component<Props<T>, State<T>> {
         method={flow.ui.method}
         onSubmit={this.handleSubmit}
       >
-        {!hideGlobalMessages ? <Messages messages={flow.ui.messages} /> : null}
-        {nodes.map((node, k) => {
-          const id = getNodeId(node) as keyof Values
-          return (
-            <Node
-              key={`${id}-${k}`}
-              disabled={isLoading}
-              node={node}
-              value={values[id]}
-              dispatchSubmit={this.handleSubmit}
-              setValue={(value) =>
-                new Promise((resolve) => {
-                  this.setState(
-                    (state) => ({
-                      ...state,
-                      values: {
-                        ...state.values,
-                        [getNodeId(node)]: value
-                      }
-                    }),
-                    resolve
-                  )
-                })
-              }
-            />
-          )
-        })}
+        <Stack spacing={4}>
+          {!hideGlobalMessages ? (
+            <Messages messages={flow.ui.messages} />
+          ) : null}
+          {nodes.map((node, k) => {
+            const id = getNodeId(node) as keyof Values
+            return (
+              <Node
+                key={`${id}-${k}`}
+                disabled={isLoading}
+                node={node}
+                value={values[id]}
+                dispatchSubmit={this.handleSubmit}
+                setValue={(value) =>
+                  new Promise((resolve) => {
+                    this.setState(
+                      (state) => ({
+                        ...state,
+                        values: {
+                          ...state.values,
+                          [getNodeId(node)]: value
+                        }
+                      }),
+                      resolve
+                    )
+                  })
+                }
+              />
+            )
+          })}
+        </Stack>
       </form>
     )
   }

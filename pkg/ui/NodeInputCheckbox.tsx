@@ -1,3 +1,4 @@
+import { Checkbox } from '@chakra-ui/react'
 import { getNodeLabel } from '@ory/integrations/ui'
 
 import { NodeInputProps } from './helpers'
@@ -11,7 +12,7 @@ export function NodeInputCheckbox<T>({
   // Render a checkbox.s
   return (
     <>
-      <input
+      <Checkbox
         type="checkbox"
         name={attributes.name}
         defaultChecked={attributes.value === true}
@@ -24,8 +25,9 @@ export function NodeInputCheckbox<T>({
             : undefined
         }
         data-subtitle={node.messages.map(({ text }) => text).join('\n')}
-      />
-      <label>{getNodeLabel(node)}</label>
+      >
+        {getNodeLabel(node)}
+      </Checkbox>
     </>
   )
 }

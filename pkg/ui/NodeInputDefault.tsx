@@ -1,13 +1,24 @@
-import styles from '../../styles/index.module.css'
-import { getNodeLabel } from '@ory/integrations/ui'
+import { FormLabel, Input, useDisclosure, useMergeRefs } from '@chakra-ui/react'
+import React from 'react'
 
-import { NodeInputButton } from './NodeInputButton'
-import { NodeInputCheckbox } from './NodeInputCheckbox'
-import { NodeInputHidden } from './NodeInputHidden'
-import { NodeInputSubmit } from './NodeInputSubmit'
 import { NodeInputProps } from './helpers'
 
-export function NodeInputDefault<T>(props: NodeInputProps) {
+export function NodeInputDefault<T>(
+  props: NodeInputProps,
+  ref:
+    | (React.Ref<HTMLInputElement> | React.MutableRefObject<HTMLInputElement>)
+    | undefined
+) {
+  const { isOpen, onToggle } = useDisclosure()
+  const inputRef = React.useRef<HTMLInputElement>(null)
+
+  const mergeRef = useMergeRefs(inputRef, ref)
+  const onClickReveal = () => {
+    onToggle()
+    if (inputRef.current) {
+      inputRef.current.focus({ preventScroll: true })
+    }
+  }
   const { node, attributes, value = '', setValue, disabled } = props
 
   // Some attributes have dynamic JavaScript - this is for example required for WebAuthn.
@@ -26,21 +37,23 @@ export function NodeInputDefault<T>(props: NodeInputProps) {
     <>
       {attributes.name !== 'traits.picture' && (
         <>
-          <div>
+          {/* <div>
             <span>{node.meta.label?.text}</span>
-          </div>
-          <input
-            className={styles.input}
-            title={node.meta.label?.text}
+          </div> */}
+          <FormLabel htmlFor={attributes.type}>
+            {node.meta.label?.text}
+          </FormLabel>
+
+          <Input
+            borderColor={'#e2e8f0'}
             onClick={onClick}
             onChange={(e) => {
               setValue(e.target.value)
             }}
+            id={attributes.name}
             type={attributes.type}
             name={attributes.name}
             value={value}
-            disabled={attributes.disabled || disabled}
-            data-help={node.messages.length > 0}
             data-state={
               node.messages.find(({ type }) => type === 'error')
                 ? 'error'

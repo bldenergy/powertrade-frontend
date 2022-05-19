@@ -47,14 +47,18 @@ export const Node = ({
 
   if (isUiNodeInputAttributes(node.attributes)) {
     return (
-      <NodeInput
-        dispatchSubmit={dispatchSubmit}
-        value={value}
-        setValue={setValue}
-        node={node}
-        disabled={disabled}
-        attributes={node.attributes}
-      />
+      <>
+        {/* <Stack spacing={5}> */}
+        <NodeInput
+          dispatchSubmit={dispatchSubmit}
+          value={value}
+          setValue={setValue}
+          node={node}
+          disabled={disabled}
+          attributes={node.attributes}
+        />
+        {/* </Stack> */}
+      </>
     )
   }
 

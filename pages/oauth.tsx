@@ -1,4 +1,3 @@
-import { AxiosError } from 'axios'
 import type { NextPage, GetServerSideProps } from 'next'
 
 import hydraAdmin from '../pkg/sdk/api/hydraAdmin'

@@ -1,5 +1,6 @@
 import styles from '../styles/account.module.css'
 import sharedStyles from '../styles/shared.module.css'
+import { Button, Stack } from '@chakra-ui/react'
 import { AxiosError } from 'axios'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -28,7 +29,6 @@ const Account: NextPage = () => {
       .then(({ data }) => {
         setSession(JSON.stringify(data, null, 2))
         setHasSession(true)
-        console.log(hasSession)
       })
       .catch((err: AxiosError) => {
         switch (err.response?.status) {
@@ -57,23 +57,29 @@ const Account: NextPage = () => {
         <h1 className={sharedStyles.title}>{translate.account.title}</h1>
         <p className={sharedStyles.description}>{translate.account.subTitle}</p>
         <div className={styles.account}>
-          <button
-            data-testid="verify-account"
-            data-href="/verification"
-            title="Verify Account"
-            onClick={(event) => (window.location.href = '/verification')}
-          >
-            Verify Account
-          </button>
-          <button
-            data-testid="account-settings"
-            data-href="/settings"
-            disabled={!hasSession}
-            title={'Account Settings'}
-            onClick={(event) => (window.location.href = '/settings')}
-          >
-            Account Settings
-          </button>
+          <Stack direction="row" spacing={4}>
+            <Button
+              style={{ background: '#088be0' }}
+              colorScheme="blue"
+              data-testid="verify-account"
+              data-href="/verification"
+              title="Verify Account"
+              onClick={(event) => (window.location.href = '/verification')}
+            >
+              Verify Account
+            </Button>
+            <Button
+              style={{ background: '#088be0' }}
+              colorScheme="blue"
+              data-testid="account-settings"
+              data-href="/settings"
+              disabled={!hasSession}
+              title={'Account Settings'}
+              onClick={(event) => (window.location.href = '/settings')}
+            >
+              Account Settings
+            </Button>
+          </Stack>
         </div>
       </main>
     </div>

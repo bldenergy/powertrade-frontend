@@ -1,7 +1,6 @@
-import { UiNode, UiNodeInputAttributes } from '@ory/client'
 import { getNodeLabel } from '@ory/integrations/ui'
 
-import { FormDispatcher, NodeInputProps, ValueSetter } from './helpers'
+import { NodeInputProps } from './helpers'
 
 export function NodeInputButton<T>({
   node,
