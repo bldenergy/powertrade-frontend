@@ -125,28 +125,28 @@ export class PowerUsageServiceClient {
     '/powertrade.powerusage.v1alpha.PowerUsageService/GetPowerUsage',
     grpcWeb.MethodType.UNARY,
     powertrade_powerusage_v1alpha_powerusage_pb.GetPowerUsageRequest,
-    powertrade_powerusage_v1alpha_powerusage_pb.PowerUsage,
+    powertrade_powerusage_v1alpha_powerusage_pb.GetPowerUsageResponse,
     (request: powertrade_powerusage_v1alpha_powerusage_pb.GetPowerUsageRequest) => {
       return request.serializeBinary();
     },
-    powertrade_powerusage_v1alpha_powerusage_pb.PowerUsage.deserializeBinary
+    powertrade_powerusage_v1alpha_powerusage_pb.GetPowerUsageResponse.deserializeBinary
   );
 
   getPowerUsage(
     request: powertrade_powerusage_v1alpha_powerusage_pb.GetPowerUsageRequest,
-    metadata: grpcWeb.Metadata | null): Promise<powertrade_powerusage_v1alpha_powerusage_pb.PowerUsage>;
+    metadata: grpcWeb.Metadata | null): Promise<powertrade_powerusage_v1alpha_powerusage_pb.GetPowerUsageResponse>;
 
   getPowerUsage(
     request: powertrade_powerusage_v1alpha_powerusage_pb.GetPowerUsageRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.RpcError,
-               response: powertrade_powerusage_v1alpha_powerusage_pb.PowerUsage) => void): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.PowerUsage>;
+               response: powertrade_powerusage_v1alpha_powerusage_pb.GetPowerUsageResponse) => void): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.GetPowerUsageResponse>;
 
   getPowerUsage(
     request: powertrade_powerusage_v1alpha_powerusage_pb.GetPowerUsageRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.RpcError,
-               response: powertrade_powerusage_v1alpha_powerusage_pb.PowerUsage) => void) {
+               response: powertrade_powerusage_v1alpha_powerusage_pb.GetPowerUsageResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
@@ -168,16 +168,16 @@ export class PowerUsageServiceClient {
     '/powertrade.powerusage.v1alpha.PowerUsageService/Get60TicksPowerUsage',
     grpcWeb.MethodType.SERVER_STREAMING,
     powertrade_powerusage_v1alpha_powerusage_pb.Get60TicksPowerUsageRequest,
-    powertrade_powerusage_v1alpha_powerusage_pb.PowerUsage,
+    powertrade_powerusage_v1alpha_powerusage_pb.Get60TicksPowerUsageResponse,
     (request: powertrade_powerusage_v1alpha_powerusage_pb.Get60TicksPowerUsageRequest) => {
       return request.serializeBinary();
     },
-    powertrade_powerusage_v1alpha_powerusage_pb.PowerUsage.deserializeBinary
+    powertrade_powerusage_v1alpha_powerusage_pb.Get60TicksPowerUsageResponse.deserializeBinary
   );
 
   get60TicksPowerUsage(
     request: powertrade_powerusage_v1alpha_powerusage_pb.Get60TicksPowerUsageRequest,
-    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.PowerUsage> {
+    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.Get60TicksPowerUsageResponse> {
     return this.client_.serverStreaming(
       this.hostname_ +
         '/powertrade.powerusage.v1alpha.PowerUsageService/Get60TicksPowerUsage',
@@ -187,3 +187,4 @@ export class PowerUsageServiceClient {
   }
 
 }
+

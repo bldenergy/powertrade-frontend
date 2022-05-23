@@ -1,10 +1,6 @@
 import * as jspb from 'google-protobuf'
 
-import * as google_protobuf_struct_pb from 'google-protobuf/google/protobuf/struct_pb';
-import * as google_protobuf_field_mask_pb from 'google-protobuf/google/protobuf/field_mask_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
-import * as protoc$gen$openapiv2_options_annotations_pb from '../../../protoc-gen-openapiv2/options/annotations_pb';
-import * as google_api_resource_pb from '../../../google/api/resource_pb';
 import * as google_api_field_behavior_pb from '../../../google/api/field_behavior_pb';
 
 
@@ -50,6 +46,26 @@ export namespace GetPowerUsageRequest {
   }
 }
 
+export class GetPowerUsageResponse extends jspb.Message {
+  getPowerusage(): PowerUsage | undefined;
+  setPowerusage(value?: PowerUsage): GetPowerUsageResponse;
+  hasPowerusage(): boolean;
+  clearPowerusage(): GetPowerUsageResponse;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetPowerUsageResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetPowerUsageResponse): GetPowerUsageResponse.AsObject;
+  static serializeBinaryToWriter(message: GetPowerUsageResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetPowerUsageResponse;
+  static deserializeBinaryFromReader(message: GetPowerUsageResponse, reader: jspb.BinaryReader): GetPowerUsageResponse;
+}
+
+export namespace GetPowerUsageResponse {
+  export type AsObject = {
+    powerusage?: PowerUsage.AsObject,
+  }
+}
+
 export class Get60TicksPowerUsageRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Get60TicksPowerUsageRequest.AsObject;
@@ -61,6 +77,26 @@ export class Get60TicksPowerUsageRequest extends jspb.Message {
 
 export namespace Get60TicksPowerUsageRequest {
   export type AsObject = {
+  }
+}
+
+export class Get60TicksPowerUsageResponse extends jspb.Message {
+  getPowerusage(): PowerUsage | undefined;
+  setPowerusage(value?: PowerUsage): Get60TicksPowerUsageResponse;
+  hasPowerusage(): boolean;
+  clearPowerusage(): Get60TicksPowerUsageResponse;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): Get60TicksPowerUsageResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: Get60TicksPowerUsageResponse): Get60TicksPowerUsageResponse.AsObject;
+  static serializeBinaryToWriter(message: Get60TicksPowerUsageResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Get60TicksPowerUsageResponse;
+  static deserializeBinaryFromReader(message: Get60TicksPowerUsageResponse, reader: jspb.BinaryReader): Get60TicksPowerUsageResponse;
+}
+
+export namespace Get60TicksPowerUsageResponse {
+  export type AsObject = {
+    powerusage?: PowerUsage.AsObject,
   }
 }
 
@@ -83,7 +119,7 @@ export namespace HealthCheckRequest {
     service?: string,
   }
 
-  export enum ServiceCase {
+  export enum ServiceCase { 
     _SERVICE_NOT_SET = 0,
     SERVICE = 1,
   }
@@ -106,7 +142,7 @@ export namespace HealthCheckResponse {
     status: HealthCheckResponse.ServingStatus,
   }
 
-  export enum ServingStatus {
+  export enum ServingStatus { 
     SERVING_STATUS_UNSPECIFIED = 0,
     SERVING_STATUS_SERVING = 1,
     SERVING_STATUS_NOT_SERVING = 2,
@@ -192,3 +228,4 @@ export namespace ReadinessResponse {
     healthCheckResponse?: HealthCheckResponse.AsObject,
   }
 }
+
