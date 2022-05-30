@@ -1,38 +1,106 @@
 import * as jspb from 'google-protobuf'
 
-import * as google_protobuf_struct_pb from 'google-protobuf/google/protobuf/struct_pb';
-import * as google_protobuf_field_mask_pb from 'google-protobuf/google/protobuf/field_mask_pb';
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
-import * as protoc$gen$openapiv2_options_annotations_pb from '../../../protoc-gen-openapiv2/options/annotations_pb';
-import * as google_api_resource_pb from '../../../google/api/resource_pb';
 import * as google_api_field_behavior_pb from '../../../google/api/field_behavior_pb';
 
 
-export class PowerUsage extends jspb.Message {
-  getDeviceId(): string;
-  setDeviceId(value: string): PowerUsage;
+export class DeviceUsage extends jspb.Message {
+  getUid(): string;
+  setUid(value: string): DeviceUsage;
 
-  getPowerUsage(): number;
-  setPowerUsage(value: number): PowerUsage;
+  getName(): string;
+  setName(value: string): DeviceUsage;
 
-  getTimeOfUsage(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setTimeOfUsage(value?: google_protobuf_timestamp_pb.Timestamp): PowerUsage;
-  hasTimeOfUsage(): boolean;
-  clearTimeOfUsage(): PowerUsage;
+  getWatt(): number;
+  setWatt(value: number): DeviceUsage;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): PowerUsage.AsObject;
-  static toObject(includeInstance: boolean, msg: PowerUsage): PowerUsage.AsObject;
-  static serializeBinaryToWriter(message: PowerUsage, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): PowerUsage;
-  static deserializeBinaryFromReader(message: PowerUsage, reader: jspb.BinaryReader): PowerUsage;
+  toObject(includeInstance?: boolean): DeviceUsage.AsObject;
+  static toObject(includeInstance: boolean, msg: DeviceUsage): DeviceUsage.AsObject;
+  static serializeBinaryToWriter(message: DeviceUsage, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): DeviceUsage;
+  static deserializeBinaryFromReader(message: DeviceUsage, reader: jspb.BinaryReader): DeviceUsage;
 }
 
-export namespace PowerUsage {
+export namespace DeviceUsage {
   export type AsObject = {
-    deviceId: string,
-    powerUsage: number,
-    timeOfUsage?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+    uid: string,
+    name: string,
+    watt: number,
+  }
+}
+
+export class ChannelUsage extends jspb.Message {
+  getNumber(): number;
+  setNumber(value: number): ChannelUsage;
+
+  getAlias(): string;
+  setAlias(value: string): ChannelUsage;
+
+  getDevicesList(): Array<DeviceUsage>;
+  setDevicesList(value: Array<DeviceUsage>): ChannelUsage;
+  clearDevicesList(): ChannelUsage;
+  addDevices(value?: DeviceUsage, index?: number): DeviceUsage;
+
+  getWatt(): number;
+  setWatt(value: number): ChannelUsage;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ChannelUsage.AsObject;
+  static toObject(includeInstance: boolean, msg: ChannelUsage): ChannelUsage.AsObject;
+  static serializeBinaryToWriter(message: ChannelUsage, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ChannelUsage;
+  static deserializeBinaryFromReader(message: ChannelUsage, reader: jspb.BinaryReader): ChannelUsage;
+}
+
+export namespace ChannelUsage {
+  export type AsObject = {
+    number: number,
+    alias: string,
+    devicesList: Array<DeviceUsage.AsObject>,
+    watt: number,
+  }
+}
+
+export class MeterUsage extends jspb.Message {
+  getId(): string;
+  setId(value: string): MeterUsage;
+
+  getVoltage(): number;
+  setVoltage(value: number): MeterUsage;
+
+  getFrequency(): number;
+  setFrequency(value: number): MeterUsage;
+
+  getChannelsList(): Array<ChannelUsage>;
+  setChannelsList(value: Array<ChannelUsage>): MeterUsage;
+  clearChannelsList(): MeterUsage;
+  addChannels(value?: ChannelUsage, index?: number): ChannelUsage;
+
+  getWatt(): number;
+  setWatt(value: number): MeterUsage;
+
+  getEpoch(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setEpoch(value?: google_protobuf_timestamp_pb.Timestamp): MeterUsage;
+  hasEpoch(): boolean;
+  clearEpoch(): MeterUsage;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): MeterUsage.AsObject;
+  static toObject(includeInstance: boolean, msg: MeterUsage): MeterUsage.AsObject;
+  static serializeBinaryToWriter(message: MeterUsage, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): MeterUsage;
+  static deserializeBinaryFromReader(message: MeterUsage, reader: jspb.BinaryReader): MeterUsage;
+}
+
+export namespace MeterUsage {
+  export type AsObject = {
+    id: string,
+    voltage: number,
+    frequency: number,
+    channelsList: Array<ChannelUsage.AsObject>,
+    watt: number,
+    epoch?: google_protobuf_timestamp_pb.Timestamp.AsObject,
   }
 }
 
@@ -50,6 +118,26 @@ export namespace GetPowerUsageRequest {
   }
 }
 
+export class GetPowerUsageResponse extends jspb.Message {
+  getMetersList(): Array<MeterUsage>;
+  setMetersList(value: Array<MeterUsage>): GetPowerUsageResponse;
+  clearMetersList(): GetPowerUsageResponse;
+  addMeters(value?: MeterUsage, index?: number): MeterUsage;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetPowerUsageResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetPowerUsageResponse): GetPowerUsageResponse.AsObject;
+  static serializeBinaryToWriter(message: GetPowerUsageResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetPowerUsageResponse;
+  static deserializeBinaryFromReader(message: GetPowerUsageResponse, reader: jspb.BinaryReader): GetPowerUsageResponse;
+}
+
+export namespace GetPowerUsageResponse {
+  export type AsObject = {
+    metersList: Array<MeterUsage.AsObject>,
+  }
+}
+
 export class Get60TicksPowerUsageRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
   toObject(includeInstance?: boolean): Get60TicksPowerUsageRequest.AsObject;
@@ -64,131 +152,27 @@ export namespace Get60TicksPowerUsageRequest {
   }
 }
 
-export class HealthCheckRequest extends jspb.Message {
-  getService(): string;
-  setService(value: string): HealthCheckRequest;
-  hasService(): boolean;
-  clearService(): HealthCheckRequest;
+export class Get60TicksPowerUsageResponse extends jspb.Message {
+  getSequenceNumber(): number;
+  setSequenceNumber(value: number): Get60TicksPowerUsageResponse;
+
+  getMetersList(): Array<MeterUsage>;
+  setMetersList(value: Array<MeterUsage>): Get60TicksPowerUsageResponse;
+  clearMetersList(): Get60TicksPowerUsageResponse;
+  addMeters(value?: MeterUsage, index?: number): MeterUsage;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): HealthCheckRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: HealthCheckRequest): HealthCheckRequest.AsObject;
-  static serializeBinaryToWriter(message: HealthCheckRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): HealthCheckRequest;
-  static deserializeBinaryFromReader(message: HealthCheckRequest, reader: jspb.BinaryReader): HealthCheckRequest;
+  toObject(includeInstance?: boolean): Get60TicksPowerUsageResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: Get60TicksPowerUsageResponse): Get60TicksPowerUsageResponse.AsObject;
+  static serializeBinaryToWriter(message: Get60TicksPowerUsageResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Get60TicksPowerUsageResponse;
+  static deserializeBinaryFromReader(message: Get60TicksPowerUsageResponse, reader: jspb.BinaryReader): Get60TicksPowerUsageResponse;
 }
 
-export namespace HealthCheckRequest {
+export namespace Get60TicksPowerUsageResponse {
   export type AsObject = {
-    service?: string,
-  }
-
-  export enum ServiceCase {
-    _SERVICE_NOT_SET = 0,
-    SERVICE = 1,
+    sequenceNumber: number,
+    metersList: Array<MeterUsage.AsObject>,
   }
 }
 
-export class HealthCheckResponse extends jspb.Message {
-  getStatus(): HealthCheckResponse.ServingStatus;
-  setStatus(value: HealthCheckResponse.ServingStatus): HealthCheckResponse;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): HealthCheckResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: HealthCheckResponse): HealthCheckResponse.AsObject;
-  static serializeBinaryToWriter(message: HealthCheckResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): HealthCheckResponse;
-  static deserializeBinaryFromReader(message: HealthCheckResponse, reader: jspb.BinaryReader): HealthCheckResponse;
-}
-
-export namespace HealthCheckResponse {
-  export type AsObject = {
-    status: HealthCheckResponse.ServingStatus,
-  }
-
-  export enum ServingStatus {
-    SERVING_STATUS_UNSPECIFIED = 0,
-    SERVING_STATUS_SERVING = 1,
-    SERVING_STATUS_NOT_SERVING = 2,
-  }
-}
-
-export class LivenessRequest extends jspb.Message {
-  getHealthCheckRequest(): HealthCheckRequest | undefined;
-  setHealthCheckRequest(value?: HealthCheckRequest): LivenessRequest;
-  hasHealthCheckRequest(): boolean;
-  clearHealthCheckRequest(): LivenessRequest;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): LivenessRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: LivenessRequest): LivenessRequest.AsObject;
-  static serializeBinaryToWriter(message: LivenessRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): LivenessRequest;
-  static deserializeBinaryFromReader(message: LivenessRequest, reader: jspb.BinaryReader): LivenessRequest;
-}
-
-export namespace LivenessRequest {
-  export type AsObject = {
-    healthCheckRequest?: HealthCheckRequest.AsObject,
-  }
-}
-
-export class LivenessResponse extends jspb.Message {
-  getHealthCheckResponse(): HealthCheckResponse | undefined;
-  setHealthCheckResponse(value?: HealthCheckResponse): LivenessResponse;
-  hasHealthCheckResponse(): boolean;
-  clearHealthCheckResponse(): LivenessResponse;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): LivenessResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: LivenessResponse): LivenessResponse.AsObject;
-  static serializeBinaryToWriter(message: LivenessResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): LivenessResponse;
-  static deserializeBinaryFromReader(message: LivenessResponse, reader: jspb.BinaryReader): LivenessResponse;
-}
-
-export namespace LivenessResponse {
-  export type AsObject = {
-    healthCheckResponse?: HealthCheckResponse.AsObject,
-  }
-}
-
-export class ReadinessRequest extends jspb.Message {
-  getHealthCheckRequest(): HealthCheckRequest | undefined;
-  setHealthCheckRequest(value?: HealthCheckRequest): ReadinessRequest;
-  hasHealthCheckRequest(): boolean;
-  clearHealthCheckRequest(): ReadinessRequest;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): ReadinessRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: ReadinessRequest): ReadinessRequest.AsObject;
-  static serializeBinaryToWriter(message: ReadinessRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): ReadinessRequest;
-  static deserializeBinaryFromReader(message: ReadinessRequest, reader: jspb.BinaryReader): ReadinessRequest;
-}
-
-export namespace ReadinessRequest {
-  export type AsObject = {
-    healthCheckRequest?: HealthCheckRequest.AsObject,
-  }
-}
-
-export class ReadinessResponse extends jspb.Message {
-  getHealthCheckResponse(): HealthCheckResponse | undefined;
-  setHealthCheckResponse(value?: HealthCheckResponse): ReadinessResponse;
-  hasHealthCheckResponse(): boolean;
-  clearHealthCheckResponse(): ReadinessResponse;
-
-  serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): ReadinessResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: ReadinessResponse): ReadinessResponse.AsObject;
-  static serializeBinaryToWriter(message: ReadinessResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): ReadinessResponse;
-  static deserializeBinaryFromReader(message: ReadinessResponse, reader: jspb.BinaryReader): ReadinessResponse;
-}
-
-export namespace ReadinessResponse {
-  export type AsObject = {
-    healthCheckResponse?: HealthCheckResponse.AsObject,
-  }
-}
