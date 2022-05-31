@@ -15,8 +15,6 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = (function() { return this || window || global || self || Function('return this')(); }).call(null);
 
-var google_api_annotations_pb = require('../../../google/api/annotations_pb.js');
-goog.object.extend(proto, google_api_annotations_pb);
 var powertrade_powerusage_v1alpha_powerusage_pb = require('../../../powertrade/powerusage/v1alpha/powerusage_pb.js');
 goog.object.extend(proto, powertrade_powerusage_v1alpha_powerusage_pb);
 var powertrade_powerusage_v1alpha_healthcheck_pb = require('../../../powertrade/powerusage/v1alpha/healthcheck_pb.js');

@@ -15,8 +15,6 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = (function() { return this || window || global || self || Function('return this')(); }).call(null);
 
-var google_api_field_behavior_pb = require('../../../google/api/field_behavior_pb.js');
-goog.object.extend(proto, google_api_field_behavior_pb);
 goog.exportSymbol('proto.powertrade.powerusage.v1alpha.HealthCheckRequest', null, global);
 goog.exportSymbol('proto.powertrade.powerusage.v1alpha.HealthCheckResponse', null, global);
 goog.exportSymbol('proto.powertrade.powerusage.v1alpha.HealthCheckResponse.ServingStatus', null, global);
