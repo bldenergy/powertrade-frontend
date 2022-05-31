@@ -8,9 +8,6 @@ export class DeviceUsage extends jspb.Message {
   getId(): string;
   setId(value: string): DeviceUsage;
 
-  getName(): string;
-  setName(value: string): DeviceUsage;
-
   getWatt(): number;
   setWatt(value: number): DeviceUsage;
 
@@ -25,7 +22,6 @@ export class DeviceUsage extends jspb.Message {
 export namespace DeviceUsage {
   export type AsObject = {
     id: string,
-    name: string,
     watt: number,
   }
 }
@@ -66,6 +62,12 @@ export class MeterUsage extends jspb.Message {
   getId(): string;
   setId(value: string): MeterUsage;
 
+  getUid(): string;
+  setUid(value: string): MeterUsage;
+
+  getDescription(): string;
+  setDescription(value: string): MeterUsage;
+
   getVoltage(): number;
   setVoltage(value: number): MeterUsage;
 
@@ -96,6 +98,8 @@ export class MeterUsage extends jspb.Message {
 export namespace MeterUsage {
   export type AsObject = {
     id: string,
+    uid: string,
+    description: string,
     voltage: number,
     frequency: number,
     channelsList: Array<ChannelUsage.AsObject>,

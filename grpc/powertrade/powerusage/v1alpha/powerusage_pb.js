@@ -206,8 +206,7 @@ proto.powertrade.powerusage.v1alpha.DeviceUsage.prototype.toObject = function(op
 proto.powertrade.powerusage.v1alpha.DeviceUsage.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    watt: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0)
+    watt: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0)
   };
 
   if (includeInstance) {
@@ -249,10 +248,6 @@ proto.powertrade.powerusage.v1alpha.DeviceUsage.deserializeBinaryFromReader = fu
       msg.setId(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setName(value);
-      break;
-    case 3:
       var value = /** @type {number} */ (reader.readFloat());
       msg.setWatt(value);
       break;
@@ -292,17 +287,10 @@ proto.powertrade.powerusage.v1alpha.DeviceUsage.serializeBinaryToWriter = functi
       f
     );
   }
-  f = message.getName();
-  if (f.length > 0) {
-    writer.writeString(
-      2,
-      f
-    );
-  }
   f = message.getWatt();
   if (f !== 0.0) {
     writer.writeFloat(
-      3,
+      2,
       f
     );
   }
@@ -328,29 +316,11 @@ proto.powertrade.powerusage.v1alpha.DeviceUsage.prototype.setId = function(value
 
 
 /**
- * optional string name = 2;
- * @return {string}
- */
-proto.powertrade.powerusage.v1alpha.DeviceUsage.prototype.getName = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
-};
-
-
-/**
- * @param {string} value
- * @return {!proto.powertrade.powerusage.v1alpha.DeviceUsage} returns this
- */
-proto.powertrade.powerusage.v1alpha.DeviceUsage.prototype.setName = function(value) {
-  return jspb.Message.setProto3StringField(this, 2, value);
-};
-
-
-/**
- * optional float watt = 3;
+ * optional float watt = 2;
  * @return {number}
  */
 proto.powertrade.powerusage.v1alpha.DeviceUsage.prototype.getWatt = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
 };
 
 
@@ -359,7 +329,7 @@ proto.powertrade.powerusage.v1alpha.DeviceUsage.prototype.getWatt = function() {
  * @return {!proto.powertrade.powerusage.v1alpha.DeviceUsage} returns this
  */
 proto.powertrade.powerusage.v1alpha.DeviceUsage.prototype.setWatt = function(value) {
-  return jspb.Message.setProto3FloatField(this, 3, value);
+  return jspb.Message.setProto3FloatField(this, 2, value);
 };
 
 
@@ -619,7 +589,7 @@ proto.powertrade.powerusage.v1alpha.ChannelUsage.prototype.setWatt = function(va
  * @private {!Array<number>}
  * @const
  */
-proto.powertrade.powerusage.v1alpha.MeterUsage.repeatedFields_ = [4];
+proto.powertrade.powerusage.v1alpha.MeterUsage.repeatedFields_ = [6];
 
 
 
@@ -653,11 +623,13 @@ proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.toObject = function(opt
 proto.powertrade.powerusage.v1alpha.MeterUsage.toObject = function(includeInstance, msg) {
   var f, obj = {
     id: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    voltage: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
-    frequency: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0),
+    uid: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    description: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    voltage: jspb.Message.getFloatingPointFieldWithDefault(msg, 4, 0.0),
+    frequency: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
     channelsList: jspb.Message.toObjectList(msg.getChannelsList(),
     proto.powertrade.powerusage.v1alpha.ChannelUsage.toObject, includeInstance),
-    watt: jspb.Message.getFloatingPointFieldWithDefault(msg, 5, 0.0),
+    watt: jspb.Message.getFloatingPointFieldWithDefault(msg, 7, 0.0),
     epoch: (f = msg.getEpoch()) && google_protobuf_timestamp_pb.Timestamp.toObject(includeInstance, f)
   };
 
@@ -700,23 +672,31 @@ proto.powertrade.powerusage.v1alpha.MeterUsage.deserializeBinaryFromReader = fun
       msg.setId(value);
       break;
     case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setUid(value);
+      break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setDescription(value);
+      break;
+    case 4:
       var value = /** @type {number} */ (reader.readFloat());
       msg.setVoltage(value);
       break;
-    case 3:
+    case 5:
       var value = /** @type {number} */ (reader.readFloat());
       msg.setFrequency(value);
       break;
-    case 4:
+    case 6:
       var value = new proto.powertrade.powerusage.v1alpha.ChannelUsage;
       reader.readMessage(value,proto.powertrade.powerusage.v1alpha.ChannelUsage.deserializeBinaryFromReader);
       msg.addChannels(value);
       break;
-    case 5:
+    case 7:
       var value = /** @type {number} */ (reader.readFloat());
       msg.setWatt(value);
       break;
-    case 6:
+    case 8:
       var value = new google_protobuf_timestamp_pb.Timestamp;
       reader.readMessage(value,google_protobuf_timestamp_pb.Timestamp.deserializeBinaryFromReader);
       msg.setEpoch(value);
@@ -757,24 +737,38 @@ proto.powertrade.powerusage.v1alpha.MeterUsage.serializeBinaryToWriter = functio
       f
     );
   }
+  f = message.getUid();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getDescription();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
   f = message.getVoltage();
   if (f !== 0.0) {
     writer.writeFloat(
-      2,
+      4,
       f
     );
   }
   f = message.getFrequency();
   if (f !== 0.0) {
     writer.writeFloat(
-      3,
+      5,
       f
     );
   }
   f = message.getChannelsList();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      4,
+      6,
       f,
       proto.powertrade.powerusage.v1alpha.ChannelUsage.serializeBinaryToWriter
     );
@@ -782,14 +776,14 @@ proto.powertrade.powerusage.v1alpha.MeterUsage.serializeBinaryToWriter = functio
   f = message.getWatt();
   if (f !== 0.0) {
     writer.writeFloat(
-      5,
+      7,
       f
     );
   }
   f = message.getEpoch();
   if (f != null) {
     writer.writeMessage(
-      6,
+      8,
       f,
       google_protobuf_timestamp_pb.Timestamp.serializeBinaryToWriter
     );
@@ -816,11 +810,47 @@ proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.setId = function(value)
 
 
 /**
- * optional float voltage = 2;
+ * optional string uid = 2;
+ * @return {string}
+ */
+proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.getUid = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.powertrade.powerusage.v1alpha.MeterUsage} returns this
+ */
+proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.setUid = function(value) {
+  return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string description = 3;
+ * @return {string}
+ */
+proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.getDescription = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.powertrade.powerusage.v1alpha.MeterUsage} returns this
+ */
+proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.setDescription = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
+};
+
+
+/**
+ * optional float voltage = 4;
  * @return {number}
  */
 proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.getVoltage = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 2, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 4, 0.0));
 };
 
 
@@ -829,16 +859,16 @@ proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.getVoltage = function()
  * @return {!proto.powertrade.powerusage.v1alpha.MeterUsage} returns this
  */
 proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.setVoltage = function(value) {
-  return jspb.Message.setProto3FloatField(this, 2, value);
+  return jspb.Message.setProto3FloatField(this, 4, value);
 };
 
 
 /**
- * optional float frequency = 3;
+ * optional float frequency = 5;
  * @return {number}
  */
 proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.getFrequency = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 3, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
 };
 
 
@@ -847,17 +877,17 @@ proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.getFrequency = function
  * @return {!proto.powertrade.powerusage.v1alpha.MeterUsage} returns this
  */
 proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.setFrequency = function(value) {
-  return jspb.Message.setProto3FloatField(this, 3, value);
+  return jspb.Message.setProto3FloatField(this, 5, value);
 };
 
 
 /**
- * repeated ChannelUsage channels = 4;
+ * repeated ChannelUsage channels = 6;
  * @return {!Array<!proto.powertrade.powerusage.v1alpha.ChannelUsage>}
  */
 proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.getChannelsList = function() {
   return /** @type{!Array<!proto.powertrade.powerusage.v1alpha.ChannelUsage>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.powertrade.powerusage.v1alpha.ChannelUsage, 4));
+    jspb.Message.getRepeatedWrapperField(this, proto.powertrade.powerusage.v1alpha.ChannelUsage, 6));
 };
 
 
@@ -866,7 +896,7 @@ proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.getChannelsList = funct
  * @return {!proto.powertrade.powerusage.v1alpha.MeterUsage} returns this
 */
 proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.setChannelsList = function(value) {
-  return jspb.Message.setRepeatedWrapperField(this, 4, value);
+  return jspb.Message.setRepeatedWrapperField(this, 6, value);
 };
 
 
@@ -876,7 +906,7 @@ proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.setChannelsList = funct
  * @return {!proto.powertrade.powerusage.v1alpha.ChannelUsage}
  */
 proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.addChannels = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 4, opt_value, proto.powertrade.powerusage.v1alpha.ChannelUsage, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 6, opt_value, proto.powertrade.powerusage.v1alpha.ChannelUsage, opt_index);
 };
 
 
@@ -890,11 +920,11 @@ proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.clearChannelsList = fun
 
 
 /**
- * optional float watt = 5;
+ * optional float watt = 7;
  * @return {number}
  */
 proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.getWatt = function() {
-  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 5, 0.0));
+  return /** @type {number} */ (jspb.Message.getFloatingPointFieldWithDefault(this, 7, 0.0));
 };
 
 
@@ -903,17 +933,17 @@ proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.getWatt = function() {
  * @return {!proto.powertrade.powerusage.v1alpha.MeterUsage} returns this
  */
 proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.setWatt = function(value) {
-  return jspb.Message.setProto3FloatField(this, 5, value);
+  return jspb.Message.setProto3FloatField(this, 7, value);
 };
 
 
 /**
- * optional google.protobuf.Timestamp epoch = 6;
+ * optional google.protobuf.Timestamp epoch = 8;
  * @return {?proto.google.protobuf.Timestamp}
  */
 proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.getEpoch = function() {
   return /** @type{?proto.google.protobuf.Timestamp} */ (
-    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 6));
+    jspb.Message.getWrapperField(this, google_protobuf_timestamp_pb.Timestamp, 8));
 };
 
 
@@ -922,7 +952,7 @@ proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.getEpoch = function() {
  * @return {!proto.powertrade.powerusage.v1alpha.MeterUsage} returns this
 */
 proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.setEpoch = function(value) {
-  return jspb.Message.setWrapperField(this, 6, value);
+  return jspb.Message.setWrapperField(this, 8, value);
 };
 
 
@@ -940,7 +970,7 @@ proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.clearEpoch = function()
  * @return {boolean}
  */
 proto.powertrade.powerusage.v1alpha.MeterUsage.prototype.hasEpoch = function() {
-  return jspb.Message.getField(this, 6) != null;
+  return jspb.Message.getField(this, 8) != null;
 };
 
 
