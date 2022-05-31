@@ -17,8 +17,6 @@ var global = (function() { return this || window || global || self || Function('
 
 var google_protobuf_timestamp_pb = require('google-protobuf/google/protobuf/timestamp_pb.js');
 goog.object.extend(proto, google_protobuf_timestamp_pb);
-var google_api_field_behavior_pb = require('../../../google/api/field_behavior_pb.js');
-goog.object.extend(proto, google_api_field_behavior_pb);
 goog.exportSymbol('proto.powertrade.powerusage.v1alpha.ChannelUsage', null, global);
 goog.exportSymbol('proto.powertrade.powerusage.v1alpha.DeviceUsage', null, global);
 goog.exportSymbol('proto.powertrade.powerusage.v1alpha.Get60TicksPowerUsageRequest', null, global);
