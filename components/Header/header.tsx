@@ -1,5 +1,6 @@
 import logo from '../../public/images/bld-energy-logo.webp'
 import styles from './header.module.css'
+import { useSession, signOut, signIn } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -7,7 +8,6 @@ import { useEffect, useState } from 'react'
 
 import en from '../../locales/en'
 import zh from '../../locales/zh'
-import { useSession, signOut } from 'next-auth/react'
 
 const path = [
   { uid: 21, name: 'Power Consumption', id: 2, path: '/power-consumption' },
@@ -16,9 +16,9 @@ const path = [
 ]
 
 export default function Header() {
-  const { data: session } = useSession();
+  const { data: session } = useSession()
   const router = useRouter()
-  
+
   const { locale } = router
   const translate: any = locale === 'en' ? en : zh
   // console.log(translate['home']);
@@ -111,7 +111,7 @@ export default function Header() {
                 data-testid="login"
                 data-href="/login"
                 title={'Login'}
-                onClick={(event) => (window.location.href = '/login')}
+                onClick={() => signIn('kratos-hydra')}
               >
                 Login
               </button>
@@ -122,7 +122,7 @@ export default function Header() {
                 data-testid="sign-up"
                 data-href="/registration"
                 title={'Sign Up'}
-                onClick={(event) => (window.location.href = '/registration')}
+                onClick={() => signIn('kratos-hydra')}
               >
                 Sign Up
               </button>
@@ -133,34 +133,31 @@ export default function Header() {
         {session && (
           <div className={styles.selectOption}>
             <div>
-              
-                <button
-                  className={styles.authButton}
-                  data-testid="account"
-                  disabled={!session}
-                  onClick={() => {
-                    window.location.replace("https://127.0.0.1:4455/");
-                  }}
-                >
-                  Account
-                </button>
-          
+              <button
+                className={styles.authButton}
+                data-testid="account"
+                disabled={!session}
+                onClick={() => {
+                  window.location.replace('https://127.0.0.1:4455/')
+                }}
+              >
+                Account
+              </button>
             </div>
             <div>
-              
-                <button
-                  className={styles.authButton}
-                  data-testid="logout"
-                  disabled={!session}
-                  title={'Logout'}
-                  onClick={() => {
-                    signOut();
-                    window.location.replace("https://127.0.0.1:4455/logout");
-                  }}
-                >
-                  Logout
-                </button>
-              
+              <button
+                className={styles.authButton}
+                data-testid="logout"
+                disabled={!session}
+                title={'Logout'}
+                onClick={() => {
+                  signOut()
+                  console.log('Signed out')
+                  window.location.replace('https://127.0.0.1:4455/logout')
+                }}
+              >
+                Logout
+              </button>
             </div>
           </div>
         )}
