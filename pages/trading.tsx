@@ -23,14 +23,6 @@ const Trading: NextPage = () => {
   )
 }
 
-function checkLogout(hasSession: any, redirect: any) {
-  if (hasSession) {
-    router.push(redirect)
-  } else {
-    router.push('/login')
-  }
-}
-
 // This gets called on every request
 // export const getServerSideProps: GetServerSideProps = async (context) => {
 //   return {
