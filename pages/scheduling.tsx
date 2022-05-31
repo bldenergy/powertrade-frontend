@@ -1,6 +1,5 @@
 import styles from '../styles/shared.module.css'
 import { Spinner } from '@chakra-ui/react'
-import jwt_decode from 'jwt-decode'
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
