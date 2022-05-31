@@ -205,7 +205,7 @@ proto.powertrade.powerusage.v1alpha.DeviceUsage.prototype.toObject = function(op
  */
 proto.powertrade.powerusage.v1alpha.DeviceUsage.toObject = function(includeInstance, msg) {
   var f, obj = {
-    uid: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
     name: jspb.Message.getFieldWithDefault(msg, 2, ""),
     watt: jspb.Message.getFloatingPointFieldWithDefault(msg, 3, 0.0)
   };
@@ -246,7 +246,7 @@ proto.powertrade.powerusage.v1alpha.DeviceUsage.deserializeBinaryFromReader = fu
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUid(value);
+      msg.setId(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
@@ -285,7 +285,7 @@ proto.powertrade.powerusage.v1alpha.DeviceUsage.prototype.serializeBinary = func
  */
 proto.powertrade.powerusage.v1alpha.DeviceUsage.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getUid();
+  f = message.getId();
   if (f.length > 0) {
     writer.writeString(
       1,
@@ -310,10 +310,10 @@ proto.powertrade.powerusage.v1alpha.DeviceUsage.serializeBinaryToWriter = functi
 
 
 /**
- * optional string uid = 1;
+ * optional string id = 1;
  * @return {string}
  */
-proto.powertrade.powerusage.v1alpha.DeviceUsage.prototype.getUid = function() {
+proto.powertrade.powerusage.v1alpha.DeviceUsage.prototype.getId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -322,7 +322,7 @@ proto.powertrade.powerusage.v1alpha.DeviceUsage.prototype.getUid = function() {
  * @param {string} value
  * @return {!proto.powertrade.powerusage.v1alpha.DeviceUsage} returns this
  */
-proto.powertrade.powerusage.v1alpha.DeviceUsage.prototype.setUid = function(value) {
+proto.powertrade.powerusage.v1alpha.DeviceUsage.prototype.setId = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 

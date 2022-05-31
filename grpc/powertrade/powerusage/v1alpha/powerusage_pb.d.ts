@@ -5,8 +5,8 @@ import * as google_api_field_behavior_pb from '../../../google/api/field_behavio
 
 
 export class DeviceUsage extends jspb.Message {
-  getUid(): string;
-  setUid(value: string): DeviceUsage;
+  getId(): string;
+  setId(value: string): DeviceUsage;
 
   getName(): string;
   setName(value: string): DeviceUsage;
@@ -24,7 +24,7 @@ export class DeviceUsage extends jspb.Message {
 
 export namespace DeviceUsage {
   export type AsObject = {
-    uid: string,
+    id: string,
     name: string,
     watt: number,
   }
