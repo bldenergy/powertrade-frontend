@@ -151,7 +151,9 @@ export default function Header() {
                 disabled={!session}
                 title={'Logout'}
                 onClick={() => {
-                  window.location.replace('https://127.0.0.1:4455/logout')
+                  window.location.replace(
+                    'https://127.0.0.1:4455/logout?redirect_url=https://127.0.0.1:4456/'
+                  )
                 }}
               >
                 Logout
