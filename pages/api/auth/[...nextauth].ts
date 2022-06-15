@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth from 'next-auth'
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
@@ -6,25 +6,30 @@ export default NextAuth({
   // https://next-auth.js.org/configuration/providers
   providers: [
     {
-      id: "kratos-hydra",
-      name: "Kratos & Hydra",
-      type: "oauth",
+      id: 'kratos-hydra',
+      name: 'Kratos & Hydra',
+      type: 'oauth',
       wellKnown: process.env.HYDRA_OPENID_CONFIG,
-      authorization: { params: { grant_type: "authorization_code", scopes: ["openid", "offline"] } },
+      authorization: {
+        params: {
+          grant_type: 'authorization_code',
+          scopes: ['openid', 'offline']
+        }
+      },
       idToken: true,
-      checks: ["state"],
+      checks: ['state'],
       async profile(profile) {
-        console.log("profile", profile);
+        console.log('profile', profile)
         return {
           id: profile.sub,
-          email: profile.email,
-        };
+          email: profile.email
+        }
       },
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+
       clientId: process.env.AUTH_CLIENT_ID!,
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      clientSecret: process.env.AUTH_CLIENT_SECRET!,
-    },
+
+      clientSecret: process.env.AUTH_CLIENT_SECRET!
+    }
   ],
   // Database optional. MySQL, Maria DB, Postgres and MongoDB are supported.
   // https://next-auth.js.org/configuration/databases
@@ -43,7 +48,7 @@ export default NextAuth({
     // Use JSON Web Tokens for session instead of database sessions.
     // This option can be used with or without a database for users/accounts.
     // Note: `strategy` should be set to 'jwt' if no database is used.
-    strategy: "jwt",
+    strategy: 'jwt'
 
     // Seconds - How long until an idle session expires and is no longer valid.
     // maxAge: 30 * 24 * 60 * 60, // 30 days
@@ -59,7 +64,7 @@ export default NextAuth({
   // https://next-auth.js.org/configuration/options#jwt
   jwt: {
     // A secret to use for key generation (you should set this explicitly)
-    secret: process.env.SECRET,
+    secret: process.env.SECRET
     // Set to true to use encryption (default: false)
     // encryption: true,
     // You can define your own encode/decode functions for signing and encryption
@@ -88,12 +93,12 @@ export default NextAuth({
     // async signIn({ user, account, profile, email, credentials }) { return true },
     // This function is called first to determine if a user is allowed to sign in.
     async signIn({ profile }) {
-      console.log("signIn-profile", profile);
+      console.log('signIn-profile', profile)
       if (profile) {
-        return true;
+        return true
       } else {
         // Return false to display a default error message
-        return false;
+        return false
         // Or you can return a URL to redirect to:
         // return '/unauthorized'
       }
@@ -103,26 +108,33 @@ export default NextAuth({
     // The access token is extracted from the OAuth provider's response,
     // and stored in the token object.
     jwt({ token, account }) {
-      console.log("jwt-token", token, "jwt-account", account);
+      console.log('jwt-token', token, 'jwt-account', account)
       // add accessToken to token
       if (account) {
-        token.accessToken = account.access_token;
+        token.accessToken = account.access_token
       }
-      return token;
+      return token
     },
     // async session({ session, token, user }) { return session },
     // This function is called third, after the jwt callback function.
     // The access token that is extracted in the jwt callback function,
     // is stored in the session object.
     async session({ session, token, user }) {
-      console.log("session-session", session, "session-token", token, "session-user", user);
-      session.accessToken = token.accessToken;
-      return session;
+      console.log(
+        'session-session',
+        session,
+        'session-token',
+        token,
+        'session-user',
+        user
+      )
+      session.accessToken = token.accessToken
+      return session
     },
     // async redirect({ url, baseUrl }) { return baseUrl },
     async redirect({ url, baseUrl }) {
-      return url.startsWith(baseUrl) ? `${baseUrl}/` : baseUrl;
-    },
+      return url.startsWith(baseUrl) ? `${baseUrl}/` : baseUrl
+    }
   },
 
   // Events are useful for logging
@@ -130,5 +142,5 @@ export default NextAuth({
   events: {},
 
   // Enable debug messages in the console if you are having problems
-  debug: false,
-});
+  debug: false
+})
