@@ -26,7 +26,6 @@ const firebaseCloudMessaging = {
   onMessage: async () => {
     const messaging = getMessaging()
     onMessage(messaging, (payload) => {
-      console.log('Message received. ', payload)
     })
   },
   init: async function () {
