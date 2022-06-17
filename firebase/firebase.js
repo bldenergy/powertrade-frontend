@@ -25,8 +25,7 @@ const firebaseCloudMessaging = {
   },
   onMessage: async () => {
     const messaging = getMessaging()
-    onMessage(messaging, (payload) => {
-    })
+    onMessage(messaging, (payload) => {})
   },
   init: async function () {
     try {
@@ -36,8 +35,7 @@ const firebaseCloudMessaging = {
       const messaging = getMessaging(app)
       await Notification.requestPermission()
       getToken(messaging, {
-        vapidKey:
-          
+        vapidKey: ''
       })
         .then((currentToken) => {
           if (currentToken) {
@@ -45,13 +43,9 @@ const firebaseCloudMessaging = {
             // save the token in your database
             localforage.setItem('fcm_token', currentToken)
           } else {
-            // Show permission request UI
-            )
-            // ...
           }
         })
-        .catch((err) => {
-        })
+        .catch((err) => {})
     } catch (error) {
       console.error(error)
     }
