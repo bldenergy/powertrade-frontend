@@ -51,8 +51,6 @@ const firebaseCloudMessaging = {
           }
         })
         .catch((err) => {
-          console.log('NOTIFICACIONAn error occurred while retrieving token . ')
-          console.log(err)
         })
     } catch (error) {
       console.error(error)
