@@ -3,25 +3,22 @@ import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 import {
   Accordion,
   AccordionButton,
-  AccordionIcon,
   AccordionItem,
   AccordionPanel,
   Box,
   Heading,
   ListItem,
-  Spinner,
   UnorderedList
 } from '@chakra-ui/react'
 import * as grpcWeb from 'grpc-web'
-import type { GetServerSideProps, NextPage } from 'next'
+import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
-import router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
 import HeadComponent from '../components/head'
 import { PowerUsageServiceClient } from '../grpc/powertrade/powerusage/v1alpha/Powerusage_serviceServiceClientPb'
 import {
-  Get60TicksPowerUsageRequest,
   GetPowerUsageResponse,
   GetPowerUsageRequest
 } from '../grpc/powertrade/powerusage/v1alpha/powerusage_pb'
@@ -56,27 +53,11 @@ const Consumption: NextPage = () => {
         request,
         { 'custom-header-1': 'value1' },
         (err: grpcWeb.RpcError, response: GetPowerUsageResponse) => {
-          // console.log(err)
-          // console.log(response.toObject())
           setPowerUsage(response.toObject())
-          // console.log(powerUsage?.metersList)
         }
       )
     }, 1000)
     return () => clearInterval(apiCall)
-
-    // call.on('status', (status: grpcWeb.Status) => {
-    //   // console.log(status)
-    // })
-
-    // var get60TicksPowerUsageRequest = new Get60TicksPowerUsageRequest()
-    // const streamCall = powerUsageService.get60TicksPowerUsage(get60TicksPowerUsageRequest, {});
-    // streamCall.on('data', (resp: Get60TicksPowerUsageRequest) => {
-    //   console.log(resp);
-    // });
-    // streamCall.on('end', () => {
-    //   console.log("It's the end");
-    // });
   }, [powerUsage])
 
   return (
@@ -87,22 +68,6 @@ const Consumption: NextPage = () => {
         style={{ marginTop: '40px', justifyContent: 'start' }}
       >
         <Heading style={{ marginBottom: '20px' }}>Meters</Heading>
-
-        {/* {powerUsage?.metersList.map((meter: any) => {
-          return (
-            <>
-              {meter?.channelsList.map((channel: any) => {
-                return (
-                  <>
-                    {channel?.devicesList.map((device: any, i: any) => {
-                      return <LineChart key={i} meterWatt={meter?.watt} />
-                    })}
-                  </>
-                )
-              })}
-            </>
-          )
-        })} */}
         {powerUsage?.metersList.map((meter: any, i: any) => {
           return (
             <Accordion allowMultiple width={'100%'} key={i}>
@@ -221,14 +186,5 @@ const Consumption: NextPage = () => {
     </div>
   )
 }
-
-// This gets called on every request
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   return {
-//     props: {
-//       ory_hydra_public_url: process.env.ORY_HYDRA_PUBLIC_URL
-//     }
-//   }
-// }
 
 export default Consumption

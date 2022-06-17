@@ -57,34 +57,6 @@ export default function Header() {
           )
         })}
       </div>
-
-      {/* <div className={styles.formSlider}>
-          <form action="#">
-            <label className={styles.switch}>
-              <input
-                type="checkbox"
-                checked={darkTheme}
-                onChange={handleToggle}
-              />
-              <span className={styles.slider}></span>
-            </label>
-          </form>
-        </div> */}
-
-      {/* <div className={styles.selectOption}>
-          <select
-            onChange={changeLanguage}
-            defaultValue={locale}
-            className={styles.selectStyle}
-          >
-            <option className="text-black" value="en">
-              EN
-            </option>
-            <option className="text-black" value="zh">
-              ZH
-            </option>
-          </select>
-        </div> */}
     </nav>
   )
 }
