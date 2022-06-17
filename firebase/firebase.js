@@ -28,12 +28,6 @@ const firebaseCloudMessaging = {
     const messaging = getMessaging()
     onMessage(messaging, (payload) => {
       console.log('Message received. ', payload)
-      // alert('Notificacion')
-      // const { title, body } = payload.notification
-      // const options = {
-      //   body
-      // }
-      // ServiceWorkerRegistration.showNotification(title, options)
     })
   },
   init: async function () {
