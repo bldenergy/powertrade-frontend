@@ -40,7 +40,6 @@ const firebaseCloudMessaging = {
           
       })
         .then((currentToken) => {
-          console.log('current Token', currentToken)
           if (currentToken) {
             // Send the token to your server and update the UI if necessary
             // save the token in your database
