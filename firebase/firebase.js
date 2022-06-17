@@ -33,7 +33,6 @@ const firebaseCloudMessaging = {
       if ((await this.tokenInlocalforage()) !== null) {
         return false
       }
-      console.log('it is creating it.')
       const messaging = getMessaging(app)
       await Notification.requestPermission()
       getToken(messaging, {
