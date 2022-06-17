@@ -44,7 +44,6 @@ const firebaseCloudMessaging = {
             // Send the token to your server and update the UI if necessary
             // save the token in your database
             localforage.setItem('fcm_token', currentToken)
-            console.log('fcm_token', currentToken)
           } else {
             // Show permission request UI
             console.log(
