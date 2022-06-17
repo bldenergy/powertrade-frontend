@@ -21,7 +21,6 @@ const app = !getApps().length ? initializeApp(firebaseConfig) : getApp()
 const firebaseCloudMessaging = {
   tokenInlocalforage: async () => {
     const token = await localforage.getItem('fcm_token')
-    console.log('fcm_token', token)
     return token
   },
   onMessage: async () => {
