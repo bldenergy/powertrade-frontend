@@ -46,8 +46,6 @@ const firebaseCloudMessaging = {
             localforage.setItem('fcm_token', currentToken)
           } else {
             // Show permission request UI
-            console.log(
-              'NOTIFICACION, No registration token available. Request permission to generate one.'
             )
             // ...
           }
