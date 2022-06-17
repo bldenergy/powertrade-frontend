@@ -33,7 +33,6 @@ const firebaseCloudMessaging = {
   init: async function () {
     try {
       if ((await this.tokenInlocalforage()) !== null) {
-        console.log('it already exists')
         return false
       }
       console.log('it is creating it.')
