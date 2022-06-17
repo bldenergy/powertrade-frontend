@@ -6,8 +6,8 @@ export default NextAuth({
   // https://next-auth.js.org/configuration/providers
   providers: [
     {
-      id: 'kratos-hydra',
-      name: 'Kratos & Hydra',
+      id: 'bldenergy-myaccount',
+      name: 'BLD Energy - Myaccount',
       type: 'oauth',
       wellKnown: process.env.HYDRA_OPENID_CONFIG,
       authorization: {
