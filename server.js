@@ -13,7 +13,7 @@ app.prepare().then(() => {
   createServer(httpsOptions, (req, res) => {
     const parsedUrl = parse(req.url, true)
     handle(req, res, parsedUrl)
-  }).listen(4456, (err) => {
+  }).listen(process.env.PORT || 3000, (err) => {
     if (err) throw err
     console.log('> Server started on https://127.0.0.1:4456')
   })
