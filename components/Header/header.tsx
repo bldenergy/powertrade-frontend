@@ -1,5 +1,14 @@
 import logo from '../../public/images/bld-energy-logo.webp'
 import styles from './header.module.css'
+import { ChevronDownIcon } from '@chakra-ui/icons'
+import {
+  Avatar,
+  Button,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList
+} from '@chakra-ui/react'
 import { useSession, signOut, signIn } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -16,12 +25,11 @@ const path = [
 ]
 
 export default function Header() {
-  const { data: session } = useSession()
+  const { data: session }: any = useSession()
   const router = useRouter()
 
   const { locale } = router
   const translate: any = locale === 'en' ? en : zh
-  // console.log(translate['home']);
 
   const changeLanguage = (e: any) => {
     const locale = e.target.value
@@ -29,9 +37,9 @@ export default function Header() {
   }
 
   return (
-    <header className={styles.container}>
-      <nav className={styles.nav}>
-        <div className={styles.logo}>
+    <nav className={styles.container}>
+      <div className={styles.content}>
+        <div>
           <Link href="/">
             <a>
               <Image
@@ -45,111 +53,26 @@ export default function Header() {
             </a>
           </Link>
         </div>
-
-        <div className={styles.links}>
-          {path.map((value) => {
-            return (
-              <div
-                key={value.uid}
-                className={
-                  (router.pathname === value.path
-                    ? styles.active
-                    : styles.inactive) +
-                  ` ` +
-                  styles.link
-                }
-              >
-                <span>
-                  <Link href={value.path}>
-                    <a>
-                      {
-                        translate[value.name.toLowerCase().replace(/\s/g, '')]
-                          .title
-                      }
-                    </a>
-                  </Link>
-                </span>
-              </div>
-            )
-          })}
-        </div>
-
-        {/* <div className={styles.formSlider}>
-          <form action="#">
-            <label className={styles.switch}>
-              <input
-                type="checkbox"
-                checked={darkTheme}
-                onChange={handleToggle}
+        <div>
+          <Menu>
+            <MenuButton>
+              <Avatar
+                size="md"
+                bg="gray"
+                name={session?.user.email}
+                src={session?.profile?.picture}
               />
-              <span className={styles.slider}></span>
-            </label>
-          </form>
-        </div> */}
+            </MenuButton>
 
-        {/* <div className={styles.selectOption}>
-          <select
-            onChange={changeLanguage}
-            defaultValue={locale}
-            className={styles.selectStyle}
-          >
-            <option className="text-black" value="en">
-              EN
-            </option>
-            <option className="text-black" value="zh">
-              ZH
-            </option>
-          </select>
-        </div> */}
-
-        {!session && (
-          <div className={styles.selectOption}>
-            <div>
-              <button
-                className={styles.authButton}
-                type="button"
-                data-testid="login"
-                data-href="/login"
-                title={'Login'}
-                onClick={() => signIn('kratos-hydra')}
-              >
-                Login
-              </button>
-            </div>
-            <div>
-              <button
-                className={styles.authButton}
-                data-testid="sign-up"
-                data-href="/registration"
-                title={'Sign Up'}
-                onClick={() => signIn('kratos-hydra')}
-              >
-                Sign Up
-              </button>
-            </div>
-          </div>
-        )}
-
-        {session && (
-          <div className={styles.selectOption}>
-            <div>
-              <button
-                className={styles.authButton}
-                data-testid="account"
-                disabled={!session}
+            <MenuList color={'black'}>
+              <MenuItem
                 onClick={() => {
                   window.location.replace('https://127.0.0.1:4455/')
                 }}
               >
                 Account
-              </button>
-            </div>
-            <div>
-              <button
-                className={styles.authButton}
-                data-testid="logout"
-                disabled={!session}
-                title={'Logout'}
+              </MenuItem>
+              <MenuItem
                 onClick={() => {
                   window.location.replace(
                     'https://127.0.0.1:4455/logout?redirect_url=https://127.0.0.1:4456/'
@@ -157,11 +80,11 @@ export default function Header() {
                 }}
               >
                 Logout
-              </button>
-            </div>
-          </div>
-        )}
-      </nav>
-    </header>
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </div>
+      </div>
+    </nav>
   )
 }

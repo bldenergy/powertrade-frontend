@@ -1,34 +1,26 @@
 .container {
-  padding: 0 2rem;
   width: 100%;
 }
 
 .main {
-  min-height: 80vh;
-  flex: 1;
+  align-items: center;
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-}
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
+  min-height: 85vh;
 }
 
-.title,
 .description {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  margin: 4rem 0;
   text-align: center;
 }
 
-.description {
-  margin: 4rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
-}
-
-.authSection {
-  display: flex;
-  gap: 1rem;
+.title {
+  font-size: 4rem;
+  line-height: 1.15;
+  margin: 0;
+  text-align: center;
 }

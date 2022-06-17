@@ -59,7 +59,7 @@ const Consumption: NextPage = () => {
           // console.log(err)
           // console.log(response.toObject())
           setPowerUsage(response.toObject())
-          console.log(powerUsage?.metersList)
+          // console.log(powerUsage?.metersList)
         }
       )
     }, 1000)

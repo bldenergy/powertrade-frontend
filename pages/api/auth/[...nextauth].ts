@@ -19,7 +19,7 @@ export default NextAuth({
       idToken: true,
       checks: ['state'],
       async profile(profile) {
-        console.log('profile', profile)
+        // console.log('profile', profile)
         return {
           id: profile.sub,
           email: profile.email
@@ -93,7 +93,7 @@ export default NextAuth({
     // async signIn({ user, account, profile, email, credentials }) { return true },
     // This function is called first to determine if a user is allowed to sign in.
     async signIn({ profile }) {
-      console.log('signIn-profile', profile)
+      // console.log('signIn-profile', profile)
       if (profile) {
         return true
       } else {
@@ -108,7 +108,7 @@ export default NextAuth({
     // The access token is extracted from the OAuth provider's response,
     // and stored in the token object.
     jwt({ token, account }) {
-      console.log('jwt-token', token, 'jwt-account', account)
+      // console.log('jwt-token', token, 'jwt-account', account)
       // add accessToken to token
       if (account) {
         token.accessToken = account.access_token
@@ -120,14 +120,14 @@ export default NextAuth({
     // The access token that is extracted in the jwt callback function,
     // is stored in the session object.
     async session({ session, token, user }) {
-      console.log(
-        'session-session',
-        session,
-        'session-token',
-        token,
-        'session-user',
-        user
-      )
+      // console.log(
+      //   'session-session',
+      //   session,
+      //   'session-token',
+      //   token,
+      //   'session-user',
+      //   user
+      // )
       session.accessToken = token.accessToken
       return session
     },
