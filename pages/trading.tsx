@@ -10,7 +10,6 @@ const Trading: NextPage = () => {
   const router = useRouter()
   const { locale } = router
   const translate = locale === 'en' ? en : zh
-
   return (
     <div className={styles.container}>
       <HeadComponent title="BLD PowerTrade - Trading" />
