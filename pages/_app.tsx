@@ -27,7 +27,6 @@ function MyApp({
       try {
         const token = await firebaseCloudMessaging.init()
         if (token) {
-          console.log('token', token)
         }
       } catch (error) {
         console.log(error)

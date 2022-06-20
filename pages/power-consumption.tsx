@@ -3,25 +3,22 @@ import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 import {
   Accordion,
   AccordionButton,
-  AccordionIcon,
   AccordionItem,
   AccordionPanel,
   Box,
   Heading,
   ListItem,
-  Spinner,
   UnorderedList
 } from '@chakra-ui/react'
 import * as grpcWeb from 'grpc-web'
-import type { GetServerSideProps, NextPage } from 'next'
+import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
-import router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 
 import HeadComponent from '../components/head'
 import { PowerUsageServiceClient } from '../grpc/powertrade/powerusage/v1alpha/Powerusage_serviceServiceClientPb'
 import {
-  Get60TicksPowerUsageRequest,
   GetPowerUsageResponse,
   GetPowerUsageRequest
 } from '../grpc/powertrade/powerusage/v1alpha/powerusage_pb'
@@ -56,27 +53,11 @@ const Consumption: NextPage = () => {
         request,
         { 'custom-header-1': 'value1' },
         (err: grpcWeb.RpcError, response: GetPowerUsageResponse) => {
-          // console.log(err)
-          // console.log(response.toObject())
           setPowerUsage(response.toObject())
-          console.log(powerUsage?.metersList)
         }
       )
     }, 1000)
     return () => clearInterval(apiCall)
-
-    // call.on('status', (status: grpcWeb.Status) => {
-    //   // console.log(status)
-    // })
-
-    // var get60TicksPowerUsageRequest = new Get60TicksPowerUsageRequest()
-    // const streamCall = powerUsageService.get60TicksPowerUsage(get60TicksPowerUsageRequest, {});
-    // streamCall.on('data', (resp: Get60TicksPowerUsageRequest) => {
-    //   console.log(resp);
-    // });
-    // streamCall.on('end', () => {
-    //   console.log("It's the end");
-    // });
   }, [powerUsage])
 
   return (
@@ -84,25 +65,9 @@ const Consumption: NextPage = () => {
       <HeadComponent title="BLD PowerTrade - Power Consumption" />
       <main
         className={styles.main}
-        style={{ marginTop: '40px', justifyContent: 'start' }}
+        style={{ marginTop: '2.5rem', justifyContent: 'start' }}
       >
-        <Heading style={{ marginBottom: '20px' }}>Meters</Heading>
-
-        {/* {powerUsage?.metersList.map((meter: any) => {
-          return (
-            <>
-              {meter?.channelsList.map((channel: any) => {
-                return (
-                  <>
-                    {channel?.devicesList.map((device: any, i: any) => {
-                      return <LineChart key={i} meterWatt={meter?.watt} />
-                    })}
-                  </>
-                )
-              })}
-            </>
-          )
-        })} */}
+        <Heading style={{ marginBottom: '1.25rem' }}>Meters</Heading>
         {powerUsage?.metersList.map((meter: any, i: any) => {
           return (
             <Accordion allowMultiple width={'100%'} key={i}>
@@ -115,14 +80,14 @@ const Consumption: NextPage = () => {
                           {i + 1} - {meter?.id}
                         </Box>
                         {isExpanded ? (
-                          <MinusIcon fontSize="12px" />
+                          <MinusIcon fontSize="0.75rem" />
                         ) : (
-                          <AddIcon fontSize="12px" />
+                          <AddIcon fontSize="0.75rem" />
                         )}
                       </AccordionButton>
                     </h2>
                     <AccordionPanel pb={4}>
-                      <UnorderedList style={{ marginBottom: '20px' }}>
+                      <UnorderedList style={{ marginBottom: '1.25rem' }}>
                         <ListItem>
                           Frequency: {Math.round(meter?.frequency)}
                         </ListItem>
@@ -150,15 +115,15 @@ const Consumption: NextPage = () => {
                                       {channel?.number} - {channel?.alias}
                                     </Box>
                                     {isExpanded ? (
-                                      <MinusIcon fontSize="12px" />
+                                      <MinusIcon fontSize="0.75rem" />
                                     ) : (
-                                      <AddIcon fontSize="12px" />
+                                      <AddIcon fontSize="0.75rem" />
                                     )}
                                   </AccordionButton>
                                 </h2>
                                 <AccordionPanel pb={4} key={i}>
                                   <UnorderedList
-                                    style={{ marginBottom: '20px' }}
+                                    style={{ marginBottom: '1.25rem' }}
                                   >
                                     <ListItem>
                                       Watt: {Math.round(channel?.watt)}
@@ -183,9 +148,9 @@ const Consumption: NextPage = () => {
                                                       {device?.id}
                                                     </Box>
                                                     {isExpanded ? (
-                                                      <MinusIcon fontSize="12px" />
+                                                      <MinusIcon fontSize="0.75rem" />
                                                     ) : (
-                                                      <AddIcon fontSize="12px" />
+                                                      <AddIcon fontSize="0.75rem" />
                                                     )}
                                                   </AccordionButton>
                                                 </h2>
@@ -221,14 +186,5 @@ const Consumption: NextPage = () => {
     </div>
   )
 }
-
-// This gets called on every request
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   return {
-//     props: {
-//       ory_hydra_public_url: process.env.ORY_HYDRA_PUBLIC_URL
-//     }
-//   }
-// }
 
 export default Consumption

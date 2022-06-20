@@ -43,9 +43,13 @@ const firebaseCloudMessaging = {
             // save the token in your database
             localforage.setItem('fcm_token', currentToken)
           } else {
+            // Show permission request UI
+            // ...
           }
         })
-        .catch((err) => {})
+        .catch((err) => {
+          console.log(err)
+        })
     } catch (error) {
       console.error(error)
     }
