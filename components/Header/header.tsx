@@ -7,7 +7,8 @@ import {
   Menu,
   MenuButton,
   MenuItem,
-  MenuList
+  MenuList,
+  Select
 } from '@chakra-ui/react'
 import { useSession, signOut, signIn } from 'next-auth/react'
 import Image from 'next/image'
@@ -42,47 +43,59 @@ export default function Header() {
         <div>
           <Link href="/">
             <a>
-              <Image
-                src={logo}
-                alt="BLD Energy"
-                width={172}
-                height={68}
-                // blurDataURL="data:..." automatically provided
-                // placeholder="blur" // Optional blur-up while loading
-              />
+              <Image src={logo} alt="BLD Energy" width={172} height={68} />
             </a>
           </Link>
         </div>
-        <div>
-          <Menu>
-            <MenuButton>
-              <Avatar
-                size="md"
-                bg="gray"
-                name={session?.user.email}
-                src={session?.profile?.picture}
-              />
-            </MenuButton>
+        <div style={{ display: 'flex', gap: '0.75rem' }}>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center'
+            }}
+          >
+            <Select
+              color={'black'}
+              onChange={changeLanguage}
+              defaultValue={locale}
+              variant="unstyled"
+            >
+              <option value="en">EN</option>
+              <option value="zh">ZH</option>
+            </Select>
+          </div>
+          <div>
+            <Menu>
+              <MenuButton>
+                <Avatar
+                  size="md"
+                  bg="gray"
+                  name={session?.user.email}
+                  src={session?.profile?.picture}
+                />
+              </MenuButton>
 
-            <MenuList color={'black'}>
-              <MenuItem
-                onClick={() => {
-                  window.location.replace('https://127.0.0.1:4455/')
-                }}
-              >
-                Account
-              </MenuItem>
-              <MenuItem
-                onClick={() => {
-                  window.location.replace(
-                    'https://127.0.0.1:4455/logout?redirect_url=https://127.0.0.1:4456/'
-                  )
-                }}
-              >
-                Logout
-              </MenuItem>
-            </MenuList>
-          </Menu>
+              <MenuList color={'black'}>
+                <MenuItem
+                  onClick={() => {
+                    window.location.replace('https://127.0.0.1:4455/')
+                  }}
+                >
+                  {translate.account.title}
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    window.location.replace(
+                      'https://127.0.0.1:4455/logout?redirect_url=https://127.0.0.1:4456/'
+                    )
+                  }}
+                >
+                  {translate.account.logout}
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </div>
         </div>
       </div>
     </nav>

@@ -21,12 +21,6 @@ export default function Header() {
 
   const { locale } = router
   const translate: any = locale === 'en' ? en : zh
-  // console.log(translate['home']);
-
-  const changeLanguage = (e: any) => {
-    const locale = e.target.value
-    router.push(router.pathname, router.asPath, { locale })
-  }
 
   return (
     <nav className={styles.container}>

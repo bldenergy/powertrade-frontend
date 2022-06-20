@@ -67,7 +67,9 @@ const Consumption: NextPage = () => {
         className={styles.main}
         style={{ marginTop: '2.5rem', justifyContent: 'start' }}
       >
-        <Heading style={{ marginBottom: '1.25rem' }}>Meters</Heading>
+        <Heading style={{ marginBottom: '1.25rem' }}>
+          {translate.powerconsumption.subTitle}
+        </Heading>
         {powerUsage?.metersList.map((meter: any, i: any) => {
           return (
             <Accordion allowMultiple width={'100%'} key={i}>

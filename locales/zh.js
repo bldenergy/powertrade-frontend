@@ -17,6 +17,10 @@ export default {
   },
   powerconsumption: {
     title: '能量消耗',
-    subTitle: '可視化您的數據'
+    subTitle: '儀表'
+  },
+  account: {
+    title: '帳號',
+    logout: '登出'
   }
 }
