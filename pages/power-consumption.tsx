@@ -65,9 +65,9 @@ const Consumption: NextPage = () => {
       <HeadComponent title="BLD PowerTrade - Power Consumption" />
       <main
         className={styles.main}
-        style={{ marginTop: '40px', justifyContent: 'start' }}
+        style={{ marginTop: '2.5rem', justifyContent: 'start' }}
       >
-        <Heading style={{ marginBottom: '20px' }}>Meters</Heading>
+        <Heading style={{ marginBottom: '1.25rem' }}>Meters</Heading>
         {powerUsage?.metersList.map((meter: any, i: any) => {
           return (
             <Accordion allowMultiple width={'100%'} key={i}>
@@ -80,14 +80,14 @@ const Consumption: NextPage = () => {
                           {i + 1} - {meter?.id}
                         </Box>
                         {isExpanded ? (
-                          <MinusIcon fontSize="12px" />
+                          <MinusIcon fontSize="0.75rem" />
                         ) : (
-                          <AddIcon fontSize="12px" />
+                          <AddIcon fontSize="0.75rem" />
                         )}
                       </AccordionButton>
                     </h2>
                     <AccordionPanel pb={4}>
-                      <UnorderedList style={{ marginBottom: '20px' }}>
+                      <UnorderedList style={{ marginBottom: '1.25rem' }}>
                         <ListItem>
                           Frequency: {Math.round(meter?.frequency)}
                         </ListItem>
@@ -115,15 +115,15 @@ const Consumption: NextPage = () => {
                                       {channel?.number} - {channel?.alias}
                                     </Box>
                                     {isExpanded ? (
-                                      <MinusIcon fontSize="12px" />
+                                      <MinusIcon fontSize="0.75rem" />
                                     ) : (
-                                      <AddIcon fontSize="12px" />
+                                      <AddIcon fontSize="0.75rem" />
                                     )}
                                   </AccordionButton>
                                 </h2>
                                 <AccordionPanel pb={4} key={i}>
                                   <UnorderedList
-                                    style={{ marginBottom: '20px' }}
+                                    style={{ marginBottom: '1.25rem' }}
                                   >
                                     <ListItem>
                                       Watt: {Math.round(channel?.watt)}
@@ -148,9 +148,9 @@ const Consumption: NextPage = () => {
                                                       {device?.id}
                                                     </Box>
                                                     {isExpanded ? (
-                                                      <MinusIcon fontSize="12px" />
+                                                      <MinusIcon fontSize="0.75rem" />
                                                     ) : (
-                                                      <AddIcon fontSize="12px" />
+                                                      <AddIcon fontSize="0.75rem" />
                                                     )}
                                                   </AccordionButton>
                                                 </h2>
