@@ -1,12 +1,13 @@
 import styles from '../styles/shared.module.css'
 import type { NextPage } from 'next'
-import router from 'next/router'
+import router, { useRouter } from 'next/router'
 
 import HeadComponent from '../components/head'
 import en from '../locales/en'
 import zh from '../locales/zh'
 
 const Trading: NextPage = () => {
+  const router = useRouter()
   const { locale } = router
   const translate = locale === 'en' ? en : zh
 

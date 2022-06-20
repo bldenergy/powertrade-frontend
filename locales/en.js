@@ -17,6 +17,10 @@ export default {
   },
   powerconsumption: {
     title: 'Power Consumption',
-    subTitle: 'Visualize your data'
+    subTitle: 'Meters'
+  },
+  account: {
+    title: 'Account',
+    logout: 'Logout'
   }
 }
