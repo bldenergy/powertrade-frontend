@@ -1,12 +1,15 @@
 import styles from '../styles/shared.module.css'
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 
 import HeadComponent from '../components/head'
 import zh from '../locales/zh'
+import en from '../locales/zh'
 
 const Home: NextPage = () => {
-  // const { locale } = router
-  const translate = zh
+  const router = useRouter()
+  const { locale } = router
+  const translate = locale === 'en' ? en : zh
 
   return (
     <div className={styles.container}>
