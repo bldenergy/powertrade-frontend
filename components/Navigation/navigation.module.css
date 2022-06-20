@@ -11,7 +11,7 @@
 .container .links {
   display: flex;
   -webkit-box-pack: justify;
-  justify-content: space-between;
+  justify-content: space-evenly;
   list-style: none;
   margin: 0 auto;
   max-width: 56.25rem;

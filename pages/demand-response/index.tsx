@@ -1,10 +1,10 @@
-import styles from '../styles/shared.module.css'
+import styles from '../../styles/shared.module.css'
 import type { NextPage } from 'next'
 import router, { useRouter } from 'next/router'
 
-import HeadComponent from '../components/head'
-import en from '../locales/en'
-import zh from '../locales/zh'
+import HeadComponent from '../../components/head'
+import en from '../../locales/en'
+import zh from '../../locales/zh'
 
 const Trading: NextPage = () => {
   const router = useRouter()
@@ -12,11 +12,13 @@ const Trading: NextPage = () => {
   const translate = locale === 'en' ? en : zh
   return (
     <div className={styles.container}>
-      <HeadComponent title="BLD PowerTrade - Trading" />
+      <HeadComponent title="BLD PowerTrade - Demand Response" />
       <main className={styles.main}>
         <>
-          <h1 className={styles.title}>{translate.trading.title}</h1>
-          <p className={styles.description}>{translate.trading.subTitle}</p>
+          <h1 className={styles.title}>{translate.demandresponse.title}</h1>
+          <p className={styles.description}>
+            {translate.demandresponse.subTitle}
+          </p>
         </>
       </main>
     </div>

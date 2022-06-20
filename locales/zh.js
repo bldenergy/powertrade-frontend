@@ -3,12 +3,12 @@ export default {
     title: '首頁',
     subTitle: '存電然後賺錢'
   },
-  scheduling: {
-    title: '表格',
-    subTitle: '選最適合你的時間'
+  reward: {
+    title: '执行 成果',
+    subTitle: '得到你的獎賞'
   },
-  trading: {
-    title: '貿易',
+  demandresponse: {
+    title: '需量反應計畫',
     subTitle: '節省能源並獲得獎勵'
   },
   account: {

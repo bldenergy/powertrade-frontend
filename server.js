@@ -6,8 +6,8 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 const httpsOptions = {
-  key: fs.readFileSync('./127.0.0.1-key.pem'),
-  cert: fs.readFileSync('./127.0.0.1.pem')
+  key: fs.readFileSync('/Users/claudevernetmichel/127.0.0.1-key.pem'),
+  cert: fs.readFileSync('/Users/claudevernetmichel/127.0.0.1.pem')
 }
 app.prepare().then(() => {
   createServer(httpsOptions, (req, res) => {
