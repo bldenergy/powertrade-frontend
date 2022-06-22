@@ -3,12 +3,12 @@ export default {
     title: 'Home',
     subTitle: 'Save Energy and Get Paid'
   },
-  scheduling: {
-    title: 'Scheduling',
-    subTitle: 'Choose the best Time that suits you'
+  reward: {
+    title: 'Reward',
+    subTitle: 'Get your rewards'
   },
-  trading: {
-    title: 'Trading',
+  demandresponse: {
+    title: 'Demand Response Plan',
     subTitle: 'Save Energy and get Rewarded'
   },
   account: {

@@ -1,6 +1,6 @@
 .container {
-  background: rgb(255, 255, 255);
-  box-shadow: rgb(26 33 69 / 10%) 0 0.25rem 0.25rem 0;
+  background: var(--color-header-background);
+  box-shadow: var(--box-shadow-header);
   position: sticky;
   top: 0;
   width: 100%;
@@ -11,7 +11,7 @@
 .content {
   -webkit-box-align: center;
   align-items: center;
-  color: rgb(255, 255, 255);
+  /* color: rgb(255, 255, 255); */
   display: flex;
   font-weight: 700;
   -webkit-box-pack: justify;
@@ -21,4 +21,8 @@
   max-width: 56.25rem;
   padding: 0 0.75rem;
   position: relative;
+}
+
+.optionColor {
+  color: var(--color-primary);
 }

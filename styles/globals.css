@@ -11,27 +11,40 @@
   --shadow: rgb(26 33 69 / 10%) 0px 4px 4px 0px;
 } */
 
-/* [data-theme='dark'] {
-  --color-primary-accent: #00ff4c;
-  --color-primary: #fff;
-  --color-button: #00ff4c;
-  --color-paragraph: #8a8a8a;
-  --color-button-text: rgb(0, 0, 0);
-  --color-background: #000000;
-  --color-anchor: #00ff4c;
-  --shadow: rgb(255 255 255 / 14%) 0px 4px 4px 0px;
-} */
+[data-theme='light'] {
+  --color-primary: #000; /* csslint allow: known-properties */
+  --color-background: #f7fafc; /* csslint allow: known-properties */
+  --color-header-background: #fff; /* csslint allow: known-properties */
+  --box-shadow-header: rgb(26 33 69 / 10%) 0 0.25rem 0.25rem 0; /* csslint allow: known-properties */
+  --box-shadow-navigation: rgb(26 33 69 / 10%) 0px -0.25rem 0.25rem; /* csslint allow: known-properties */
+  --link-active-background: #19213b; /* csslint allow: known-properties */
+  --link-active: #fff; /* csslint allow: known-properties */
+}
+
+[data-theme='dark'] {
+  --color-primary: #fff; /* csslint allow: known-properties */
+  --color-background: rgb(26, 37, 56); /* csslint allow: known-properties */
+  --color-header-background: rgb(
+    26 32 44
+  ); /* csslint allow: known-properties */
+  --box-shadow-header: rgb(36 37 45) -15px 0.3rem 0.25rem 0; /* csslint allow: known-properties */
+  --box-shadow-navigation: rgb(36 37 45) 4px -0.5rem 0.25rem; /* csslint allow: known-properties */
+  --link-active-background: #fff; /* csslint allow: known-properties */
+  --link-active: #000; /* csslint allow: known-properties */
+}
 
 body {
-  /* background-color: var(--color-background); */
-  color: var(--color-primary);
+  background-color: var(
+    --color-background
+  ) !important; /* csslint allow: known-properties */
+  color: var(--color-primary); /* csslint allow: known-properties */
   font-size: 1rem;
   font-family: 'Poppins', sans-serif;
 }
 
 html,
 body {
-  background-color: #f7fafc !important;
+  /* background-color: #f7fafc !important; */
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   height: 100%;

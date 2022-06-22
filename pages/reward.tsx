@@ -7,7 +7,7 @@ import HeadComponent from '../components/head'
 import en from '../locales/en'
 import zh from '../locales/zh'
 
-const Scheduling: NextPage = () => {
+const Reward: NextPage = () => {
   const router = useRouter()
   const { locale } = router
   const translate = locale === 'en' ? en : zh
@@ -16,12 +16,12 @@ const Scheduling: NextPage = () => {
       <HeadComponent title="BLD PowerTrade - Scheduling..." />
       <main className={styles.main}>
         <>
-          <h1 className={styles.title}>{translate.scheduling.title}</h1>
-          <p className={styles.description}>{translate.scheduling.subTitle}</p>
+          <h1 className={styles.title}>{translate.reward.title}</h1>
+          <p className={styles.description}>{translate.reward.subTitle}</p>
         </>
       </main>
     </div>
   )
 }
 
-export default Scheduling
+export default Reward
