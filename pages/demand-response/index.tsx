@@ -12,7 +12,9 @@ const Trading: NextPage = () => {
   const translate = locale === 'en' ? en : zh
   return (
     <div className={styles.container}>
-      <HeadComponent title="BLD PowerTrade - Demand Response" />
+      <HeadComponent
+        title={'BLD PowerTrade - ' + translate.demandresponse.title}
+      />
       <main className={styles.main}>
         <>
           <h1 className={styles.title}>{translate.demandresponse.title}</h1>

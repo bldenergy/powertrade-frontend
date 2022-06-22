@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Layout from '../components/Layout/layout'
 import { firebaseCloudMessaging } from '../firebase/firebase'
 import Auth from '../middleware/Auth'
+import theme from '../theme'
 
 function MyApp({
   Component,
@@ -36,7 +37,7 @@ function MyApp({
 
   return (
     <SessionProvider session={session}>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <Layout>
           {requireAuth ? (
             <Auth>

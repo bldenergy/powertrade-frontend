@@ -12,10 +12,6 @@ repos:
       - id: detect-private-key
       - id: no-commit-to-branch
         args: [--branch=main, --branch=development]
-  - repo: https://github.com/pre-commit/mirrors-csslint
-    rev: v1.0.5 # Use the sha / tag you want to point at
-    hooks:
-      - id: csslint
   - repo: https://github.com/pre-commit/mirrors-scss-lint
     rev: v0.59.0 # Use the sha / tag you want to point at
     hooks:

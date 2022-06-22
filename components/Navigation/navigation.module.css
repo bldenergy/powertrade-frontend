@@ -1,11 +1,12 @@
 .container {
   height: 5rem;
-  background: rgb(255, 255, 255);
+  /* background: rgb(255, 255, 255); */
   bottom: 0;
-  box-shadow: rgb(26 33 69 / 10%) 0px -0.25rem 0.25rem;
+  box-shadow: var(--box-shadow-navigation);
   position: fixed;
   width: 100%;
   z-index: 2;
+  background: var(--color-header-background);
 }
 
 .container .links {
@@ -38,15 +39,15 @@
 }
 
 .active {
-  background: #19213b;
+  background: var(--link-active-background);
 }
 
 .active span a {
-  color: #ffffff !important;
+  color: var(--link-active);
 }
 
 .inactive span a {
-  color: var(--color-primary);
+  /* color: var(--color-primary); */
 }
 
 .switch {
@@ -69,7 +70,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  /* background-color: #ccc; */
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -81,13 +82,13 @@
   width: 1.625rem;
   left: 0.25rem;
   bottom: 0.25rem;
-  background-color: white;
+  /* background-color: white; */
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #000000;
+  /* background-color: #000000; */
   border: 0.063rem solid;
 }
 
@@ -119,20 +120,4 @@ input:checked + .slider:before {
   border-radius: 1.25rem;
   padding: 0.438rem;
   border: 0.063rem solid #ccc;
-}
-
-.authButton {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  border-radius: 1.25rem;
-  border-color: #ffffff;
-  color: #ffffff;
-  background-color: #088be0;
-  margin: 0.625rem;
-  padding: 0.625rem;
-  min-width: 5rem;
-  cursor: pointer;
-  outline: none;
-  border: none;
 }
