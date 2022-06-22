@@ -5,6 +5,5 @@
   max-width: 56.25rem;
   overflow-x: hidden;
   position: relative;
-  background: rgb(255, 255, 255);
-  padding-bottom: 0.5rem;
+  background: var(--color-header-background);
 }

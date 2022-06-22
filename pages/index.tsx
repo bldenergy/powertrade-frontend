@@ -11,6 +11,8 @@ const Home: NextPage = () => {
   const { locale } = router
   const translate = locale === 'en' ? en : zh
 
+  console.log(translate)
+
   return (
     <div className={styles.container}>
       <HeadComponent title={translate.home.title} />
