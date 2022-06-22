@@ -11,13 +11,14 @@ import zh from '../../locales/zh'
 
 const path = [
   {
-    uid: 41,
+    uid: 11,
     name: 'Demand Response',
     id: 1,
     path: '/demand-response'
   },
-  { uid: 31, name: 'Reward', id: 3, path: '/reward' },
-  { uid: 21, name: 'Power Consumption', id: 2, path: '/power-consumption' }
+  { uid: 21, name: 'Reward', id: 2, path: '/reward' },
+  { uid: 31, name: 'Power Consumption', id: 3, path: '/power-consumption' },
+  { uid: 41, name: 'Settings', id: 4, path: '/settings' }
 ]
 
 export default function Header() {

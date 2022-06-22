@@ -22,5 +22,8 @@ export default {
   account: {
     title: '帳號',
     logout: '登出'
+  },
+  settings: {
+    title: '設定'
   }
 }
