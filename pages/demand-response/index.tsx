@@ -10,6 +10,8 @@ const Trading: NextPage = () => {
   const router = useRouter()
   const { locale } = router
   const translate = locale === 'en' ? en : zh
+
+  console.log(locale)
   return (
     <div className={styles.container}>
       <HeadComponent

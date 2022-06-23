@@ -1,4 +1,4 @@
-export default {
+const zh = {
   home: {
     title: '首頁',
     subTitle: '存電然後賺錢'
@@ -10,10 +10,6 @@ export default {
   demandresponse: {
     title: '需量反應計畫',
     subTitle: '節省能源並獲得獎勵'
-  },
-  account: {
-    title: '帳戶',
-    subTitle: '編輯您的個人信息'
   },
   powerconsumption: {
     title: '能量消耗',
@@ -27,3 +23,5 @@ export default {
     title: '設定'
   }
 }
+
+export default zh

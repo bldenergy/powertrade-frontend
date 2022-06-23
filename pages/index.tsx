@@ -3,15 +3,13 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
 import HeadComponent from '../components/head'
+import en from '../locales/en'
 import zh from '../locales/zh'
-import en from '../locales/zh'
 
 const Home: NextPage = () => {
   const router = useRouter()
   const { locale } = router
   const translate = locale === 'en' ? en : zh
-
-  console.log(translate)
 
   return (
     <div className={styles.container}>

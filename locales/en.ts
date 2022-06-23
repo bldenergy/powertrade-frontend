@@ -1,4 +1,4 @@
-export default {
+const en = {
   home: {
     title: 'Home',
     subTitle: 'Save Energy and Get Paid'
@@ -10,10 +10,6 @@ export default {
   demandresponse: {
     title: 'Demand Response Plan',
     subTitle: 'Save Energy and get Rewarded'
-  },
-  account: {
-    title: 'Account',
-    subTitle: 'Edit your personal info'
   },
   powerconsumption: {
     title: 'Power Consumption',
@@ -27,3 +23,5 @@ export default {
     title: 'Settings'
   }
 }
+
+export default en
