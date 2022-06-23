@@ -22,5 +22,8 @@ export default {
   account: {
     title: 'Account',
     logout: 'Logout'
+  },
+  settings: {
+    title: 'Settings'
   }
 }
