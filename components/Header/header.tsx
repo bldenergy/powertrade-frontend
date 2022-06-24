@@ -1,6 +1,9 @@
 import logo from '../../public/images/bld-energy-logo.webp'
+import logoWhite from '../../public/images/bld_logo.png'
 import styles from './header.module.css'
+import { IconButton } from '@chakra-ui/button'
 import { ChevronDownIcon } from '@chakra-ui/icons'
+import { MoonIcon, SunIcon } from '@chakra-ui/icons'
 import {
   Avatar,
   Button,
@@ -8,7 +11,8 @@ import {
   MenuButton,
   MenuItem,
   MenuList,
-  Select
+  Select,
+  useColorMode
 } from '@chakra-ui/react'
 import { useSession, signOut, signIn } from 'next-auth/react'
 import Image from 'next/image'
@@ -26,6 +30,7 @@ const path = [
 ]
 
 export default function Header() {
+  const { colorMode, toggleColorMode } = useColorMode()
   const { data: session }: any = useSession()
   const router = useRouter()
 
@@ -43,7 +48,12 @@ export default function Header() {
         <div>
           <Link href="/">
             <a>
-              <Image src={logo} alt="BLD Energy" width={172} height={68} />
+              <Image
+                src={colorMode === 'light' ? logo : logoWhite}
+                alt="BLD Energy"
+                width={colorMode === 'light' ? 172 : 150}
+                height={colorMode === 'light' ? 68 : 45}
+              />
             </a>
           </Link>
         </div>
@@ -56,7 +66,7 @@ export default function Header() {
             }}
           >
             <Select
-              color={'black'}
+              className={styles.optionColor}
               onChange={changeLanguage}
               defaultValue={locale}
               variant="unstyled"
@@ -65,6 +75,18 @@ export default function Header() {
               <option value="zh">ZH</option>
             </Select>
           </div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center'
+            }}
+          >
+            <IconButton aria-label="Toggle Mode" onClick={toggleColorMode}>
+              {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+            </IconButton>
+          </div>
+
           <div>
             <Menu>
               <MenuButton>
@@ -76,7 +98,7 @@ export default function Header() {
                 />
               </MenuButton>
 
-              <MenuList color={'black'}>
+              <MenuList className={styles.optionColor}>
                 <MenuItem
                   onClick={() => {
                     window.location.replace('https://127.0.0.1:4455/')

@@ -1,19 +1,15 @@
-export default {
+const en = {
   home: {
     title: 'Home',
     subTitle: 'Save Energy and Get Paid'
   },
-  scheduling: {
-    title: 'Scheduling',
-    subTitle: 'Choose the best Time that suits you'
+  reward: {
+    title: 'Reward',
+    subTitle: 'Get your rewards'
   },
-  trading: {
-    title: 'Trading',
+  demandresponse: {
+    title: 'Demand Response Plan',
     subTitle: 'Save Energy and get Rewarded'
-  },
-  account: {
-    title: 'Account',
-    subTitle: 'Edit your personal info'
   },
   powerconsumption: {
     title: 'Power Consumption',
@@ -22,5 +18,10 @@ export default {
   account: {
     title: 'Account',
     logout: 'Logout'
+  },
+  settings: {
+    title: 'Settings'
   }
 }
+
+export default en

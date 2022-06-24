@@ -10,13 +10,18 @@ import en from '../../locales/en'
 import zh from '../../locales/zh'
 
 const path = [
-  { uid: 21, name: 'Power Consumption', id: 2, path: '/power-consumption' },
-  { uid: 31, name: 'Scheduling', id: 2, path: '/scheduling' },
-  { uid: 41, name: 'Trading', id: 3, path: '/trading' }
+  {
+    uid: 11,
+    name: 'Demand Response',
+    id: 1,
+    path: '/demand-response'
+  },
+  { uid: 21, name: 'Reward', id: 2, path: '/reward' },
+  { uid: 31, name: 'Power Consumption', id: 3, path: '/power-consumption' },
+  { uid: 41, name: 'Settings', id: 4, path: '/settings' }
 ]
 
 export default function Header() {
-  const { data: session } = useSession()
   const router = useRouter()
 
   const { locale } = router
