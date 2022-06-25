@@ -322,38 +322,80 @@ export namespace ListHistoricalPowerUsageResponse {
   }
 }
 
-export class GetStreamPowerUsageRequest extends jspb.Message {
+export class GetRealtimePowerUsageRequest extends jspb.Message {
+  getName(): string;
+  setName(value: string): GetRealtimePowerUsageRequest;
+
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetStreamPowerUsageRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetStreamPowerUsageRequest): GetStreamPowerUsageRequest.AsObject;
-  static serializeBinaryToWriter(message: GetStreamPowerUsageRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetStreamPowerUsageRequest;
-  static deserializeBinaryFromReader(message: GetStreamPowerUsageRequest, reader: jspb.BinaryReader): GetStreamPowerUsageRequest;
+  toObject(includeInstance?: boolean): GetRealtimePowerUsageRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetRealtimePowerUsageRequest): GetRealtimePowerUsageRequest.AsObject;
+  static serializeBinaryToWriter(message: GetRealtimePowerUsageRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetRealtimePowerUsageRequest;
+  static deserializeBinaryFromReader(message: GetRealtimePowerUsageRequest, reader: jspb.BinaryReader): GetRealtimePowerUsageRequest;
 }
 
-export namespace GetStreamPowerUsageRequest {
+export namespace GetRealtimePowerUsageRequest {
+  export type AsObject = {
+    name: string,
+  }
+}
+
+export class GetRealtimePowerUsageResponse extends jspb.Message {
+  getSequenceNumber(): number;
+  setSequenceNumber(value: number): GetRealtimePowerUsageResponse;
+
+  getMeter(): MeterUsage | undefined;
+  setMeter(value?: MeterUsage): GetRealtimePowerUsageResponse;
+  hasMeter(): boolean;
+  clearMeter(): GetRealtimePowerUsageResponse;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetRealtimePowerUsageResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetRealtimePowerUsageResponse): GetRealtimePowerUsageResponse.AsObject;
+  static serializeBinaryToWriter(message: GetRealtimePowerUsageResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetRealtimePowerUsageResponse;
+  static deserializeBinaryFromReader(message: GetRealtimePowerUsageResponse, reader: jspb.BinaryReader): GetRealtimePowerUsageResponse;
+}
+
+export namespace GetRealtimePowerUsageResponse {
+  export type AsObject = {
+    sequenceNumber: number,
+    meter?: MeterUsage.AsObject,
+  }
+}
+
+export class ListRealtimePowerUsageRequest extends jspb.Message {
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ListRealtimePowerUsageRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: ListRealtimePowerUsageRequest): ListRealtimePowerUsageRequest.AsObject;
+  static serializeBinaryToWriter(message: ListRealtimePowerUsageRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ListRealtimePowerUsageRequest;
+  static deserializeBinaryFromReader(message: ListRealtimePowerUsageRequest, reader: jspb.BinaryReader): ListRealtimePowerUsageRequest;
+}
+
+export namespace ListRealtimePowerUsageRequest {
   export type AsObject = {
   }
 }
 
-export class GetStreamPowerUsageResponse extends jspb.Message {
+export class ListRealtimePowerUsageResponse extends jspb.Message {
   getSequenceNumber(): number;
-  setSequenceNumber(value: number): GetStreamPowerUsageResponse;
+  setSequenceNumber(value: number): ListRealtimePowerUsageResponse;
 
   getMetersList(): Array<MeterUsage>;
-  setMetersList(value: Array<MeterUsage>): GetStreamPowerUsageResponse;
-  clearMetersList(): GetStreamPowerUsageResponse;
+  setMetersList(value: Array<MeterUsage>): ListRealtimePowerUsageResponse;
+  clearMetersList(): ListRealtimePowerUsageResponse;
   addMeters(value?: MeterUsage, index?: number): MeterUsage;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetStreamPowerUsageResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: GetStreamPowerUsageResponse): GetStreamPowerUsageResponse.AsObject;
-  static serializeBinaryToWriter(message: GetStreamPowerUsageResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetStreamPowerUsageResponse;
-  static deserializeBinaryFromReader(message: GetStreamPowerUsageResponse, reader: jspb.BinaryReader): GetStreamPowerUsageResponse;
+  toObject(includeInstance?: boolean): ListRealtimePowerUsageResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: ListRealtimePowerUsageResponse): ListRealtimePowerUsageResponse.AsObject;
+  static serializeBinaryToWriter(message: ListRealtimePowerUsageResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ListRealtimePowerUsageResponse;
+  static deserializeBinaryFromReader(message: ListRealtimePowerUsageResponse, reader: jspb.BinaryReader): ListRealtimePowerUsageResponse;
 }
 
-export namespace GetStreamPowerUsageResponse {
+export namespace ListRealtimePowerUsageResponse {
   export type AsObject = {
     sequenceNumber: number,
     metersList: Array<MeterUsage.AsObject>,

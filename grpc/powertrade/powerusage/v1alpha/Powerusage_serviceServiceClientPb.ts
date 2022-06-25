@@ -208,26 +208,48 @@ export class PowerUsageServiceClient {
     this.methodDescriptorListHistoricalPowerUsage);
   }
 
-  methodDescriptorGetStreamPowerUsage = new grpcWeb.MethodDescriptor(
-    '/powertrade.powerusage.v1alpha.PowerUsageService/GetStreamPowerUsage',
+  methodDescriptorGetRealtimePowerUsage = new grpcWeb.MethodDescriptor(
+    '/powertrade.powerusage.v1alpha.PowerUsageService/GetRealtimePowerUsage',
     grpcWeb.MethodType.SERVER_STREAMING,
-    powertrade_powerusage_v1alpha_powerusage_pb.GetStreamPowerUsageRequest,
-    powertrade_powerusage_v1alpha_powerusage_pb.GetStreamPowerUsageResponse,
-    (request: powertrade_powerusage_v1alpha_powerusage_pb.GetStreamPowerUsageRequest) => {
+    powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimePowerUsageRequest,
+    powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimePowerUsageResponse,
+    (request: powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimePowerUsageRequest) => {
       return request.serializeBinary();
     },
-    powertrade_powerusage_v1alpha_powerusage_pb.GetStreamPowerUsageResponse.deserializeBinary
+    powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimePowerUsageResponse.deserializeBinary
   );
 
-  getStreamPowerUsage(
-    request: powertrade_powerusage_v1alpha_powerusage_pb.GetStreamPowerUsageRequest,
-    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.GetStreamPowerUsageResponse> {
+  getRealtimePowerUsage(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimePowerUsageRequest,
+    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimePowerUsageResponse> {
     return this.client_.serverStreaming(
       this.hostname_ +
-        '/powertrade.powerusage.v1alpha.PowerUsageService/GetStreamPowerUsage',
+        '/powertrade.powerusage.v1alpha.PowerUsageService/GetRealtimePowerUsage',
       request,
       metadata || {},
-      this.methodDescriptorGetStreamPowerUsage);
+      this.methodDescriptorGetRealtimePowerUsage);
+  }
+
+  methodDescriptorListRealtimePowerUsage = new grpcWeb.MethodDescriptor(
+    '/powertrade.powerusage.v1alpha.PowerUsageService/ListRealtimePowerUsage',
+    grpcWeb.MethodType.SERVER_STREAMING,
+    powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimePowerUsageRequest,
+    powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimePowerUsageResponse,
+    (request: powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimePowerUsageRequest) => {
+      return request.serializeBinary();
+    },
+    powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimePowerUsageResponse.deserializeBinary
+  );
+
+  listRealtimePowerUsage(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimePowerUsageRequest,
+    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimePowerUsageResponse> {
+    return this.client_.serverStreaming(
+      this.hostname_ +
+        '/powertrade.powerusage.v1alpha.PowerUsageService/ListRealtimePowerUsage',
+      request,
+      metadata || {},
+      this.methodDescriptorListRealtimePowerUsage);
   }
 
 }
