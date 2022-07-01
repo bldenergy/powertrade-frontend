@@ -122,134 +122,220 @@ export class PowerUsageServiceClient {
     this.methodDescriptorReadiness);
   }
 
-  methodDescriptorGetHistoricalPowerUsage = new grpcWeb.MethodDescriptor(
-    '/powertrade.powerusage.v1alpha.PowerUsageService/GetHistoricalPowerUsage',
+  methodDescriptorGetHistorical = new grpcWeb.MethodDescriptor(
+    '/powertrade.powerusage.v1alpha.PowerUsageService/GetHistorical',
     grpcWeb.MethodType.UNARY,
-    powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalPowerUsageRequest,
-    powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalPowerUsageResponse,
-    (request: powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalPowerUsageRequest) => {
+    powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalRequest,
+    powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalResponse,
+    (request: powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalRequest) => {
       return request.serializeBinary();
     },
-    powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalPowerUsageResponse.deserializeBinary
+    powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalResponse.deserializeBinary
   );
 
-  getHistoricalPowerUsage(
-    request: powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalPowerUsageRequest,
-    metadata: grpcWeb.Metadata | null): Promise<powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalPowerUsageResponse>;
+  getHistorical(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalRequest,
+    metadata: grpcWeb.Metadata | null): Promise<powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalResponse>;
 
-  getHistoricalPowerUsage(
-    request: powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalPowerUsageRequest,
+  getHistorical(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.RpcError,
-               response: powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalPowerUsageResponse) => void): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalPowerUsageResponse>;
+               response: powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalResponse) => void): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalResponse>;
 
-  getHistoricalPowerUsage(
-    request: powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalPowerUsageRequest,
+  getHistorical(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.RpcError,
-               response: powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalPowerUsageResponse) => void) {
+               response: powertrade_powerusage_v1alpha_powerusage_pb.GetHistoricalResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/powertrade.powerusage.v1alpha.PowerUsageService/GetHistoricalPowerUsage',
+          '/powertrade.powerusage.v1alpha.PowerUsageService/GetHistorical',
         request,
         metadata || {},
-        this.methodDescriptorGetHistoricalPowerUsage,
+        this.methodDescriptorGetHistorical,
         callback);
     }
     return this.client_.unaryCall(
     this.hostname_ +
-      '/powertrade.powerusage.v1alpha.PowerUsageService/GetHistoricalPowerUsage',
+      '/powertrade.powerusage.v1alpha.PowerUsageService/GetHistorical',
     request,
     metadata || {},
-    this.methodDescriptorGetHistoricalPowerUsage);
+    this.methodDescriptorGetHistorical);
   }
 
-  methodDescriptorListHistoricalPowerUsage = new grpcWeb.MethodDescriptor(
-    '/powertrade.powerusage.v1alpha.PowerUsageService/ListHistoricalPowerUsage',
+  methodDescriptorGetStatisticalWatt = new grpcWeb.MethodDescriptor(
+    '/powertrade.powerusage.v1alpha.PowerUsageService/GetStatisticalWatt',
     grpcWeb.MethodType.UNARY,
-    powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalPowerUsageRequest,
-    powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalPowerUsageResponse,
-    (request: powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalPowerUsageRequest) => {
+    powertrade_powerusage_v1alpha_powerusage_pb.GetStatisticalWattRequest,
+    powertrade_powerusage_v1alpha_powerusage_pb.GetStatisticalWattResponse,
+    (request: powertrade_powerusage_v1alpha_powerusage_pb.GetStatisticalWattRequest) => {
       return request.serializeBinary();
     },
-    powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalPowerUsageResponse.deserializeBinary
+    powertrade_powerusage_v1alpha_powerusage_pb.GetStatisticalWattResponse.deserializeBinary
   );
 
-  listHistoricalPowerUsage(
-    request: powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalPowerUsageRequest,
-    metadata: grpcWeb.Metadata | null): Promise<powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalPowerUsageResponse>;
+  getStatisticalWatt(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.GetStatisticalWattRequest,
+    metadata: grpcWeb.Metadata | null): Promise<powertrade_powerusage_v1alpha_powerusage_pb.GetStatisticalWattResponse>;
 
-  listHistoricalPowerUsage(
-    request: powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalPowerUsageRequest,
+  getStatisticalWatt(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.GetStatisticalWattRequest,
     metadata: grpcWeb.Metadata | null,
     callback: (err: grpcWeb.RpcError,
-               response: powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalPowerUsageResponse) => void): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalPowerUsageResponse>;
+               response: powertrade_powerusage_v1alpha_powerusage_pb.GetStatisticalWattResponse) => void): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.GetStatisticalWattResponse>;
 
-  listHistoricalPowerUsage(
-    request: powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalPowerUsageRequest,
+  getStatisticalWatt(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.GetStatisticalWattRequest,
     metadata: grpcWeb.Metadata | null,
     callback?: (err: grpcWeb.RpcError,
-               response: powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalPowerUsageResponse) => void) {
+               response: powertrade_powerusage_v1alpha_powerusage_pb.GetStatisticalWattResponse) => void) {
     if (callback !== undefined) {
       return this.client_.rpcCall(
         this.hostname_ +
-          '/powertrade.powerusage.v1alpha.PowerUsageService/ListHistoricalPowerUsage',
+          '/powertrade.powerusage.v1alpha.PowerUsageService/GetStatisticalWatt',
         request,
         metadata || {},
-        this.methodDescriptorListHistoricalPowerUsage,
+        this.methodDescriptorGetStatisticalWatt,
         callback);
     }
     return this.client_.unaryCall(
     this.hostname_ +
-      '/powertrade.powerusage.v1alpha.PowerUsageService/ListHistoricalPowerUsage',
+      '/powertrade.powerusage.v1alpha.PowerUsageService/GetStatisticalWatt',
     request,
     metadata || {},
-    this.methodDescriptorListHistoricalPowerUsage);
+    this.methodDescriptorGetStatisticalWatt);
   }
 
-  methodDescriptorGetRealtimePowerUsage = new grpcWeb.MethodDescriptor(
-    '/powertrade.powerusage.v1alpha.PowerUsageService/GetRealtimePowerUsage',
-    grpcWeb.MethodType.SERVER_STREAMING,
-    powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimePowerUsageRequest,
-    powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimePowerUsageResponse,
-    (request: powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimePowerUsageRequest) => {
+  methodDescriptorListHistorical = new grpcWeb.MethodDescriptor(
+    '/powertrade.powerusage.v1alpha.PowerUsageService/ListHistorical',
+    grpcWeb.MethodType.UNARY,
+    powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalRequest,
+    powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalResponse,
+    (request: powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalRequest) => {
       return request.serializeBinary();
     },
-    powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimePowerUsageResponse.deserializeBinary
+    powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalResponse.deserializeBinary
   );
 
-  getRealtimePowerUsage(
-    request: powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimePowerUsageRequest,
-    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimePowerUsageResponse> {
-    return this.client_.serverStreaming(
-      this.hostname_ +
-        '/powertrade.powerusage.v1alpha.PowerUsageService/GetRealtimePowerUsage',
-      request,
-      metadata || {},
-      this.methodDescriptorGetRealtimePowerUsage);
+  listHistorical(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalRequest,
+    metadata: grpcWeb.Metadata | null): Promise<powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalResponse>;
+
+  listHistorical(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.RpcError,
+               response: powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalResponse) => void): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalResponse>;
+
+  listHistorical(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.RpcError,
+               response: powertrade_powerusage_v1alpha_powerusage_pb.ListHistoricalResponse) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/powertrade.powerusage.v1alpha.PowerUsageService/ListHistorical',
+        request,
+        metadata || {},
+        this.methodDescriptorListHistorical,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/powertrade.powerusage.v1alpha.PowerUsageService/ListHistorical',
+    request,
+    metadata || {},
+    this.methodDescriptorListHistorical);
   }
 
-  methodDescriptorListRealtimePowerUsage = new grpcWeb.MethodDescriptor(
-    '/powertrade.powerusage.v1alpha.PowerUsageService/ListRealtimePowerUsage',
-    grpcWeb.MethodType.SERVER_STREAMING,
-    powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimePowerUsageRequest,
-    powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimePowerUsageResponse,
-    (request: powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimePowerUsageRequest) => {
+  methodDescriptorListStatisticalWatt = new grpcWeb.MethodDescriptor(
+    '/powertrade.powerusage.v1alpha.PowerUsageService/ListStatisticalWatt',
+    grpcWeb.MethodType.UNARY,
+    powertrade_powerusage_v1alpha_powerusage_pb.ListStatisticalWattRequest,
+    powertrade_powerusage_v1alpha_powerusage_pb.ListStatisticalWattResponse,
+    (request: powertrade_powerusage_v1alpha_powerusage_pb.ListStatisticalWattRequest) => {
       return request.serializeBinary();
     },
-    powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimePowerUsageResponse.deserializeBinary
+    powertrade_powerusage_v1alpha_powerusage_pb.ListStatisticalWattResponse.deserializeBinary
   );
 
-  listRealtimePowerUsage(
-    request: powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimePowerUsageRequest,
-    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimePowerUsageResponse> {
+  listStatisticalWatt(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.ListStatisticalWattRequest,
+    metadata: grpcWeb.Metadata | null): Promise<powertrade_powerusage_v1alpha_powerusage_pb.ListStatisticalWattResponse>;
+
+  listStatisticalWatt(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.ListStatisticalWattRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.RpcError,
+               response: powertrade_powerusage_v1alpha_powerusage_pb.ListStatisticalWattResponse) => void): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.ListStatisticalWattResponse>;
+
+  listStatisticalWatt(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.ListStatisticalWattRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.RpcError,
+               response: powertrade_powerusage_v1alpha_powerusage_pb.ListStatisticalWattResponse) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/powertrade.powerusage.v1alpha.PowerUsageService/ListStatisticalWatt',
+        request,
+        metadata || {},
+        this.methodDescriptorListStatisticalWatt,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/powertrade.powerusage.v1alpha.PowerUsageService/ListStatisticalWatt',
+    request,
+    metadata || {},
+    this.methodDescriptorListStatisticalWatt);
+  }
+
+  methodDescriptorGetRealtime = new grpcWeb.MethodDescriptor(
+    '/powertrade.powerusage.v1alpha.PowerUsageService/GetRealtime',
+    grpcWeb.MethodType.SERVER_STREAMING,
+    powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimeRequest,
+    powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimeResponse,
+    (request: powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimeRequest) => {
+      return request.serializeBinary();
+    },
+    powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimeResponse.deserializeBinary
+  );
+
+  getRealtime(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimeRequest,
+    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.GetRealtimeResponse> {
     return this.client_.serverStreaming(
       this.hostname_ +
-        '/powertrade.powerusage.v1alpha.PowerUsageService/ListRealtimePowerUsage',
+        '/powertrade.powerusage.v1alpha.PowerUsageService/GetRealtime',
       request,
       metadata || {},
-      this.methodDescriptorListRealtimePowerUsage);
+      this.methodDescriptorGetRealtime);
+  }
+
+  methodDescriptorListRealtime = new grpcWeb.MethodDescriptor(
+    '/powertrade.powerusage.v1alpha.PowerUsageService/ListRealtime',
+    grpcWeb.MethodType.SERVER_STREAMING,
+    powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimeRequest,
+    powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimeResponse,
+    (request: powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimeRequest) => {
+      return request.serializeBinary();
+    },
+    powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimeResponse.deserializeBinary
+  );
+
+  listRealtime(
+    request: powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimeRequest,
+    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<powertrade_powerusage_v1alpha_powerusage_pb.ListRealtimeResponse> {
+    return this.client_.serverStreaming(
+      this.hostname_ +
+        '/powertrade.powerusage.v1alpha.PowerUsageService/ListRealtime',
+      request,
+      metadata || {},
+      this.methodDescriptorListRealtime);
   }
 
 }

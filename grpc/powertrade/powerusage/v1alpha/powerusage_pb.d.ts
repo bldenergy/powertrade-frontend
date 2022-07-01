@@ -1,7 +1,6 @@
 import * as jspb from 'google-protobuf'
 
 import * as google_protobuf_timestamp_pb from 'google-protobuf/google/protobuf/timestamp_pb';
-import * as google_api_resource_pb from '../../../google/api/resource_pb';
 
 
 export class DeviceUsage extends jspb.Message {
@@ -50,12 +49,33 @@ export namespace HistoricalDeviceUsage {
   }
 }
 
+export class StatisticalDeviceWatt extends jspb.Message {
+  getId(): string;
+  setId(value: string): StatisticalDeviceWatt;
+
+  getWattList(): Array<number>;
+  setWattList(value: Array<number>): StatisticalDeviceWatt;
+  clearWattList(): StatisticalDeviceWatt;
+  addWatt(value: number, index?: number): StatisticalDeviceWatt;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StatisticalDeviceWatt.AsObject;
+  static toObject(includeInstance: boolean, msg: StatisticalDeviceWatt): StatisticalDeviceWatt.AsObject;
+  static serializeBinaryToWriter(message: StatisticalDeviceWatt, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StatisticalDeviceWatt;
+  static deserializeBinaryFromReader(message: StatisticalDeviceWatt, reader: jspb.BinaryReader): StatisticalDeviceWatt;
+}
+
+export namespace StatisticalDeviceWatt {
+  export type AsObject = {
+    id: string,
+    wattList: Array<number>,
+  }
+}
+
 export class ChannelUsage extends jspb.Message {
   getNumber(): number;
   setNumber(value: number): ChannelUsage;
-
-  getAlias(): string;
-  setAlias(value: string): ChannelUsage;
 
   getDevicesList(): Array<DeviceUsage>;
   setDevicesList(value: Array<DeviceUsage>): ChannelUsage;
@@ -76,7 +96,6 @@ export class ChannelUsage extends jspb.Message {
 export namespace ChannelUsage {
   export type AsObject = {
     number: number,
-    alias: string,
     devicesList: Array<DeviceUsage.AsObject>,
     watt: number,
   }
@@ -85,9 +104,6 @@ export namespace ChannelUsage {
 export class HistoricalChannelUsage extends jspb.Message {
   getNumber(): number;
   setNumber(value: number): HistoricalChannelUsage;
-
-  getAlias(): string;
-  setAlias(value: string): HistoricalChannelUsage;
 
   getDevicesList(): Array<HistoricalDeviceUsage>;
   setDevicesList(value: Array<HistoricalDeviceUsage>): HistoricalChannelUsage;
@@ -110,8 +126,37 @@ export class HistoricalChannelUsage extends jspb.Message {
 export namespace HistoricalChannelUsage {
   export type AsObject = {
     number: number,
-    alias: string,
     devicesList: Array<HistoricalDeviceUsage.AsObject>,
+    wattList: Array<number>,
+  }
+}
+
+export class StatisticalChannelWatt extends jspb.Message {
+  getNumber(): number;
+  setNumber(value: number): StatisticalChannelWatt;
+
+  getDevicesList(): Array<StatisticalDeviceWatt>;
+  setDevicesList(value: Array<StatisticalDeviceWatt>): StatisticalChannelWatt;
+  clearDevicesList(): StatisticalChannelWatt;
+  addDevices(value?: StatisticalDeviceWatt, index?: number): StatisticalDeviceWatt;
+
+  getWattList(): Array<number>;
+  setWattList(value: Array<number>): StatisticalChannelWatt;
+  clearWattList(): StatisticalChannelWatt;
+  addWatt(value: number, index?: number): StatisticalChannelWatt;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): StatisticalChannelWatt.AsObject;
+  static toObject(includeInstance: boolean, msg: StatisticalChannelWatt): StatisticalChannelWatt.AsObject;
+  static serializeBinaryToWriter(message: StatisticalChannelWatt, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StatisticalChannelWatt;
+  static deserializeBinaryFromReader(message: StatisticalChannelWatt, reader: jspb.BinaryReader): StatisticalChannelWatt;
+}
+
+export namespace StatisticalChannelWatt {
+  export type AsObject = {
+    number: number,
+    devicesList: Array<StatisticalDeviceWatt.AsObject>,
     wattList: Array<number>,
   }
 }
@@ -222,30 +267,74 @@ export namespace HistoricalMeterUsage {
   }
 }
 
-export class GetHistoricalPowerUsageRequest extends jspb.Message {
-  getFrames(): number;
-  setFrames(value: number): GetHistoricalPowerUsageRequest;
-
-  getGranularity(): Granularity;
-  setGranularity(value: Granularity): GetHistoricalPowerUsageRequest;
-
-  getStart(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setStart(value?: google_protobuf_timestamp_pb.Timestamp): GetHistoricalPowerUsageRequest;
-  hasStart(): boolean;
-  clearStart(): GetHistoricalPowerUsageRequest;
-
+export class StatisticalMeterWatt extends jspb.Message {
   getName(): string;
-  setName(value: string): GetHistoricalPowerUsageRequest;
+  setName(value: string): StatisticalMeterWatt;
+
+  getId(): string;
+  setId(value: string): StatisticalMeterWatt;
+
+  getUid(): string;
+  setUid(value: string): StatisticalMeterWatt;
+
+  getChannelsList(): Array<StatisticalChannelWatt>;
+  setChannelsList(value: Array<StatisticalChannelWatt>): StatisticalMeterWatt;
+  clearChannelsList(): StatisticalMeterWatt;
+  addChannels(value?: StatisticalChannelWatt, index?: number): StatisticalChannelWatt;
+
+  getWattList(): Array<number>;
+  setWattList(value: Array<number>): StatisticalMeterWatt;
+  clearWattList(): StatisticalMeterWatt;
+  addWatt(value: number, index?: number): StatisticalMeterWatt;
+
+  getEpoch(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setEpoch(value?: google_protobuf_timestamp_pb.Timestamp): StatisticalMeterWatt;
+  hasEpoch(): boolean;
+  clearEpoch(): StatisticalMeterWatt;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetHistoricalPowerUsageRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetHistoricalPowerUsageRequest): GetHistoricalPowerUsageRequest.AsObject;
-  static serializeBinaryToWriter(message: GetHistoricalPowerUsageRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetHistoricalPowerUsageRequest;
-  static deserializeBinaryFromReader(message: GetHistoricalPowerUsageRequest, reader: jspb.BinaryReader): GetHistoricalPowerUsageRequest;
+  toObject(includeInstance?: boolean): StatisticalMeterWatt.AsObject;
+  static toObject(includeInstance: boolean, msg: StatisticalMeterWatt): StatisticalMeterWatt.AsObject;
+  static serializeBinaryToWriter(message: StatisticalMeterWatt, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): StatisticalMeterWatt;
+  static deserializeBinaryFromReader(message: StatisticalMeterWatt, reader: jspb.BinaryReader): StatisticalMeterWatt;
 }
 
-export namespace GetHistoricalPowerUsageRequest {
+export namespace StatisticalMeterWatt {
+  export type AsObject = {
+    name: string,
+    id: string,
+    uid: string,
+    channelsList: Array<StatisticalChannelWatt.AsObject>,
+    wattList: Array<number>,
+    epoch?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+  }
+}
+
+export class GetHistoricalRequest extends jspb.Message {
+  getFrames(): number;
+  setFrames(value: number): GetHistoricalRequest;
+
+  getGranularity(): Granularity;
+  setGranularity(value: Granularity): GetHistoricalRequest;
+
+  getStart(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setStart(value?: google_protobuf_timestamp_pb.Timestamp): GetHistoricalRequest;
+  hasStart(): boolean;
+  clearStart(): GetHistoricalRequest;
+
+  getName(): string;
+  setName(value: string): GetHistoricalRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetHistoricalRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetHistoricalRequest): GetHistoricalRequest.AsObject;
+  static serializeBinaryToWriter(message: GetHistoricalRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetHistoricalRequest;
+  static deserializeBinaryFromReader(message: GetHistoricalRequest, reader: jspb.BinaryReader): GetHistoricalRequest;
+}
+
+export namespace GetHistoricalRequest {
   export type AsObject = {
     frames: number,
     granularity: Granularity,
@@ -254,47 +343,95 @@ export namespace GetHistoricalPowerUsageRequest {
   }
 }
 
-export class GetHistoricalPowerUsageResponse extends jspb.Message {
+export class GetHistoricalResponse extends jspb.Message {
   getMeter(): HistoricalMeterUsage | undefined;
-  setMeter(value?: HistoricalMeterUsage): GetHistoricalPowerUsageResponse;
+  setMeter(value?: HistoricalMeterUsage): GetHistoricalResponse;
   hasMeter(): boolean;
-  clearMeter(): GetHistoricalPowerUsageResponse;
+  clearMeter(): GetHistoricalResponse;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetHistoricalPowerUsageResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: GetHistoricalPowerUsageResponse): GetHistoricalPowerUsageResponse.AsObject;
-  static serializeBinaryToWriter(message: GetHistoricalPowerUsageResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetHistoricalPowerUsageResponse;
-  static deserializeBinaryFromReader(message: GetHistoricalPowerUsageResponse, reader: jspb.BinaryReader): GetHistoricalPowerUsageResponse;
+  toObject(includeInstance?: boolean): GetHistoricalResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetHistoricalResponse): GetHistoricalResponse.AsObject;
+  static serializeBinaryToWriter(message: GetHistoricalResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetHistoricalResponse;
+  static deserializeBinaryFromReader(message: GetHistoricalResponse, reader: jspb.BinaryReader): GetHistoricalResponse;
 }
 
-export namespace GetHistoricalPowerUsageResponse {
+export namespace GetHistoricalResponse {
   export type AsObject = {
     meter?: HistoricalMeterUsage.AsObject,
   }
 }
 
-export class ListHistoricalPowerUsageRequest extends jspb.Message {
-  getFrames(): number;
-  setFrames(value: number): ListHistoricalPowerUsageRequest;
-
-  getGranularity(): Granularity;
-  setGranularity(value: Granularity): ListHistoricalPowerUsageRequest;
+export class GetStatisticalWattRequest extends jspb.Message {
+  getScale(): Scale;
+  setScale(value: Scale): GetStatisticalWattRequest;
 
   getStart(): google_protobuf_timestamp_pb.Timestamp | undefined;
-  setStart(value?: google_protobuf_timestamp_pb.Timestamp): ListHistoricalPowerUsageRequest;
+  setStart(value?: google_protobuf_timestamp_pb.Timestamp): GetStatisticalWattRequest;
   hasStart(): boolean;
-  clearStart(): ListHistoricalPowerUsageRequest;
+  clearStart(): GetStatisticalWattRequest;
+
+  getName(): string;
+  setName(value: string): GetStatisticalWattRequest;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): ListHistoricalPowerUsageRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: ListHistoricalPowerUsageRequest): ListHistoricalPowerUsageRequest.AsObject;
-  static serializeBinaryToWriter(message: ListHistoricalPowerUsageRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): ListHistoricalPowerUsageRequest;
-  static deserializeBinaryFromReader(message: ListHistoricalPowerUsageRequest, reader: jspb.BinaryReader): ListHistoricalPowerUsageRequest;
+  toObject(includeInstance?: boolean): GetStatisticalWattRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetStatisticalWattRequest): GetStatisticalWattRequest.AsObject;
+  static serializeBinaryToWriter(message: GetStatisticalWattRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetStatisticalWattRequest;
+  static deserializeBinaryFromReader(message: GetStatisticalWattRequest, reader: jspb.BinaryReader): GetStatisticalWattRequest;
 }
 
-export namespace ListHistoricalPowerUsageRequest {
+export namespace GetStatisticalWattRequest {
+  export type AsObject = {
+    scale: Scale,
+    start?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+    name: string,
+  }
+}
+
+export class GetStatisticalWattResponse extends jspb.Message {
+  getMeter(): StatisticalMeterWatt | undefined;
+  setMeter(value?: StatisticalMeterWatt): GetStatisticalWattResponse;
+  hasMeter(): boolean;
+  clearMeter(): GetStatisticalWattResponse;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetStatisticalWattResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetStatisticalWattResponse): GetStatisticalWattResponse.AsObject;
+  static serializeBinaryToWriter(message: GetStatisticalWattResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetStatisticalWattResponse;
+  static deserializeBinaryFromReader(message: GetStatisticalWattResponse, reader: jspb.BinaryReader): GetStatisticalWattResponse;
+}
+
+export namespace GetStatisticalWattResponse {
+  export type AsObject = {
+    meter?: StatisticalMeterWatt.AsObject,
+  }
+}
+
+export class ListHistoricalRequest extends jspb.Message {
+  getFrames(): number;
+  setFrames(value: number): ListHistoricalRequest;
+
+  getGranularity(): Granularity;
+  setGranularity(value: Granularity): ListHistoricalRequest;
+
+  getStart(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setStart(value?: google_protobuf_timestamp_pb.Timestamp): ListHistoricalRequest;
+  hasStart(): boolean;
+  clearStart(): ListHistoricalRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ListHistoricalRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: ListHistoricalRequest): ListHistoricalRequest.AsObject;
+  static serializeBinaryToWriter(message: ListHistoricalRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ListHistoricalRequest;
+  static deserializeBinaryFromReader(message: ListHistoricalRequest, reader: jspb.BinaryReader): ListHistoricalRequest;
+}
+
+export namespace ListHistoricalRequest {
   export type AsObject = {
     frames: number,
     granularity: Granularity,
@@ -302,100 +439,144 @@ export namespace ListHistoricalPowerUsageRequest {
   }
 }
 
-export class ListHistoricalPowerUsageResponse extends jspb.Message {
+export class ListHistoricalResponse extends jspb.Message {
   getMetersList(): Array<HistoricalMeterUsage>;
-  setMetersList(value: Array<HistoricalMeterUsage>): ListHistoricalPowerUsageResponse;
-  clearMetersList(): ListHistoricalPowerUsageResponse;
+  setMetersList(value: Array<HistoricalMeterUsage>): ListHistoricalResponse;
+  clearMetersList(): ListHistoricalResponse;
   addMeters(value?: HistoricalMeterUsage, index?: number): HistoricalMeterUsage;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): ListHistoricalPowerUsageResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: ListHistoricalPowerUsageResponse): ListHistoricalPowerUsageResponse.AsObject;
-  static serializeBinaryToWriter(message: ListHistoricalPowerUsageResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): ListHistoricalPowerUsageResponse;
-  static deserializeBinaryFromReader(message: ListHistoricalPowerUsageResponse, reader: jspb.BinaryReader): ListHistoricalPowerUsageResponse;
+  toObject(includeInstance?: boolean): ListHistoricalResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: ListHistoricalResponse): ListHistoricalResponse.AsObject;
+  static serializeBinaryToWriter(message: ListHistoricalResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ListHistoricalResponse;
+  static deserializeBinaryFromReader(message: ListHistoricalResponse, reader: jspb.BinaryReader): ListHistoricalResponse;
 }
 
-export namespace ListHistoricalPowerUsageResponse {
+export namespace ListHistoricalResponse {
   export type AsObject = {
     metersList: Array<HistoricalMeterUsage.AsObject>,
   }
 }
 
-export class GetRealtimePowerUsageRequest extends jspb.Message {
-  getName(): string;
-  setName(value: string): GetRealtimePowerUsageRequest;
+export class ListStatisticalWattRequest extends jspb.Message {
+  getScale(): Scale;
+  setScale(value: Scale): ListStatisticalWattRequest;
+
+  getStart(): google_protobuf_timestamp_pb.Timestamp | undefined;
+  setStart(value?: google_protobuf_timestamp_pb.Timestamp): ListStatisticalWattRequest;
+  hasStart(): boolean;
+  clearStart(): ListStatisticalWattRequest;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetRealtimePowerUsageRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: GetRealtimePowerUsageRequest): GetRealtimePowerUsageRequest.AsObject;
-  static serializeBinaryToWriter(message: GetRealtimePowerUsageRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetRealtimePowerUsageRequest;
-  static deserializeBinaryFromReader(message: GetRealtimePowerUsageRequest, reader: jspb.BinaryReader): GetRealtimePowerUsageRequest;
+  toObject(includeInstance?: boolean): ListStatisticalWattRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: ListStatisticalWattRequest): ListStatisticalWattRequest.AsObject;
+  static serializeBinaryToWriter(message: ListStatisticalWattRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ListStatisticalWattRequest;
+  static deserializeBinaryFromReader(message: ListStatisticalWattRequest, reader: jspb.BinaryReader): ListStatisticalWattRequest;
 }
 
-export namespace GetRealtimePowerUsageRequest {
+export namespace ListStatisticalWattRequest {
+  export type AsObject = {
+    scale: Scale,
+    start?: google_protobuf_timestamp_pb.Timestamp.AsObject,
+  }
+}
+
+export class ListStatisticalWattResponse extends jspb.Message {
+  getMeterList(): Array<StatisticalMeterWatt>;
+  setMeterList(value: Array<StatisticalMeterWatt>): ListStatisticalWattResponse;
+  clearMeterList(): ListStatisticalWattResponse;
+  addMeter(value?: StatisticalMeterWatt, index?: number): StatisticalMeterWatt;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): ListStatisticalWattResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: ListStatisticalWattResponse): ListStatisticalWattResponse.AsObject;
+  static serializeBinaryToWriter(message: ListStatisticalWattResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ListStatisticalWattResponse;
+  static deserializeBinaryFromReader(message: ListStatisticalWattResponse, reader: jspb.BinaryReader): ListStatisticalWattResponse;
+}
+
+export namespace ListStatisticalWattResponse {
+  export type AsObject = {
+    meterList: Array<StatisticalMeterWatt.AsObject>,
+  }
+}
+
+export class GetRealtimeRequest extends jspb.Message {
+  getName(): string;
+  setName(value: string): GetRealtimeRequest;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): GetRealtimeRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: GetRealtimeRequest): GetRealtimeRequest.AsObject;
+  static serializeBinaryToWriter(message: GetRealtimeRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetRealtimeRequest;
+  static deserializeBinaryFromReader(message: GetRealtimeRequest, reader: jspb.BinaryReader): GetRealtimeRequest;
+}
+
+export namespace GetRealtimeRequest {
   export type AsObject = {
     name: string,
   }
 }
 
-export class GetRealtimePowerUsageResponse extends jspb.Message {
+export class GetRealtimeResponse extends jspb.Message {
   getSequenceNumber(): number;
-  setSequenceNumber(value: number): GetRealtimePowerUsageResponse;
+  setSequenceNumber(value: number): GetRealtimeResponse;
 
   getMeter(): MeterUsage | undefined;
-  setMeter(value?: MeterUsage): GetRealtimePowerUsageResponse;
+  setMeter(value?: MeterUsage): GetRealtimeResponse;
   hasMeter(): boolean;
-  clearMeter(): GetRealtimePowerUsageResponse;
+  clearMeter(): GetRealtimeResponse;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): GetRealtimePowerUsageResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: GetRealtimePowerUsageResponse): GetRealtimePowerUsageResponse.AsObject;
-  static serializeBinaryToWriter(message: GetRealtimePowerUsageResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): GetRealtimePowerUsageResponse;
-  static deserializeBinaryFromReader(message: GetRealtimePowerUsageResponse, reader: jspb.BinaryReader): GetRealtimePowerUsageResponse;
+  toObject(includeInstance?: boolean): GetRealtimeResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: GetRealtimeResponse): GetRealtimeResponse.AsObject;
+  static serializeBinaryToWriter(message: GetRealtimeResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): GetRealtimeResponse;
+  static deserializeBinaryFromReader(message: GetRealtimeResponse, reader: jspb.BinaryReader): GetRealtimeResponse;
 }
 
-export namespace GetRealtimePowerUsageResponse {
+export namespace GetRealtimeResponse {
   export type AsObject = {
     sequenceNumber: number,
     meter?: MeterUsage.AsObject,
   }
 }
 
-export class ListRealtimePowerUsageRequest extends jspb.Message {
+export class ListRealtimeRequest extends jspb.Message {
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): ListRealtimePowerUsageRequest.AsObject;
-  static toObject(includeInstance: boolean, msg: ListRealtimePowerUsageRequest): ListRealtimePowerUsageRequest.AsObject;
-  static serializeBinaryToWriter(message: ListRealtimePowerUsageRequest, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): ListRealtimePowerUsageRequest;
-  static deserializeBinaryFromReader(message: ListRealtimePowerUsageRequest, reader: jspb.BinaryReader): ListRealtimePowerUsageRequest;
+  toObject(includeInstance?: boolean): ListRealtimeRequest.AsObject;
+  static toObject(includeInstance: boolean, msg: ListRealtimeRequest): ListRealtimeRequest.AsObject;
+  static serializeBinaryToWriter(message: ListRealtimeRequest, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ListRealtimeRequest;
+  static deserializeBinaryFromReader(message: ListRealtimeRequest, reader: jspb.BinaryReader): ListRealtimeRequest;
 }
 
-export namespace ListRealtimePowerUsageRequest {
+export namespace ListRealtimeRequest {
   export type AsObject = {
   }
 }
 
-export class ListRealtimePowerUsageResponse extends jspb.Message {
+export class ListRealtimeResponse extends jspb.Message {
   getSequenceNumber(): number;
-  setSequenceNumber(value: number): ListRealtimePowerUsageResponse;
+  setSequenceNumber(value: number): ListRealtimeResponse;
 
   getMetersList(): Array<MeterUsage>;
-  setMetersList(value: Array<MeterUsage>): ListRealtimePowerUsageResponse;
-  clearMetersList(): ListRealtimePowerUsageResponse;
+  setMetersList(value: Array<MeterUsage>): ListRealtimeResponse;
+  clearMetersList(): ListRealtimeResponse;
   addMeters(value?: MeterUsage, index?: number): MeterUsage;
 
   serializeBinary(): Uint8Array;
-  toObject(includeInstance?: boolean): ListRealtimePowerUsageResponse.AsObject;
-  static toObject(includeInstance: boolean, msg: ListRealtimePowerUsageResponse): ListRealtimePowerUsageResponse.AsObject;
-  static serializeBinaryToWriter(message: ListRealtimePowerUsageResponse, writer: jspb.BinaryWriter): void;
-  static deserializeBinary(bytes: Uint8Array): ListRealtimePowerUsageResponse;
-  static deserializeBinaryFromReader(message: ListRealtimePowerUsageResponse, reader: jspb.BinaryReader): ListRealtimePowerUsageResponse;
+  toObject(includeInstance?: boolean): ListRealtimeResponse.AsObject;
+  static toObject(includeInstance: boolean, msg: ListRealtimeResponse): ListRealtimeResponse.AsObject;
+  static serializeBinaryToWriter(message: ListRealtimeResponse, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): ListRealtimeResponse;
+  static deserializeBinaryFromReader(message: ListRealtimeResponse, reader: jspb.BinaryReader): ListRealtimeResponse;
 }
 
-export namespace ListRealtimePowerUsageResponse {
+export namespace ListRealtimeResponse {
   export type AsObject = {
     sequenceNumber: number,
     metersList: Array<MeterUsage.AsObject>,
@@ -405,4 +586,13 @@ export namespace ListRealtimePowerUsageResponse {
 export enum Granularity { 
   GRANULARITY_UNSPECIFIED = 0,
   GRANULARITY_SECOND = 1,
+  GRANULARITY_MINUTE = 2,
+  GRANULARITY_HOUR = 3,
+}
+export enum Scale { 
+  SCALE_UNSPECIFIED = 0,
+  SCALE_DAY = 1,
+  SCALE_WEEK = 2,
+  SCALE_MONTH = 3,
+  SCALE_YEAR = 4,
 }
