@@ -34,7 +34,7 @@ const BarChart: any = dynamic(
   { ssr: false }
 );
 
-const Consumption: NextPage = () => {
+const PowerUsage: NextPage = () => {
   const router = useRouter();
   const { locale } = router;
   const translate = locale === 'en' ? en : zh;
@@ -66,7 +66,7 @@ const Consumption: NextPage = () => {
         className={styles.main}
         style={{ marginTop: '2.5rem', justifyContent: 'start' }}>
         <Heading style={{ marginBottom: '1.25rem' }}>
-          {translate.powerconsumption.subTitle}
+          {translate.powerusage.subTitle}
         </Heading>
         {powerUsage?.metersList.map((meter: any, i: any) => {
           return (
@@ -185,4 +185,4 @@ const Consumption: NextPage = () => {
   );
 };
 
-export default Consumption;
+export default PowerUsage;
