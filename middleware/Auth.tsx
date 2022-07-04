@@ -1,22 +1,22 @@
-import styles from '../styles/shared.module.css'
-import { Spinner } from '@chakra-ui/react'
-import { signIn, useSession } from 'next-auth/react'
-import { ReactNode, useEffect } from 'react'
+import styles from '../styles/shared.module.css';
+import { Spinner } from '@chakra-ui/react';
+import { signIn, useSession } from 'next-auth/react';
+import { ReactNode, useEffect } from 'react';
 
 type AuthProps = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 export default function Auth({ children }: AuthProps) {
-  const { data: session, status } = useSession()
-  const isUser = !!session?.user
+  const { data: session, status } = useSession();
+  const isUser = !!session?.user;
 
   useEffect(() => {
-    if (status === 'loading') return // Do nothing while loading
-    if (!isUser) signIn('kratos-hydra') // If not authenticated, force log in
-  }, [isUser, status])
+    if (status === 'loading') return; // Do nothing while loading
+    if (!isUser) signIn('bldenergy-myaccount'); // If not authenticated, force log in
+  }, [isUser, status]);
 
   if (isUser) {
-    return <>{children}</>
+    return <>{children}</>;
   }
 
   // Session is being fetched, or no user.
@@ -33,5 +33,5 @@ export default function Auth({ children }: AuthProps) {
         />
       </main>
     </div>
-  )
+  );
 }
