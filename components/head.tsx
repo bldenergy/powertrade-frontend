@@ -11,7 +11,7 @@ export default function HeadComponent({ title }: Title) {
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icon.png"></link>
         <meta name="theme-color" content="#fff" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/images/logo/icon.png" sizes="32x32" />
         <title>{title}</title>
         <meta
           name="description"
