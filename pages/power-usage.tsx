@@ -1,5 +1,13 @@
-import styles from '../styles/shared.module.css'
-import { AddIcon, MinusIcon } from '@chakra-ui/icons'
+import HeadComponent from '../components/head';
+import { PowerUsageServiceClient } from '../grpc/powertrade/powerusage/v1alpha/Powerusage_serviceServiceClientPb';
+// import {
+//   GetPowerUsageResponse,
+//   GetPowerUsageRequest,
+// } from '../grpc/powertrade/powerusage/v1alpha/powerusage_pb';
+import en from '../locales/en';
+import zh from '../locales/zh';
+import styles from '../styles/shared.module.css';
+import { AddIcon, MinusIcon } from '@chakra-ui/icons';
 import {
   Accordion,
   AccordionButton,
@@ -8,38 +16,29 @@ import {
   Box,
   Heading,
   ListItem,
-  UnorderedList
-} from '@chakra-ui/react'
-import * as grpcWeb from 'grpc-web'
-import type { NextPage } from 'next'
-import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
-
-import HeadComponent from '../components/head'
-import { PowerUsageServiceClient } from '../grpc/powertrade/powerusage/v1alpha/Powerusage_serviceServiceClientPb'
-import {
-  GetPowerUsageResponse,
-  GetPowerUsageRequest
-} from '../grpc/powertrade/powerusage/v1alpha/powerusage_pb'
-import en from '../locales/en'
-import zh from '../locales/zh'
+  UnorderedList,
+} from '@chakra-ui/react';
+import * as grpcWeb from 'grpc-web';
+import type { NextPage } from 'next';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 
 const LineChart: any = dynamic(
   () => import('../components/Charts/Line').then((linechart: any) => linechart),
   { ssr: false }
-)
+);
 
 const BarChart: any = dynamic(
   () => import('../components/Charts/Bar').then((chart: any) => chart),
   { ssr: false }
-)
+);
 
-const Consumption: NextPage = () => {
-  const router = useRouter()
-  const { locale } = router
-  const translate = locale === 'en' ? en : zh
-  const [powerUsage, setPowerUsage]: any = useState()
+const PowerUsage: NextPage = () => {
+  const router = useRouter();
+  const { locale } = router;
+  const translate = locale === 'en' ? en : zh;
+  const [powerUsage, setPowerUsage]: any = useState();
 
   useEffect(() => {
     const apiCall = setInterval(() => {
@@ -47,28 +46,27 @@ const Consumption: NextPage = () => {
         `http://${window.location.hostname}:8081`,
         null,
         null
-      )
-      var request = new GetPowerUsageRequest()
-      const call = powerUsageService.getPowerUsage(
-        request,
-        { 'custom-header-1': 'value1' },
-        (err: grpcWeb.RpcError, response: GetPowerUsageResponse) => {
-          setPowerUsage(response.toObject())
-        }
-      )
-    }, 1000)
-    return () => clearInterval(apiCall)
-  }, [powerUsage])
+      );
+      // var request = new GetPowerUsageRequest();
+      // const call = powerUsageService.getPowerUsage(
+      //   request,
+      //   { 'custom-header-1': 'value1' },
+      //   (err: grpcWeb.RpcError, response: GetPowerUsageResponse) => {
+      //     setPowerUsage(response.toObject())
+      //   }
+      // )
+    }, 1000);
+    return () => clearInterval(apiCall);
+  }, [powerUsage]);
 
   return (
     <div className={styles.container}>
-      <HeadComponent title="BLD PowerTrade - Power Consumption" />
+      <HeadComponent title={'BLD PowerTrade - ' + translate.powerusage.title} />
       <main
         className={styles.main}
-        style={{ marginTop: '2.5rem', justifyContent: 'start' }}
-      >
+        style={{ marginTop: '2.5rem', justifyContent: 'start' }}>
         <Heading style={{ marginBottom: '1.25rem' }}>
-          {translate.powerconsumption.subTitle}
+          {translate.powerusage.title}
         </Heading>
         {powerUsage?.metersList.map((meter: any, i: any) => {
           return (
@@ -125,8 +123,7 @@ const Consumption: NextPage = () => {
                                 </h2>
                                 <AccordionPanel pb={4} key={i}>
                                   <UnorderedList
-                                    style={{ marginBottom: '1.25rem' }}
-                                  >
+                                    style={{ marginBottom: '1.25rem' }}>
                                     <ListItem>
                                       Watt: {Math.round(channel?.watt)}
                                     </ListItem>
@@ -145,8 +142,7 @@ const Consumption: NextPage = () => {
                                                   <AccordionButton>
                                                     <Box
                                                       flex="1"
-                                                      textAlign="left"
-                                                    >
+                                                      textAlign="left">
                                                       {device?.id}
                                                     </Box>
                                                     {isExpanded ? (
@@ -168,25 +164,25 @@ const Consumption: NextPage = () => {
                                             )}
                                           </AccordionItem>
                                         </>
-                                      )
+                                      );
                                     }
                                   )}
                                 </AccordionPanel>
                               </>
                             )}
                           </AccordionItem>
-                        )
+                        );
                       })}
                     </AccordionPanel>
                   </>
                 )}
               </AccordionItem>
             </Accordion>
-          )
+          );
         })}
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Consumption
+export default PowerUsage;
