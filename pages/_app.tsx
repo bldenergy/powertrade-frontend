@@ -1,39 +1,37 @@
-import '../styles/globals.css'
-import { ChakraProvider } from '@chakra-ui/react'
-import { SessionProvider } from 'next-auth/react'
-import type { AppProps } from 'next/app'
-import React, { useEffect } from 'react'
-import 'react-toastify/dist/ReactToastify.css'
-
-import Layout from '../components/Layout/layout'
-import { firebaseCloudMessaging } from '../firebase/firebase'
-import Auth from '../middleware/Auth'
-import theme from '../theme'
+import Layout from '../components/Layout/layout';
+import { firebaseCloudMessaging } from '../firebase/firebase';
+import Auth from '../middleware/Auth';
+import '../styles/globals.css';
+import theme from '../theme';
+import { ChakraProvider } from '@chakra-ui/react';
+import { SessionProvider } from 'next-auth/react';
+import type { AppProps } from 'next/app';
+import React, { useEffect } from 'react';
 
 function MyApp({
   Component,
   pageProps: { session, ...pageProps },
-  router: { route }
+  router: { route },
 }: AppProps) {
-  const requireAuth = !route.includes('/auth')
+  const requireAuth = !route.includes('/auth');
 
   useEffect(() => {
-    setToken()
+    setToken();
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.addEventListener('message', (event) =>
         console.log('event for the service worker', event.data)
-      )
+      );
     }
     async function setToken() {
       try {
-        const token = await firebaseCloudMessaging.init()
+        const token = await firebaseCloudMessaging.init();
         if (token) {
         }
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
-  })
+  });
 
   return (
     <SessionProvider session={session}>
@@ -49,7 +47,7 @@ function MyApp({
         </Layout>
       </ChakraProvider>
     </SessionProvider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
