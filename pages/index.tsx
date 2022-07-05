@@ -1,19 +1,18 @@
-import styles from '../styles/shared.module.css'
-import type { NextPage } from 'next'
-import { useRouter } from 'next/router'
-
-import HeadComponent from '../components/head'
-import en from '../locales/en'
-import zh from '../locales/zh'
+import HeadComponent from '../components/head';
+import en from '../locales/en';
+import zh from '../locales/zh';
+import styles from '../styles/shared.module.css';
+import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 
 const Home: NextPage = () => {
-  const router = useRouter()
-  const { locale } = router
-  const translate = locale === 'en' ? en : zh
+  const router = useRouter();
+  const { locale } = router;
+  const translate = locale === 'en' ? en : zh;
 
   return (
     <div className={styles.container}>
-      <HeadComponent title={translate.home.title} />
+      <HeadComponent title={'BLD PowerTrade - ' + translate.home.title} />
 
       <main className={styles.main}>
         <>
@@ -22,7 +21,7 @@ const Home: NextPage = () => {
         </>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

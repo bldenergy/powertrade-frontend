@@ -12,7 +12,7 @@ const en = {
     subTitle: 'Save Energy and get Rewarded',
   },
   reward: {
-    title: 'Reward',
+    title: 'Rewards',
     subTitle: 'Get your rewards',
   },
   account: {

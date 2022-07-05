@@ -1,13 +1,9 @@
-// Custom components
-// Layout Style
-import layoutStyles from './layout.module.css'
-
-import Footer from '../Footer/footer'
-import Header from '../Header/header'
-import Navigation from '../Navigation/navigation'
+import Header from '../Header/header';
+import Navigation from '../Navigation/navigation';
+import layoutStyles from './layout.module.css';
 
 interface LayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
@@ -17,5 +13,5 @@ export default function Layout({ children }: LayoutProps) {
       <main className={layoutStyles.container}>{children}</main>
       <Navigation />
     </>
-  )
+  );
 }

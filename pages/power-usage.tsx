@@ -61,12 +61,12 @@ const PowerUsage: NextPage = () => {
 
   return (
     <div className={styles.container}>
-      <HeadComponent title="BLD PowerTrade - Power Consumption" />
+      <HeadComponent title={'BLD PowerTrade - ' + translate.powerusage.title} />
       <main
         className={styles.main}
         style={{ marginTop: '2.5rem', justifyContent: 'start' }}>
         <Heading style={{ marginBottom: '1.25rem' }}>
-          {translate.powerusage.subTitle}
+          {translate.powerusage.title}
         </Heading>
         {powerUsage?.metersList.map((meter: any, i: any) => {
           return (
