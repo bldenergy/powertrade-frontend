@@ -12,11 +12,11 @@ const Reward: NextPage = () => {
   const translate = locale === 'en' ? en : zh;
   return (
     <div className={styles.container}>
-      <HeadComponent title={'BLD PowerTrade - ' + translate.reward.title} />
+      <HeadComponent title={'BLD PowerTrade - ' + translate.rewards.title} />
       <main className={styles.main}>
         <>
-          <h1 className={styles.title}>{translate.reward.title}</h1>
-          <p className={styles.description}>{translate.reward.subTitle}</p>
+          <h1 className={styles.title}>{translate.rewards.title}</h1>
+          <p className={styles.description}>{translate.rewards.subTitle}</p>
         </>
       </main>
     </div>

@@ -1,6 +1,6 @@
 .container {
   background: var(--color-header-background);
-  box-shadow: var(--box-shadow-header);
+  /* box-shadow: var(--box-shadow-header); */
   position: sticky;
   top: 0;
   width: 100%;
@@ -11,11 +11,11 @@
 .content {
   -webkit-box-align: center;
   align-items: center;
-  /* color: rgb(255, 255, 255); */
   display: flex;
+  font-size: 1.3rem;
   font-weight: 700;
   -webkit-box-pack: justify;
-  justify-content: space-between;
+  justify-content: center;
   height: 3rem;
   margin: 0 auto;
   max-width: 56.25rem;
