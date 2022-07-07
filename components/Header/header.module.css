@@ -6,6 +6,7 @@
   width: 100%;
   z-index: 10;
   padding: 0.5rem;
+  height: 4rem;
 }
 
 .content {
@@ -13,10 +14,10 @@
   align-items: center;
   display: flex;
   font-size: 1.3rem;
-  font-weight: 700;
+  font-weight: 600;
   -webkit-box-pack: justify;
   justify-content: center;
-  height: 3rem;
+  height: 100%;
   margin: 0 auto;
   max-width: 56.25rem;
   padding: 0 0.75rem;
@@ -25,4 +26,14 @@
 
 .optionColor {
   color: var(--color-primary);
+}
+
+@media only screen and (max-width: 400px) {
+  .content {
+    font-size: 1rem;
+  }
+
+  .container {
+    height: 3rem;
+  }
 }
