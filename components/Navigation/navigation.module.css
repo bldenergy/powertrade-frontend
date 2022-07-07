@@ -1,5 +1,5 @@
 .container {
-  height: 5rem;
+  height: 4rem;
   bottom: 0;
   box-shadow: var(--box-shadow-navigation);
   position: fixed;
@@ -33,14 +33,14 @@
 .navigationIcon {
   display: flex;
   flex-direction: column;
-  padding: 0.75rem 0 0.313rem 0;
+  padding: 0.64rem 0 0.313rem 0;
   cursor: pointer;
 }
 
 .navigationIconMiddle {
   display: flex;
   flex-direction: column;
-  padding: 0.15rem 0 0.313rem 0;
+  padding: 0;
   cursor: pointer;
 }
 
