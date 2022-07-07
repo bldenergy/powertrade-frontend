@@ -11,7 +11,7 @@ const zh = {
     title: '交易計畫',
     subTitle: '節省能源並獲得獎勵',
   },
-  reward: {
+  rewards: {
     title: '收益成果',
     subTitle: '得到你的獎賞',
   },

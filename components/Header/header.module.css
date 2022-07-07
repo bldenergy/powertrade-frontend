@@ -1,22 +1,23 @@
 .container {
   background: var(--color-header-background);
-  box-shadow: var(--box-shadow-header);
+  /* box-shadow: var(--box-shadow-header); */
   position: sticky;
   top: 0;
   width: 100%;
   z-index: 10;
   padding: 0.5rem;
+  height: 4rem;
 }
 
 .content {
   -webkit-box-align: center;
   align-items: center;
-  /* color: rgb(255, 255, 255); */
   display: flex;
-  font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 600;
   -webkit-box-pack: justify;
-  justify-content: space-between;
-  height: 3rem;
+  justify-content: center;
+  height: 100%;
   margin: 0 auto;
   max-width: 56.25rem;
   padding: 0 0.75rem;
@@ -25,4 +26,14 @@
 
 .optionColor {
   color: var(--color-primary);
+}
+
+@media only screen and (max-width: 400px) {
+  .content {
+    font-size: 1rem;
+  }
+
+  .container {
+    height: 3rem;
+  }
 }

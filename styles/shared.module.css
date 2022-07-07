@@ -9,7 +9,7 @@
   flex-direction: column;
   justify-content: center;
   min-height: calc(100vh - 8.078rem);
-  background: var(--color-header-background);
+  /* background: var(--color-header-background); */
 }
 
 .description {

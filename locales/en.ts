@@ -11,7 +11,7 @@ const en = {
     title: 'Trading Plan',
     subTitle: 'Save Energy and get Rewarded',
   },
-  reward: {
+  rewards: {
     title: 'Rewards',
     subTitle: 'Get your rewards',
   },

@@ -25,17 +25,22 @@ export default function Header() {
   const router = useRouter();
 
   const { locale } = router;
-  const translate: any = locale === 'en' ? en : zh;
-
-  const changeLanguage = (e: any) => {
-    const locale = e.target.value;
-    router.push(router.pathname, router.asPath, { locale });
-  };
-
+  // const translate: any = locale === 'en' ? en : zh;
+  const translate: any = zh;
   return (
     <nav className={styles.container}>
       <div className={styles.content}>
         <div>
+          {
+            translate[
+              router.pathname === '/'
+                ? 'home'
+                : router.pathname.toLowerCase().replace(/[^\w\s]/gi, '')
+            ].title
+          }
+        </div>
+
+        {/* <div>
           <Link href="/">
             <a>
               <Image
@@ -46,8 +51,8 @@ export default function Header() {
               />
             </a>
           </Link>
-        </div>
-        <div style={{ display: 'flex', gap: '0.75rem' }}>
+        </div> */}
+        {/* <div style={{ display: 'flex', gap: '0.75rem' }}>
           <div
             style={{
               display: 'flex',
@@ -103,7 +108,7 @@ export default function Header() {
               </MenuList>
             </Menu>
           </div>
-        </div>
+        </div> */}
       </div>
     </nav>
   );

@@ -42,7 +42,7 @@ const path = [
   },
   {
     uid: 41,
-    name: 'Reward',
+    name: 'Rewards',
     id: 4,
     path: '/rewards',
     inactive: rewardInactive,
@@ -61,7 +61,8 @@ const path = [
 export default function Header() {
   const router = useRouter();
   const { locale } = router;
-  const translate: any = locale === 'en' ? en : zh;
+  // const translate: any = locale === 'en' ? en : zh;
+  const translate: any = zh;
 
   return (
     <nav className={styles.container}>

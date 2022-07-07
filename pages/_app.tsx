@@ -15,23 +15,23 @@ function MyApp({
 }: AppProps) {
   const requireAuth = !route.includes('/auth');
 
-  useEffect(() => {
-    setToken();
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.addEventListener('message', (event) =>
-        console.log('event for the service worker', event.data)
-      );
-    }
-    async function setToken() {
-      try {
-        const token = await firebaseCloudMessaging.init();
-        if (token) {
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-  });
+  // useEffect(() => {
+  //   setToken();
+  //   if ('serviceWorker' in navigator) {
+  //     navigator.serviceWorker.addEventListener('message', (event) =>
+  //       console.log('event for the service worker', event.data)
+  //     );
+  //   }
+  //   async function setToken() {
+  //     try {
+  //       const token = await firebaseCloudMessaging.init();
+  //       if (token) {
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  // });
 
   return (
     <SessionProvider session={session}>
